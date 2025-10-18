@@ -1079,6 +1079,199 @@ function Formulaire() {
           </p>
         </div>
       </div>
+      <!-- SLIDE 34: STYLING EN REACT (INTRODUCTION) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">34. Styling en React</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Pourquoi le styling est important ?</h3>
+  <p class="text-lg text-gray-700">
+    Le style en React détermine l’apparence visuelle de vos composants. 
+    Vous pouvez utiliser différentes approches selon le niveau de complexité et de réutilisabilité souhaité.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><b>Inline Styles :</b> Style défini directement dans le JSX via un objet JavaScript.</li>
+    <li><b>CSS Externe :</b> Fichiers CSS globaux importés dans vos composants.</li>
+    <li><b>CSS Modules :</b> Styles locaux, évitent les conflits entre composants.</li>
+    <li><b>Bibliothèques CSS :</b> (ex : Tailwind, Bootstrap, MUI) pour accélérer le design.</li>
+  </ul>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ⭐ Le choix dépend du projet : Tailwind pour la rapidité, CSS Modules pour la modularité.
+  </p>
+</div>
+
+<!-- SLIDE 35: INLINE ET CSS EXTERNE -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">35. Styling : Inline & CSS Externe</h2>
+  <h3 class="font-bold text-2xl text-sky-600">1️⃣ Inline Styles</h3>
+  <p class="text-lg text-gray-700">
+    On utilise un objet JavaScript. Les noms de propriétés utilisent le format camelCase.
+  </p>
+  <pre><code>const style = { color: "blue", fontSize: "22px" };
+&lt;p style={style}&gt;Bonjour React !&lt;/p&gt;
+
+// Exemple dynamique :
+&lt;div style={{ backgroundColor: isActive ? "green" : "red" }}&gt;
+  {isActive ? "Actif" : "Inactif"}
+&lt;/div&gt;</code></pre>
+
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ CSS Externe</h3>
+  <p class="text-lg text-gray-700">
+    Le style est défini dans un fichier CSS classique et importé dans le composant.
+  </p>
+  <pre><code>import "./App.css";
+
+function App() {
+  return &lt;h1 className="titre"&gt;Bienvenue dans React&lt;/h1&gt;;
+}
+
+// App.css
+.titre {
+  color: orange;
+  text-align: center;
+  font-family: Arial;
+}</code></pre>
+</div>
+
+<!-- SLIDE 36: CSS MODULES -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">36. Styling : CSS Modules</h2>
+  <p class="text-lg text-gray-700">
+    Les <b>CSS Modules</b> permettent de créer des styles isolés pour chaque composant.
+    Le nom des classes est automatiquement rendu unique.
+  </p>
+  <pre><code>import styles from "./App.module.css";
+
+function App() {
+  return (
+    &lt;div className={styles.card}&gt;
+      &lt;h2 className={styles.title}&gt;Carte stylée&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+}
+
+// App.module.css
+.card {
+  background-color: #f0f9ff;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.title {
+  color: #0369a1;
+}</code></pre>
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ✅ Avantage : pas de conflit de classes entre composants différents.
+  </p>
+</div>
+
+<!-- SLIDE 37: CONTEXT API (INTRODUCTION) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">37. Context API : Introduction</h2>
+  <p class="text-lg text-gray-700">
+    Le <b>Context API</b> permet de partager des données à travers plusieurs composants sans passer de props à chaque niveau.
+    On l’utilise souvent pour gérer :
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-2">
+    <li>Le thème (clair/sombre)</li>
+    <li>L’utilisateur connecté</li>
+    <li>Les paramètres de langue</li>
+    <li>Le panier dans une boutique</li>
+  </ul>
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Structure de base</h3>
+  <pre><code>import { createContext } from "react";
+export const ThemeContext = createContext("light");</code></pre>
+  <p class="text-lg text-gray-700 mt-2">
+    Ensuite, on utilise un <b>Provider</b> pour fournir la valeur et le hook <b>useContext()</b> pour la lire.
+  </p>
+</div>
+
+<!-- SLIDE 38: CONTEXT API (UTILISATION) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">38. Context API : Fournir et Consommer</h2>
+  <h3 class="font-bold text-2xl text-emerald-600">1️⃣ Fournir le contexte</h3>
+  <pre><code>&lt;ThemeContext.Provider value="dark"&gt;
+  &lt;Navbar /&gt;
+&lt;/ThemeContext.Provider&gt;</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">2️⃣ Consommer avec useContext</h3>
+  <pre><code>import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
+
+function Navbar() {
+  const theme = useContext(ThemeContext);
+  return &lt;h3&gt;Thème actuel : {theme}&lt;/h3&gt;;
+}</code></pre>
+
+  <p class="text-lg text-gray-700 mt-4">
+    ✅ <b>Avantage :</b> évite de répéter les props inutiles.  
+    ⚠️ <b>Attention :</b> chaque Provider crée un nouveau contexte isolé.
+  </p>
+</div>
+
+<!-- SLIDE 39: USEREF -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">39. Hook useRef()</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Qu’est-ce que useRef ?</h3>
+  <p class="text-lg text-gray-700">
+    <b>useRef()</b> permet de stocker une valeur persistante entre les rendus sans provoquer de re-render.
+  </p>
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Exemple : accéder à un élément DOM</h3>
+  <pre><code>import { useRef } from "react";
+
+function FocusInput() {
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputRef} placeholder="Cliquez sur le bouton"&gt;
+      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  <p class="text-lg text-gray-700 mt-3">
+    💡 Aussi utile pour sauvegarder des valeurs précédentes ou un intervalle de temps.
+  </p>
+</div>
+
+<!-- SLIDE 40: USEMEMO, USECALLBACK & MEMO -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    40. useMemo, useCallback et React.memo
+  </h2>
+
+  <h3 class="font-bold text-2xl text-emerald-600">1️⃣ useMemo()</h3>
+  <p class="text-lg text-gray-700">
+    Mémorise le résultat d’un calcul pour éviter de le refaire à chaque rendu.
+  </p>
+  <pre><code>const total = useMemo(() => {
+  console.log("Calcul du total...");
+  return items.reduce((sum, i) => sum + i.price, 0);
+}, [items]);</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">2️⃣ useCallback()</h3>
+  <p class="text-lg text-gray-700">
+    Mémorise une fonction pour éviter de la recréer à chaque rendu.
+  </p>
+  <pre><code>const handleClick = useCallback(() => {
+  console.log("Clic !");
+}, []);</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">3️⃣ React.memo()</h3>
+  <p class="text-lg text-gray-700">
+    Empêche le re-rendu d’un composant si ses props n’ont pas changé.
+  </p>
+  <pre><code>const Enfant = React.memo(({ name }) => {
+  console.log("Rendu :", name);
+  return &lt;p&gt;Bonjour {name}&lt;/p&gt;;
+});</code></pre>
+
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ✅ Idéal pour améliorer les performances dans des listes ou composants coûteux.
+  </p>
+</div>
 
       <!-- Navigation -->
       <div
