@@ -1081,7 +1081,7 @@ function Formulaire() {
       </div>
       <!-- SLIDE 34: STYLING EN REACT (INTRODUCTION) -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">34. Styling en React</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">22. Styling en React</h2>
   <h3 class="font-bold text-2xl text-sky-600">Pourquoi le styling est important ?</h3>
   <p class="text-lg text-gray-700">
     Le style en React détermine l’apparence visuelle de vos composants. 
@@ -1100,7 +1100,7 @@ function Formulaire() {
 
 <!-- SLIDE 35: INLINE ET CSS EXTERNE -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">35. Styling : Inline & CSS Externe</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">23. Styling : Inline & CSS Externe</h2>
   <h3 class="font-bold text-2xl text-sky-600">1️⃣ Inline Styles</h3>
   <p class="text-lg text-gray-700">
     On utilise un objet JavaScript. Les noms de propriétés utilisent le format camelCase.
@@ -1133,7 +1133,7 @@ function App() {
 
 <!-- SLIDE 36: CSS MODULES -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">36. Styling : CSS Modules</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">24. Styling : CSS Modules</h2>
   <p class="text-lg text-gray-700">
     Les <b>CSS Modules</b> permettent de créer des styles isolés pour chaque composant.
     Le nom des classes est automatiquement rendu unique.
@@ -1165,7 +1165,7 @@ function App() {
 
 <!-- SLIDE 37: CONTEXT API (INTRODUCTION) -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">37. Context API : Introduction</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">25. Context API : Introduction</h2>
   <p class="text-lg text-gray-700">
     Le <b>Context API</b> permet de partager des données à travers plusieurs composants sans passer de props à chaque niveau.
     On l’utilise souvent pour gérer :
@@ -1186,7 +1186,7 @@ export const ThemeContext = createContext("light");</code></pre>
 
 <!-- SLIDE 38: CONTEXT API (UTILISATION) -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">38. Context API : Fournir et Consommer</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">26. Context API : Fournir et Consommer</h2>
   <h3 class="font-bold text-2xl text-emerald-600">1️⃣ Fournir le contexte</h3>
   <pre><code>&lt;ThemeContext.Provider value="dark"&gt;
   &lt;Navbar /&gt;
@@ -1209,7 +1209,7 @@ function Navbar() {
 
 <!-- SLIDE 39: USEREF -->
 <div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">39. Hook useRef()</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">27. Hook useRef()</h2>
   <h3 class="font-bold text-2xl text-sky-600">Qu’est-ce que useRef ?</h3>
   <p class="text-lg text-gray-700">
     <b>useRef()</b> permet de stocker une valeur persistante entre les rendus sans provoquer de re-render.
@@ -1239,7 +1239,7 @@ function FocusInput() {
 <!-- SLIDE 40: USEMEMO, USECALLBACK & MEMO -->
 <div class="slide">
   <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    40. useMemo, useCallback et React.memo
+    28. useMemo, useCallback et React.memo
   </h2>
 
   <h3 class="font-bold text-2xl text-emerald-600">1️⃣ useMemo()</h3>
@@ -1270,6 +1270,102 @@ function FocusInput() {
 
   <p class="text-xl text-emerald-600 font-semibold mt-4">
     ✅ Idéal pour améliorer les performances dans des listes ou composants coûteux.
+  </p>
+</div>
+<!-- SLIDE 39: REDUX TOOLKIT (INTRODUCTION) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">29. Redux Toolkit : Introduction</h2>
+  <p class="text-lg text-gray-700">
+    <b>Redux Toolkit (RTK)</b> est la <b>version moderne et simplifiée</b> de Redux.  
+    Il permet de gérer l’état global de l’application avec moins de code et sans complexité.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><b>Problème :</b> Redux classique était trop verbeux (actions, reducers, switch...)</li>
+    <li><b>Solution :</b> RTK fournit des fonctions prêtes à l’emploi comme <code>createSlice</code> et <code>configureStore</code>.</li>
+    <li>Utilisé pour stocker et partager les données globales (ex : utilisateur, panier, thème...).</li>
+  </ul>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ⭐ Standard officiel recommandé par l’équipe Redux.
+  </p>
+</div>
+
+<!-- SLIDE 40: REDUX TOOLKIT (CONCEPTS DE BASE) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">30. Redux Toolkit : Concepts de Base</h2>
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <h3 class="font-bold text-2xl text-sky-600">Store</h3>
+      <p class="text-lg text-gray-700">
+        Contient l’état global de l’application (comme un grand "state global").
+      </p>
+    </div>
+    <div>
+      <h3 class="font-bold text-2xl text-sky-600">Slice</h3>
+      <p class="text-lg text-gray-700">
+        Représente une portion du store : un ensemble d’état + reducers associés.
+      </p>
+    </div>
+  </div>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><code>createSlice()</code> → crée actions + reducers automatiquement.</li>
+    <li><code>configureStore()</code> → crée le store et combine les slices.</li>
+    <li><code>useSelector()</code> → lit une donnée du store.</li>
+    <li><code>useDispatch()</code> → déclenche une action.</li>
+  </ul>
+</div>
+
+<!-- SLIDE 41: REDUX TOOLKIT (EXEMPLE DE SLICE) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">31. Exemple : Création d’un Slice</h2>
+  <pre><code>import { createSlice, configureStore } from "@reduxjs/toolkit";
+
+const compteurSlice = createSlice({
+  name: "compteur",
+  initialState: { valeur: 0 },
+  reducers: {
+    incrementer: (state) => { state.valeur += 1 },
+    decrementer: (state) => { state.valeur -= 1 },
+  },
+});
+
+export const { incrementer, decrementer } = compteurSlice.actions;
+
+export const store = configureStore({
+  reducer: { compteur: compteurSlice.reducer },
+});</code></pre>
+  <p class="text-lg text-gray-700 mt-4">
+    🧠 <b>Avantage :</b> moins de code, immutabilité gérée automatiquement par <b>Immer</b>.
+  </p>
+</div>
+
+<!-- SLIDE 42: REDUX TOOLKIT (UTILISATION DANS REACT) -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">32. Redux Toolkit : Utilisation dans React</h2>
+  <pre><code>import { Provider, useDispatch, useSelector } from "react-redux";
+import { store, incrementer, decrementer } from "./store";
+
+function Compteur() {
+  const valeur = useSelector((state) => state.compteur.valeur);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Valeur : {valeur}&lt;/h2&gt;
+      &lt;button onClick={() => dispatch(incrementer())}&gt;+&lt;/button&gt;
+      &lt;button onClick={() => dispatch(decrementer())}&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function App() {
+  return (
+    &lt;Provider store={store}&gt;
+      &lt;Compteur /&gt;
+    &lt;/Provider&gt;
+  );
+}</code></pre>
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ⚡ Centralise l’état global et rend la synchronisation des données plus simple.
   </p>
 </div>
 
