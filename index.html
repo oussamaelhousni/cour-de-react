@@ -1007,6 +1007,208 @@ function Toggle() {
   );
 }</code></pre>
         </div>
+<!-- SLIDE 26: 15. COMPOSANTS CLASSE -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    15. Composants Classe
+  </h2>
+  <h3 class="font-bold text-2xl text-emerald-600">
+    Une autre façon de créer des composants React
+  </h3>
+  <p class="text-lg text-gray-700">
+    Un composant classe est une <b>classe JavaScript</b> qui étend
+    <b>React.Component</b> et contient obligatoirement une méthode
+    <b>render()</b>.
+  </p>
+  <pre><code>import React from 'react';
+
+class Bouton extends React.Component {
+  render() {
+    return (
+      &lt;button onClick={this.props.action}&gt;
+        {this.props.texte}
+      &lt;/button&gt;
+    );
+  }
+}
+
+// Utilisation
+class App extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Composition&lt;/h2&gt;
+        &lt;Bouton texte="Cliquer ici" action={() => console.log('Clic!')} /&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+  <p class="text-lg text-gray-500 italic mt-4">
+    Les composants classe étaient la norme avant les hooks.
+  </p>
+</div>
+
+<!-- SLIDE 27: 16. PROPS DANS LES COMPOSANTS CLASSE -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    16. Props dans les Composants Classe
+  </h2>
+  <h3 class="font-bold text-2xl text-sky-600">
+    Accès aux données via this.props
+  </h3>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+    <li>
+      Les props sont accessibles avec <b>this.props</b>.
+    </li>
+    <li>
+      Elles sont <b>en lecture seule</b>.
+    </li>
+    <li>
+      Elles sont fournies par le composant parent.
+    </li>
+  </ul>
+  <pre><code>class Card extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h3&gt;{this.props.titre}&lt;/h3&gt;
+        &lt;p&gt;{this.props.contenu}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+</div>
+
+<!-- SLIDE 28: 17. STATE DANS UN COMPOSANT CLASSE -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    17. State dans les Composants Classe
+  </h2>
+  <h3 class="font-bold text-2xl text-red-600">
+    Gestion de l'état interne
+  </h3>
+  <p class="text-lg text-gray-700">
+    Le state représente les données internes du composant.
+    Une modification du state déclenche un <b>re-rendu</b>.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+    <li>Le state est initialisé dans le <b>constructor</b>.</li>
+    <li>La mise à jour se fait avec <b>this.setState()</b>.</li>
+  </ul>
+  <pre><code>class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOn: false };
+  }
+
+  handleToggle = () => {
+    this.setState(prevState => ({
+      isOn: !prevState.isOn
+    }));
+  };
+
+  render() {
+    return (
+      &lt;button onClick={this.handleToggle}&gt;
+        {this.state.isOn ? 'ON' : 'OFF'}
+      &lt;/button&gt;
+    );
+  }
+}</code></pre>
+</div>
+
+<!-- SLIDE 29: 18. CYCLE DE VIE I -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    18. Cycle de Vie : Montage
+  </h2>
+  <h3 class="font-bold text-2xl text-purple-600">
+    componentDidMount
+  </h3>
+  <p class="text-lg text-gray-700">
+    Cette méthode est appelée <b>une seule fois</b> après le premier rendu
+    du composant.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+    <li>Appels API</li>
+    <li>Initialisation de timers</li>
+    <li>Abonnements</li>
+  </ul>
+  <pre><code>class UserList extends React.Component {
+  componentDidMount() {
+    console.log('Composant monté');
+    // fetchData();
+  }
+
+  render() {
+    return &lt;div&gt;Liste des utilisateurs&lt;/div&gt;;
+  }
+}</code></pre>
+</div>
+
+<!-- SLIDE 30: 18. CYCLE DE VIE II -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    18. Cycle de Vie : Démontage
+  </h2>
+  <h3 class="font-bold text-2xl text-red-600">
+    componentWillUnmount
+  </h3>
+  <p class="text-lg text-gray-700">
+    Cette méthode est appelée juste avant que le composant soit retiré du DOM.
+  </p>
+  <p class="text-lg text-gray-700">
+    Elle sert à <b>nettoyer</b> les effets actifs.
+  </p>
+  <pre><code>class Timer extends React.Component {
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      console.log('Tick');
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    console.log('Timer nettoyé');
+  }
+
+  render() {
+    return &lt;div&gt;Timer actif&lt;/div&gt;;
+  }
+}</code></pre>
+  <p class="text-lg text-gray-500 italic mt-4">
+    Indispensable pour éviter les fuites de mémoire.
+  </p>
+</div>
+
+<!-- SLIDE 31: 19. ÉVÉNEMENTS DANS LES COMPOSANTS CLASSE -->
+<div class="slide">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    19. Gestion des Événements en Classe
+  </h2>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+    <li>Les méthodes utilisent <b>this</b>.</li>
+    <li>
+      Il faut lier le contexte ou utiliser des <b>fonctions fléchées</b>.
+    </li>
+    <li>Les événements utilisent le camelCase.</li>
+  </ul>
+  <pre><code>class Counter extends React.Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      &lt;button onClick={this.increment}&gt;
+        Compteur: {this.state.count}
+      &lt;/button&gt;
+    );
+  }
+}</code></pre>
+</div>
 
         <!-- SLIDE 32: 20. LISTES ET KEYS -->
         <div class="slide">
