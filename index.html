@@ -82,6 +82,44 @@
           <p class="text-3xl mt-4">Les Fondations Essentielles du Web</p>
         </div>
 
+        <!-- SLIDE 3: ECMASCRIPT (STANDARD) -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            ECMAScript : le standard de JavaScript
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li><b>ECMAScript</b> est la sp&eacute;cification qui d&eacute;finit les r&egrave;gles et les fonctionnalit&eacute;s du langage.</li>
+            <li><b>JavaScript</b> est l'impl&eacute;mentation la plus connue, utilis&eacute;e dans les navigateurs et avec Node.js.</li>
+            <li>Le standard est maintenu par <b>TC39</b>, un comit&eacute; qui fait &eacute;voluer le langage.</li>
+          </ul>
+          <p class="text-xl text-sky-700 font-semibold mt-6">
+            &Agrave; retenir : ECMAScript d&eacute;crit le langage ; JavaScript l'ex&eacute;cute dans un environnement.
+          </p>
+        </div>
+
+        <!-- SLIDE 4: VERSIONS ECMASCRIPT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            Les versions d'ECMAScript
+          </h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-amber-700">ES5 (2009)</h3>
+              <p class="text-lg text-gray-700 mt-2">Une base largement support&eacute;e par les anciens navigateurs.</p>
+            </div>
+            <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-sky-700">ES6 / ES2015</h3>
+              <p class="text-lg text-gray-700 mt-2">let, const, classes, modules, promesses et fonctions fl&eacute;ch&eacute;es.</p>
+            </div>
+            <div class="bg-emerald-50 border-l-4 border-emerald-400 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-emerald-700">ES2016+</h3>
+              <p class="text-lg text-gray-700 mt-2">Une nouvelle version chaque ann&eacute;e : async/await, optional chaining, etc.</p>
+            </div>
+          </div>
+          <pre><code>// Exemple de fonctionnalit&eacute; moderne (ES6+)
+const message = `Bonjour ${nom}`;</code></pre>
+        </div>
+
         <!-- SLIDE 3: 1. INTRODUCTION À JS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
@@ -528,7 +566,59 @@ const [premiere, ...reste] = [1, 2, 3];
 console.log(premiere); // 1</code></pre>
         </div>
 
-        <!-- SLIDE 16: 9. DOM (QU'EST-CE QUE LE DOM) -->
+        <!-- SLIDE 16: CLASSES EN JAVASCRIPT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            Classes en JavaScript
+          </h2>
+          <p class="text-xl text-gray-700 mb-4">
+            Une classe est un mod&egrave;le pour cr&eacute;er des objets partageant des propri&eacute;t&eacute;s et des m&eacute;thodes.
+          </p>
+          <pre><code>class Utilisateur {
+  constructor(nom) {
+    this.nom = nom;
+  }
+
+  saluer() {
+    return `Bonjour ${this.nom}`;
+  }
+}
+
+const user = new Utilisateur('Alice');
+console.log(user.saluer()); // Bonjour Alice</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li><b>constructor</b> initialise l'instance.</li>
+            <li><b>new</b> cr&eacute;e un objet &agrave; partir de la classe.</li>
+            <li>Les m&eacute;thodes d&eacute;crivent les comportements de l'objet.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 17: HERITAGE AVEC LES CLASSES -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            Classes : h&eacute;ritage et r&eacute;utilisation
+          </h2>
+          <p class="text-xl text-gray-700 mb-4">
+            <b>extends</b> permet de r&eacute;utiliser une classe existante ; <b>super()</b> appelle son constructeur.
+          </p>
+          <pre><code>class Admin extends Utilisateur {
+  constructor(nom, role) {
+    super(nom);
+    this.role = role;
+  }
+
+  afficherRole() {
+    return `${this.nom} : ${this.role}`;
+  }
+}
+
+const admin = new Admin('Samir', 'formateur');</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">
+            Les classes rendent le code objet plus lisible, tout en reposant sur les prototypes de JavaScript.
+          </p>
+        </div>
+
+        <!-- SLIDE 18: 9. DOM (QU'EST-CE QUE LE DOM) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             9. DOM (Document Object Model)
@@ -551,14 +641,17 @@ console.log(premiere); // 1</code></pre>
             </li>
             <li>
               <b
-                >React ne manipule pas directement le DOM, il utilise le Virtual
-                DOM (voir plus tard).</b
+                >React ne manipule pas le DOM &agrave; chaque changement manuellement : il compare son arbre virtuel puis applique seulement les mises &agrave; jour n&eacute;cessaires au DOM r&eacute;el (voir plus tard).</b
               >
             </li>
           </ul>
           <img
             src="https://placehold.co/400x150/f0f9ff/0369a1?text=Arbre+du+DOM"
-            alt="Image de l'arbre du DOM"
+            alt="Schéma représentant la structure en arbre du DOM"
+            width="400"
+            height="150"
+            loading="lazy"
+            decoding="async"
             class="mx-auto mt-6 rounded-lg shadow-lg"
           />
         </div>
@@ -631,7 +724,11 @@ bouton.addEventListener('click', function(event) {
           </p>
           <img
             src="https://placehold.co/400x100/f0f9ff/0369a1?text=Clic+sur+Enfant+%3E+Bulle+vers+Parent"
-            alt="Propagation des événements"
+            alt="Schéma montrant un clic qui remonte de l'enfant vers le parent"
+            width="400"
+            height="100"
+            loading="lazy"
+            decoding="async"
             class="mx-auto mt-4 rounded-lg shadow-lg"
           />
           <h3 class="font-bold text-2xl text-red-600 mt-4">
@@ -648,97 +745,432 @@ bouton.addEventListener('click', function(event) {
 });</code></pre>
         </div>
 
-        <!-- SLIDE 20: 11. ES6+ FEATURES -->
+        <!-- SLIDE 20: 11. SYNTAXE MODERNE ES6+ -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            11. ES6+ Features (Modern JS)
+            11. ES6+ : &eacute;crire un JavaScript plus moderne
           </h2>
-          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li>
-              <b>Template Literals :</b> Chaînes de caractères avec les
-              backticks (` `). Permet l'interpolation de variables.
-              <pre><code>const nom = "Bob"; 
-const msg = `Salut ${nom}, Bienvenue !`;</code></pre>
-            </li>
-            <li>
-              <b>Spread Operator (...) :</b> Pour étendre un itérable
-              (array/objet) en éléments individuels. Utile pour
-              cloner/fusionner.
-              <pre><code>const a = [1, 2];
-const b = [...a, 3, 4]; // [1, 2, 3, 4]</code></pre>
-            </li>
-            <li>
-              <b>Modules (import/export) :</b> Structure le code en fichiers
-              réutilisables. Essentiel pour React.
-            </li>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Template literals</h3>
+              <p class="text-lg text-gray-700 mt-2">Les backticks permettent d'ins&eacute;rer des expressions avec <b>${}</b> et d'&eacute;crire du texte sur plusieurs lignes.</p>
+              <pre><code>const nom = "Bob";
+const age = 25;
+const message = `Salut ${nom} !
+Tu as ${age} ans.`;
+console.log(message);</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Param&egrave;tres par d&eacute;faut</h3>
+              <p class="text-lg text-gray-700 mt-2">Donner une valeur de secours lorsqu'un argument n'est pas fourni.</p>
+              <pre><code>function afficher({ nom, age = 18 }) {
+  return `${nom} a ${age} ans`;
+}
+afficher({ nom: 'Lina' });
+// Lina a 18 ans</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Ces syntaxes r&eacute;duisent le code r&eacute;p&eacute;titif et rendent l'intention plus claire.</p>
+        </div>
+
+        <!-- SLIDE 21: COLLECTIONS ET MODULES ES6+ -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            11. ES6+ : immutabilit&eacute; et modules
+          </h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">Spread (...) : copier</h3>
+              <p class="text-lg text-gray-700 mt-2">Le spread d&eacute;compose un tableau ou un objet. Il permet de cr&eacute;er une nouvelle valeur sans modifier l'originale.</p>
+              <pre><code>const nombres = [1, 2];
+const tous = [...nombres, 3];
+const copie = [...nombres];
+
+const user = { nom: 'Ali', actif: true };
+const admin = { ...user, role: 'admin' };</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">Rest (...) : regrouper</h3>
+              <p class="text-lg text-gray-700 mt-2">Le rest rassemble les valeurs restantes dans un tableau ou un objet.</p>
+              <pre><code>// math.js
+function additionner(...nombres) {
+  return nombres.reduce((total, n) => total + n, 0);
+}
+
+additionner(2, 3, 5); // 10</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-sky-700 font-semibold mt-4">Les modules permettent de d&eacute;couper une grande application en fichiers sp&eacute;cialis&eacute;s et reli&eacute;s explicitement.</p>
+        </div>
+
+        <!-- SLIDE 22: MODULES - PRINCIPES -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : organiser le projet</h2>
+          <p class="text-xl text-gray-700 mb-4">Un module est un fichier JavaScript avec son propre espace de noms. Seules les valeurs export&eacute;es peuvent &ecirc;tre utilis&eacute;es par les autres fichiers.</p>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">Exporter</h3>
+              <pre><code>// math.js
+export const PI = 3.14;
+
+export function additionner(a, b) {
+  return a + b;
+}
+
+export default function saluer(nom) {
+  return `Bonjour ${nom}`;
+}</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Importer</h3>
+              <pre><code>// app.js
+import saluer, { PI, additionner } from './math.js';
+
+console.log(PI);                // 3.14
+console.log(additionner(2, 3)); // 5
+console.log(saluer('Lina'));</code></pre>
+            </div>
+          </div>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
+            <li><b>Export nomm&eacute; :</b> import&eacute; avec le m&ecirc;me nom entre accolades.</li>
+            <li><b>Export par d&eacute;faut :</b> un seul par fichier ; le nom d'import peut changer.</li>
+            <li><b>Chemin relatif :</b> <code>./</code> d&eacute;signe le dossier actuel et <code>../</code> le dossier parent.</li>
           </ul>
         </div>
 
-        <!-- SLIDE 21: 12. ASYNCHRONE (BASES) -->
+        <!-- SLIDE 23: MODULES - STRUCTURE DE PROJET -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            12. Programmation Asynchrone
-          </h2>
-          <h3 class="font-bold text-2xl text-red-600">
-            Synchrone vs Asynchrone
-          </h3>
-          <p class="text-lg text-gray-700">
-            Le JS est par défaut <b>synchrone</b> (une ligne après l'autre).
-            L'asynchrone (ex: appels API) permet aux autres tâches de s'exécuter
-            pendant l'attente.
-          </p>
-          <h3 class="font-bold text-2xl text-red-600 mt-4">
-            setTimeout et Callbacks
-          </h3>
-          <pre><code>// Fonction de rappel (callback) exécutée après un délai
-console.log('Début');
-setTimeout(() => {
-  console.log('2 secondes écoulées');
-}, 2000);
-console.log('Fin (exécuté immédiatement)');</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            *Ceci était géré par les Callbacks (provoque le "Callback Hell").*
-          </p>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : une structure de projet claire</h2>
+          <p class="text-lg text-gray-700 mb-3">Exemple de structure pour une application React :</p>
+          <pre><code>src/
+├── components/       # composants r&eacute;utilisables
+│   ├── Button.jsx
+│   └── UserCard.jsx
+├── features/         # logique par fonctionnalit&eacute;
+│   └── users/
+│       ├── userService.js
+│       └── userUtils.js
+├── services/         # communication avec les API
+│   └── api.js
+├── hooks/             # hooks personnalis&eacute;s
+│   └── useUsers.js
+├── App.jsx            # composition de l'interface
+└── main.jsx           # point d'entr&eacute;e</code></pre>
+          <div class="grid grid-cols-3 gap-4 mt-4">
+            <div class="bg-sky-50 border-l-4 border-sky-400 p-3 rounded-lg"><h3 class="font-bold text-xl text-sky-700">Un fichier = un r&ocirc;le</h3><p class="text-base text-gray-700 mt-1">Le composant affiche, le service communique, l'utilitaire transforme.</p></div>
+            <div class="bg-emerald-50 border-l-4 border-emerald-400 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">D&eacute;pendances visibles</h3><p class="text-base text-gray-700 mt-1">Les imports montrent ce dont chaque fichier a besoin.</p></div>
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded-lg"><h3 class="font-bold text-xl text-purple-700">Navigation simple</h3><p class="text-base text-gray-700 mt-1">On retrouve rapidement le code sans fichier g&eacute;ant.</p></div>
+          </div>
         </div>
 
-        <!-- SLIDE 22: 12. ASYNCHRONE (PROMISES, ASYNC/AWAIT) -->
+        <!-- SLIDE 24: MODULES - EXEMPLE REACT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : exemple concret dans React</h2>
+          <pre><code>// services/api.js : une seule responsabilit&eacute;
+export async function getUsers() {
+  const response = await fetch('/api/users');
+  if (!response.ok) throw new Error('Erreur API');
+  return response.json();
+}
+
+// features/users/userUtils.js : logique r&eacute;utilisable
+export const getActiveUsers = users =&gt;
+  users.filter(user =&gt; user.active);
+
+// features/users/UserList.jsx : interface
+import { getUsers } from '../../services/api.js';
+import { getActiveUsers } from './userUtils.js';
+
+export default function UserList() {
+  return &lt;section&gt;Liste des utilisateurs&lt;/section&gt;;
+}</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Pourquoi c'est essentiel ?</h3>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li><b>Maintenance :</b> une modification de l'API reste dans <code>api.js</code>.</li>
+            <li><b>R&eacute;utilisation :</b> plusieurs composants peuvent importer la m&ecirc;me fonction.</li>
+            <li><b>Tests :</b> chaque fonction peut &ecirc;tre test&eacute;e ind&eacute;pendamment.</li>
+            <li><b>&Eacute;quipe :</b> chacun travaille sur des fichiers s&eacute;par&eacute;s avec moins de conflits.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 25: 12. COMPRENDRE L'ASYNCHRONE -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            12. Asynchrone : Promises et async/await
+            12. Asynchrone : ne pas bloquer le programme
           </h2>
-          <h3 class="font-bold text-2xl text-emerald-600">
-            Promises (Promesses)
-          </h3>
-          <p class="text-lg text-gray-700">
-            Objet représentant l'achèvement (ou l'échec) d'une opération
-            asynchrone.
+          <h3 class="font-bold text-2xl text-red-600">Synchrone, asynchrone et Event Loop</h3>
+          <p class="text-lg text-gray-700 mt-2">
+            JavaScript ex&eacute;cute d'abord le code synchrone dans la <b>Call Stack</b>. Les t&acirc;ches lentes, comme un minuteur ou une requ&ecirc;te r&eacute;seau, sont prises en charge par l'environnement puis replac&eacute;es dans la file d'attente. L'Event Loop les r&eacute;cup&egrave;re quand la pile est libre.
           </p>
+          <pre><code>console.log('1. D&eacute;but');
+setTimeout(() => console.log('3. Callback'), 0);
+console.log('2. Suite du programme');
+// 1. D&eacute;but &rarr; 2. Suite du programme &rarr; 3. Callback</code></pre>
+          <div class="grid grid-cols-2 gap-6 mt-2">
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Pourquoi ?</h3>
+              <p class="text-lg text-gray-700 mt-2">Le navigateur ne laisse pas une requ&ecirc;te r&eacute;seau bloquer l'interface. Pendant l'attente, l'utilisateur peut continuer &agrave; interagir avec la page.</p>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Callback</h3>
+              <p class="text-lg text-gray-700 mt-2">Une fonction pass&eacute;e en argument et ex&eacute;cut&eacute;e plus tard lorsque l'op&eacute;ration est termin&eacute;e.</p>
+            </div>
+          </div>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">Le probl&egrave;me des callbacks imbriqu&eacute;s</h3>
+          <pre><code>connexion(user, () => {
+  chargerProfil(user, () => {
+    chargerCommandes(user, () => {
+      afficherResultat(); // difficile &agrave; maintenir
+    });
+  });
+});</code></pre>
+          <p class="text-lg text-gray-700 mt-2">Les Promises puis <b>async/await</b> rendent cette logique plus lisible.</p>
+        </div>
+
+        <!-- SLIDE 23: 12. PROMESSES ET ASYNC/AWAIT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            12. Promesses : .then(), async et await
+          </h2>
+          <p class="text-lg text-gray-700">Une <b>Promise</b> repr&eacute;sente une op&eacute;ration en attente, r&eacute;ussie (<b>fulfilled</b>) ou &eacute;chou&eacute;e (<b>rejected</b>). Elle permet de cha&icirc;ner les &eacute;tapes et de centraliser les erreurs.</p>
+          <pre><code>const promesse = new Promise((resolve, reject) => {
+  const ok = true;
+  if (ok) resolve('Donn&eacute;es re&ccedil;ues');
+  else reject(new Error('Erreur r&eacute;seau'));
+});
+
+promesse
+  .then(message => console.log(message))
+  .catch(erreur => console.error(erreur));</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Appeler une API avec .then()</h3>
           <pre><code>fetch('/api/data')
-  .then(response => response.json()) // Opération réussie
+  .then(response => {
+    if (!response.ok) throw new Error('Erreur HTTP');
+    return response.json();
+  })
   .then(data => console.log(data))
-  .catch(error => console.error(error)) // Opération échouée
-  .finally(() => console.log('Terminé')); // Qu'importe le résultat</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
-            Async/Await (ES2017)
-          </h3>
-          <p class="text-lg text-gray-700">
-            Simplifie la syntaxe des promesses pour qu'elle ressemble à du code
-            synchrone.
-          </p>
+  .catch(error => console.error(error))
+  .finally(() => console.log('Termin&eacute;'));</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">La syntaxe async/await</h3>
+          <p class="text-lg text-gray-700">Une fonction <b>async</b> retourne toujours une Promise. <b>await</b> attend son r&eacute;sultat sans bloquer le navigateur.</p>
           <pre><code>async function getData() {
   try {
     const response = await fetch('/api/data');
-    const data = await response.json();
-    console.log(data);
+    if (!response.ok) throw new Error('Erreur HTTP');
+    return await response.json();
   } catch (error) {
-    console.error("Erreur de Fetch:", error);
+    console.error('Erreur :', error);
   }
-}</code></pre>
+}
+
+// Plusieurs requ&ecirc;tes en parall&egrave;le
+const resultats = await Promise.all([getData(), getData()]);
+console.log(resultats);</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Conseil : utilisez <b>Promise.all()</b> pour lancer des t&acirc;ches ind&eacute;pendantes ensemble et g&eacute;rez toujours les erreurs avec <b>try/catch</b>.</p>
         </div>
 
-        <!-- SLIDE 23: SÉPARATEUR REACT -->
+        <!-- SLIDE 26: SEPARATEUR NODE.JS -->
+        <div class="slide text-center bg-emerald-600 text-white">
+          <h2 class="text-5xl font-extrabold">PARTIE 2 : NODE.JS</h2>
+          <p class="text-3xl mt-4">Ex&eacute;cuter JavaScript, utiliser npm et cr&eacute;er des scripts</p>
+        </div>
+
+        <!-- SLIDE 27: NODE.JS - INTRODUCTION -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Node.js : JavaScript en dehors du navigateur</h2>
+          <p class="text-xl text-gray-700 mb-4"><b>Node.js</b> permet d'ex&eacute;cuter JavaScript en dehors du navigateur, directement sur votre ordinateur ou sur un serveur.</p>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">Pourquoi Node.js ?</h3>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-2">
+                <li>Ex&eacute;cuter des programmes JavaScript depuis le terminal.</li>
+                <li>Utiliser <b>npm</b>, le gestionnaire de paquets JavaScript.</li>
+                <li>Cr&eacute;er des scripts, des serveurs et des outils en ligne de commande.</li>
+                <li>G&eacute;rer les d&eacute;pendances et les scripts d'un projet.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">Navigateur vs Node.js</h3>
+              <p class="text-lg text-gray-700 mt-2">Le navigateur fournit le DOM et <code>document</code>. Node.js fournit le syst&egrave;me de fichiers, le terminal et les outils serveur.</p>
+              <pre><code>// navigateur
+document.querySelector('h1');
+
+// Node.js
+console.log('Ex&eacute;cut&eacute; dans le terminal');</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 28: INSTALLER NODE.JS -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Installer Node.js et v&eacute;rifier l'installation</h2>
+          <ol class="list-decimal pl-6 space-y-3 text-xl text-gray-700">
+            <li>Ouvrir <b>nodejs.org</b> et choisir la version <b>LTS</b>.</li>
+            <li>Ex&eacute;cuter l'installateur et conserver les options par d&eacute;faut.</li>
+            <li>Fermer puis rouvrir le terminal pour recharger le chemin syst&egrave;me.</li>
+          </ol>
+          <h3 class="font-bold text-2xl text-sky-600 mt-6">V&eacute;rifier les versions</h3>
+          <pre><code>node --version
+npm --version
+
+// Exemple de r&eacute;sultat :
+// v22.x.x
+// 10.x.x</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Node.js installe g&eacute;n&eacute;ralement <b>npm</b> en m&ecirc;me temps. Si une commande n'est pas reconnue, red&eacute;marrez le terminal ou v&eacute;rifiez l'installation.</p>
+        </div>
+
+        <!-- SLIDE 29: NODE.JS - PREMIER PROJET -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Node.js : cr&eacute;er et lancer un premier projet</h2>
+          <pre><code># cr&eacute;er un dossier et initialiser npm
+mkdir demo-node
+cd demo-node
+npm init -y
+
+# cr&eacute;er app.js puis l'ex&eacute;cuter
+node app.js</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">app.js</h3>
+          <pre><code>const nom = 'Lina';
+console.log(`Bonjour ${nom}, Node.js fonctionne !`);
+
+// Sortie dans le terminal :
+// Bonjour Lina, Node.js fonctionne !</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Ajouter une d&eacute;pendance Node.js</h3>
+          <pre><code>npm install lodash
+
+// package.json peut aussi contenir des scripts :
+"scripts": {
+  "start": "node app.js"
+}
+
+npm run start</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Node.js fournit l'environnement d'ex&eacute;cution ; npm installe les paquets et lance les scripts du projet.</p>
+        </div>
+
+        <!-- SLIDE 30: NPM -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">npm : le gestionnaire de paquets Node.js</h2>
+          <p class="text-xl text-gray-700">npm signifie <b>Node Package Manager</b>. Il permet de t&eacute;l&eacute;charger, mettre &agrave; jour et supprimer des paquets JavaScript, puis de lancer les scripts du projet.</p>
+          <div class="grid grid-cols-2 gap-6 mt-5">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">Commandes essentielles</h3>
+              <pre><code>npm init -y          # cr&eacute;er package.json
+npm install          # installer les d&eacute;pendances
+npm install lodash   # ajouter un paquet
+npm uninstall lodash # supprimer un paquet
+npm run start        # lancer un script</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">npm registre</h3>
+              <p class="text-lg text-gray-700 mt-2">npm cherche les paquets dans le registre public. Chaque paquet contient du code r&eacute;utilisable : biblioth&egrave;ques, outils, plugins ou frameworks.</p>
+              <pre><code>npm view lodash version
+npm search date
+npm outdated</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">npm automatise la gestion des d&eacute;pendances : les versions sont enregistr&eacute;es pour pouvoir reconstruire le projet.</p>
+        </div>
+
+        <!-- SLIDE 31: PACKAGE.JSON -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">package.json : la carte d'identit&eacute; du projet</h2>
+          <p class="text-xl text-gray-700 mb-4">Ce fichier d&eacute;crit le projet, ses commandes et les paquets dont il a besoin. Il est versionn&eacute; avec le code et ne doit pas &ecirc;tre supprim&eacute;.</p>
+          <pre><code>{
+  "name": "demo-node",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
+            <li><b>dependencies :</b> paquets n&eacute;cessaires pour ex&eacute;cuter l'application.</li>
+            <li><b>devDependencies :</b> outils uniquement utiles pendant le d&eacute;veloppement.</li>
+            <li><b>scripts :</b> raccourcis comme <code>npm run start</code> ou <code>npm test</code>.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 32: NODE_MODULES ET PACKAGE-LOCK -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">node_modules et package-lock.json</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">node_modules/</h3>
+              <p class="text-lg text-gray-700 mt-2">Dossier qui contient le code r&eacute;el des paquets install&eacute;s et leurs propres d&eacute;pendances.</p>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+                <li>Il peut devenir tr&egrave;s volumineux.</li>
+                <li>On ne le commit g&eacute;n&eacute;ralement pas dans Git.</li>
+                <li>On le recr&eacute;e avec <code>npm install</code>.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">package-lock.json</h3>
+              <p class="text-lg text-gray-700 mt-2">npm y enregistre les versions exactes install&eacute;es et l'arbre complet des d&eacute;pendances.</p>
+              <pre><code># apr&egrave;s avoir clon&eacute; le projet
+npm install
+
+# npm lit package-lock.json
+# puis recr&eacute;e node_modules</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-emerald-600 font-semibold mt-5">R&egrave;gle importante : partager <code>package.json</code> et <code>package-lock.json</code>, mais ignorer <code>node_modules</code>.</p>
+        </div>
+
+        <!-- SLIDE 33: INSTALLER ET SUPPRIMER DES PAQUETS -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Installer, mettre &agrave; jour et supprimer un paquet</h2>
+          <pre><code># d&eacute;pendance utilis&eacute;e par l'application
+npm install lodash
+
+# outil uniquement pour le d&eacute;veloppement
+npm install --save-dev nodemon
+
+# mettre &agrave; jour selon package.json
+npm update lodash
+
+# supprimer un paquet et son entr&eacute;e dans package.json
+npm uninstall lodash</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Apr&egrave;s chaque commande</h3>
+          <p class="text-lg text-gray-700">npm modifie <code>package.json</code>, met &agrave; jour <code>package-lock.json</code> et ajoute ou retire le paquet dans <code>node_modules</code>.</p>
+          <pre><code># voir les paquets install&eacute;s
+npm list --depth=0
+
+# r&eacute;installer proprement selon le lock
+npm ci</code></pre>
+          <p class="text-lg text-gray-700 mt-3"><code>npm ci</code> est utile dans les pipelines de test et de d&eacute;ploiement, car il installe exactement les versions verrouill&eacute;es.</p>
+        </div>
+
+        <!-- SLIDE 34: UTILISER UN PAQUET -->
+        <div class="slide border-t-8 border-emerald-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Exemple : utiliser le paquet lodash</h2>
+          <p class="text-lg text-gray-700">Lodash fournit des fonctions pratiques pour manipuler des tableaux et des objets. On l'installe une seule fois, puis on l'importe dans notre fichier.</p>
+          <pre><code># dans le terminal
+npm install lodash</code></pre>
+          <pre><code>// app.js (CommonJS)
+const _ = require('lodash');
+
+const utilisateurs = [
+  { nom: 'Lina', actif: true },
+  { nom: 'Omar', actif: false },
+  { nom: 'Sara', actif: true }
+];
+
+const actifs = _.filter(utilisateurs, { actif: true });
+const noms = _.map(actifs, 'nom');
+console.log(noms); // [ 'Lina', 'Sara' ]</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Le paquet apporte une solution pr&ecirc;te &agrave; l'emploi : on gagne du temps et on r&eacute;duit le code r&eacute;p&eacute;titif.</p>
+        </div>
+
+        <!-- SLIDE 35: SÉPARATEUR REACT -->
         <div class="slide text-center bg-sky-500 text-white">
-          <h2 class="text-5xl font-extrabold">PARTIE 2 : REACT</h2>
+          <h2 class="text-5xl font-extrabold">PARTIE 3 : REACT</h2>
           <p class="text-3xl mt-4">
             Développement d'Interface Utilisateur Moderne
           </p>
@@ -776,7 +1208,50 @@ console.log('Fin (exécuté immédiatement)');</code></pre>
           </p>
         </div>
 
-        <!-- SLIDE 25: 14. JSX -->
+        <!-- SLIDE 36: INSTALLER REACT AVEC VITE -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Approche moderne : cr&eacute;er React avec Vite</h2>
+          <p class="text-xl text-gray-700 mb-4">Vite est l'approche recommand&eacute;e pour un nouveau projet : il d&eacute;marre rapidement et fournit un serveur de d&eacute;veloppement moderne.</p>
+          <pre><code># cr&eacute;er le projet
+npm create vite@latest mon-app -- --template react
+
+# choisir dans l'assistant :
+# Framework : React
+# Variant   : JavaScript ou TypeScript
+
+cd mon-app
+npm install
+npm run dev</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">Scripts principaux</h3>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li><code>npm run dev</code> : lancer le serveur local pendant le d&eacute;veloppement.</li>
+            <li><code>npm run build</code> : produire la version optimis&eacute;e pour la production.</li>
+            <li><code>npm run preview</code> : pr&eacute;visualiser le build localement.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 37: ANCIENNE INSTALLATION REACT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Ancienne approche : Create React App (CRA)</h2>
+          <p class="text-xl text-gray-700 mb-4">Create React App (CRA) a longtemps &eacute;t&eacute; la m&eacute;thode officielle pour d&eacute;marrer React. Elle reste utile pour comprendre d'anciens projets, mais les nouveaux projets utilisent g&eacute;n&eacute;ralement Vite.</p>
+          <pre><code># cr&eacute;er un ancien projet React
+npx create-react-app mon-ancien-app
+cd mon-ancien-app
+npm start</code></pre>
+          <div class="grid grid-cols-2 gap-6 mt-4">
+            <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-sky-700">Vite</h3>
+              <p class="text-lg text-gray-700 mt-2">D&eacute;marrage rapide, configuration l&eacute;g&egrave;re et choix moderne pour apprendre ou cr&eacute;er une application.</p>
+            </div>
+            <div class="bg-gray-100 border-l-4 border-gray-400 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-gray-700">CRA</h3>
+              <p class="text-lg text-gray-700 mt-2">Ancienne structure, encore rencontr&eacute;e dans des applications existantes. &Agrave; reconna&icirc;tre lors de la maintenance.</p>
+            </div>
+          </div>
+          <p class="text-xl text-emerald-600 font-semibold mt-5">Dans les deux cas, Node.js et npm sont n&eacute;cessaires pour installer les paquets et lancer les scripts.</p>
+        </div>
+
+        <!-- SLIDE 38: 14. JSX -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             14. JSX : Syntaxe
@@ -807,7 +1282,91 @@ console.log('Fin (exécuté immédiatement)');</code></pre>
 const element = &lt;h1 className="titre"&gt;Bonjour, {nom.toUpperCase()}&lt;/h1&gt;;</code></pre>
         </div>
 
-        <!-- SLIDE 26: 15. COMPOSANTS -->
+        <!-- SLIDE 39: COMPOSANTS REACT À CLASSES -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Composants React &agrave; classes : la structure</h2>
+          <p class="text-xl text-gray-700 mb-4">Avant les Hooks, on construisait les composants avec des classes JavaScript qui h&eacute;ritent de <code>React.Component</code>. Commen&ccedil;ons par un composant simple, sans state.</p>
+          <pre><code>import React from 'react';
+
+class Bonjour <span class="code-highlight">extends React.Component</span> {
+  <span class="code-highlight">render()</span> {
+    return &lt;h2&gt;Bonjour {<span class="code-highlight">this.props</span>.nom}&lt;/h2&gt;;
+  }
+}
+
+// Utilisation dans le composant parent
+&lt;Bonjour nom="Lina" /&gt;;</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+            <li><span class="code-highlight">render()</span> retourne le JSX affich&eacute;.</li>
+            <li><span class="code-highlight">this.props</span> lit les donn&eacute;es envoy&eacute;es par le parent.</li>
+            <li>Ce composant est pr&eacute;visible : il affiche uniquement ses props.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 40: CLASSES - PROPS ET STATE -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Classes : introduire le state</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Lire les props</h3>
+              <pre><code>class Bonjour extends React.Component {
+  render() {
+    return &lt;h2&gt;Bonjour {this.props.nom}&lt;/h2&gt;;
+  }
+}
+
+&lt;Bonjour nom="Lina" /&gt;</code></pre>
+              <p class="text-lg text-gray-700">Les props viennent du parent et sont en lecture seule.</p>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">D&eacute;clarer le state</h3>
+              <pre><code>class Compteur <span class="code-highlight">extends React.Component</span> {
+  constructor(props) {
+    <span class="code-highlight">super(props)</span>;
+    <span class="code-highlight">this.state</span> = { compte: 0 };
+  }
+
+  incrementer = () =&gt; {
+    <span class="code-highlight">this.setState</span>(prevState =&gt; ({
+      compte: prevState.compte + 1
+    }));
+  };
+}</code></pre>
+              <p class="text-lg text-gray-700">Le state contient les donn&eacute;es internes et <code>setState()</code> demande un nouveau rendu.</p>
+            </div>
+          </div>
+          <p class="text-xl text-amber-700 font-semibold mt-5">Ne faites jamais <code>this.state.compte++</code> directement : React ne sera pas inform&eacute; correctement du changement.</p>
+        </div>
+
+        <!-- SLIDE 41: CLASSES - CYCLE DE VIE ET EVENEMENTS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Classes : cycle de vie et &eacute;v&eacute;nements</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">Cycle de vie</h3>
+              <pre><code><span class="code-highlight">componentDidMount()</span> {
+  this.timer = setInterval(() =&gt; {
+    console.log('actif');
+  }, 1000);
+}
+
+<span class="code-highlight">componentWillUnmount()</span> {
+  clearInterval(this.timer);
+}</code></pre>
+              <p class="text-lg text-gray-700">La premi&egrave;re m&eacute;thode se lance apr&egrave;s le montage ; la seconde nettoie avant le d&eacute;montage.</p>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-red-600">Attention &agrave; <code>this</code></h3>
+              <p class="text-lg text-gray-700 mt-2">Une m&eacute;thode classique peut perdre le contexte du composant. Une fonction fl&eacute;ch&eacute;e ou <code>bind(this)</code> conserve le bon contexte.</p>
+              <pre><code><span class="code-highlight">handleClick</span> = () =&gt; {
+  <span class="code-highlight">this.setState</span>({ ouvert: true });
+};</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-gray-700 font-semibold mt-5">Ces composants sont importants pour maintenir du code ancien, m&ecirc;me si les nouveaux composants utilisent surtout les fonctions et les Hooks.</p>
+        </div>
+
+        <!-- SLIDE 42: COMPOSANTS FONCTIONNELS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             15. Composants Fonctionnels
@@ -1007,209 +1566,6 @@ function Toggle() {
   );
 }</code></pre>
         </div>
-<!-- SLIDE 26: 15. COMPOSANTS CLASSE -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    15. Composants Classe
-  </h2>
-  <h3 class="font-bold text-2xl text-emerald-600">
-    Une autre façon de créer des composants React
-  </h3>
-  <p class="text-lg text-gray-700">
-    Un composant classe est une <b>classe JavaScript</b> qui étend
-    <b>React.Component</b> et contient obligatoirement une méthode
-    <b>render()</b>.
-  </p>
-  <pre><code>import React from 'react';
-
-class Bouton extends React.Component {
-  render() {
-    return (
-      &lt;button onClick={this.props.action}&gt;
-        {this.props.texte}
-      &lt;/button&gt;
-    );
-  }
-}
-
-// Utilisation
-class App extends React.Component {
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;h2&gt;Composition&lt;/h2&gt;
-        &lt;Bouton texte="Cliquer ici" action={() => console.log('Clic!')} /&gt;
-      &lt;/div&gt;
-    );
-  }
-}</code></pre>
-  <p class="text-lg text-gray-500 italic mt-4">
-    Les composants classe étaient la norme avant les hooks.
-  </p>
-</div>
-
-<!-- SLIDE 27: 16. PROPS DANS LES COMPOSANTS CLASSE -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    16. Props dans les Composants Classe
-  </h2>
-  <h3 class="font-bold text-2xl text-sky-600">
-    Accès aux données via this.props
-  </h3>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-    <li>
-      Les props sont accessibles avec <b>this.props</b>.
-    </li>
-    <li>
-      Elles sont <b>en lecture seule</b>.
-    </li>
-    <li>
-      Elles sont fournies par le composant parent.
-    </li>
-  </ul>
-  <pre><code>class Card extends React.Component {
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;h3&gt;{this.props.titre}&lt;/h3&gt;
-        &lt;p&gt;{this.props.contenu}&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
-}</code></pre>
-</div>
-
-<!-- SLIDE 28: 17. STATE DANS UN COMPOSANT CLASSE -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    17. State dans les Composants Classe
-  </h2>
-  <h3 class="font-bold text-2xl text-red-600">
-    Gestion de l'état interne
-  </h3>
-  <p class="text-lg text-gray-700">
-    Le state représente les données internes du composant.
-    Une modification du state déclenche un <b>re-rendu</b>.
-  </p>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-    <li>Le state est initialisé dans le <b>constructor</b>.</li>
-    <li>La mise à jour se fait avec <b>this.setState()</b>.</li>
-  </ul>
-  <pre><code>class Toggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: false };
-  }
-
-  handleToggle = () => {
-    this.setState(prevState => ({
-      isOn: !prevState.isOn
-    }));
-  };
-
-  render() {
-    return (
-      &lt;button onClick={this.handleToggle}&gt;
-        {this.state.isOn ? 'ON' : 'OFF'}
-      &lt;/button&gt;
-    );
-  }
-}</code></pre>
-</div>
-
-<!-- SLIDE 29: 18. CYCLE DE VIE I -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    18. Cycle de Vie : Montage
-  </h2>
-  <h3 class="font-bold text-2xl text-purple-600">
-    componentDidMount
-  </h3>
-  <p class="text-lg text-gray-700">
-    Cette méthode est appelée <b>une seule fois</b> après le premier rendu
-    du composant.
-  </p>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-    <li>Appels API</li>
-    <li>Initialisation de timers</li>
-    <li>Abonnements</li>
-  </ul>
-  <pre><code>class UserList extends React.Component {
-  componentDidMount() {
-    console.log('Composant monté');
-    // fetchData();
-  }
-
-  render() {
-    return &lt;div&gt;Liste des utilisateurs&lt;/div&gt;;
-  }
-}</code></pre>
-</div>
-
-<!-- SLIDE 30: 18. CYCLE DE VIE II -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    18. Cycle de Vie : Démontage
-  </h2>
-  <h3 class="font-bold text-2xl text-red-600">
-    componentWillUnmount
-  </h3>
-  <p class="text-lg text-gray-700">
-    Cette méthode est appelée juste avant que le composant soit retiré du DOM.
-  </p>
-  <p class="text-lg text-gray-700">
-    Elle sert à <b>nettoyer</b> les effets actifs.
-  </p>
-  <pre><code>class Timer extends React.Component {
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      console.log('Tick');
-    }, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-    console.log('Timer nettoyé');
-  }
-
-  render() {
-    return &lt;div&gt;Timer actif&lt;/div&gt;;
-  }
-}</code></pre>
-  <p class="text-lg text-gray-500 italic mt-4">
-    Indispensable pour éviter les fuites de mémoire.
-  </p>
-</div>
-
-<!-- SLIDE 31: 19. ÉVÉNEMENTS DANS LES COMPOSANTS CLASSE -->
-<div class="slide">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    19. Gestion des Événements en Classe
-  </h2>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-    <li>Les méthodes utilisent <b>this</b>.</li>
-    <li>
-      Il faut lier le contexte ou utiliser des <b>fonctions fléchées</b>.
-    </li>
-    <li>Les événements utilisent le camelCase.</li>
-  </ul>
-  <pre><code>class Counter extends React.Component {
-  state = { count: 0 };
-
-  increment = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-
-  render() {
-    return (
-      &lt;button onClick={this.increment}&gt;
-        Compteur: {this.state.count}
-      &lt;/button&gt;
-    );
-  }
-}</code></pre>
-</div>
-
         <!-- SLIDE 32: 20. LISTES ET KEYS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
@@ -1443,8 +1799,9 @@ function Navbar() {
 
           <p class="text-lg text-gray-700 mt-4">
             ✅ <b>Avantage :</b> évite de répéter les props inutiles.  
-            ⚠️ <b>Attention :</b> chaque Provider crée un nouveau contexte
-            isolé.
+            ⚠️ <b>Attention :</b> un Provider fournit une valeur aux composants
+            descendants ; plusieurs Providers du m&ecirc;me contexte peuvent fournir
+            des valeurs diff&eacute;rentes selon leur emplacement dans l'arbre.
           </p>
         </div>
 
@@ -1466,7 +1823,7 @@ function Navbar() {
           <pre><code>import { useRef } from "react";
 
 function FocusInput() {
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const focusInput = () => {
     inputRef.current.focus();
@@ -1515,7 +1872,8 @@ function FocusInput() {
             3️⃣ React.memo()
           </h3>
           <p class="text-lg text-gray-700">
-            Empêche le re-rendu d’un composant si ses props n’ont pas changé.
+            Évite généralement le re-rendu si les props sont restées identiques
+            lors d'une comparaison superficielle.
           </p>
           <pre><code>const Enfant = React.memo(({ name }) => {
   console.log("Rendu :", name);
@@ -1523,8 +1881,8 @@ function FocusInput() {
 });</code></pre>
 
           <p class="text-xl text-emerald-600 font-semibold mt-4">
-            ✅ Idéal pour améliorer les performances dans des listes ou
-            composants coûteux.
+            ✅ Utile pour des calculs ou composants réellement coûteux ; ne
+            mémorisez pas tout par défaut, mesurez d'abord avec le Profiler.
           </p>
         </div>
 
@@ -1617,10 +1975,10 @@ function Switch() {
           </p>
         </div>
 
-        <!-- SLIDE 43: SÉPARATEUR PARTIE 3 -->
+        <!-- SLIDE 43: SÉPARATEUR PARTIE 4 -->
         <div class="slide text-center bg-sky-500 text-white">
           <h2 class="text-5xl font-extrabold">
-            PARTIE 3 : Navigation & Gestion d’État
+            PARTIE 4 : Navigation avec React Router DOM
           </h2>
           <p class="text-3xl mt-4">React Router DOM & Redux Toolkit</p>
         </div>
@@ -1637,12 +1995,19 @@ function Switch() {
             navigateur.
           </p>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
-            <li><b>SPA :</b> Une seule page HTML, le contenu change selon la route.</li>
-            <li><b>React Router :</b> Lie les chemins (URL) à des composants React.</li>
-            <li>Supporte les <b>paramètres dynamiques</b> et la <b>navigation imbriquée</b>.</li>
+            <li><b>SPA :</b> une seule page HTML est chargée ; React remplace seulement le contenu nécessaire.</li>
+            <li><b>Route :</b> une règle qui associe un chemin d'URL à un composant.</li>
+            <li><b>Router :</b> surveille l'URL et choisit la route active.</li>
+            <li><b>Navigation :</b> changer l'URL sans recharger toute la page.</li>
           </ul>
+          <pre><code>// URL actuelle : /about
+&lt;Routes&gt;
+  &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+  &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+&lt;/Routes&gt;
+// React affiche &lt;About /&gt; sans nouveau chargement HTML</code></pre>
           <p class="text-xl text-emerald-600 font-semibold mt-6">
-            ⭐ Navigation fluide, sans rechargement complet.
+            À retenir : l'URL devient une source de vérité pour savoir quelle vue afficher.
           </p>
         </div>
 
@@ -1671,8 +2036,9 @@ function App() {
   );
 }</code></pre>
           <p class="text-lg text-gray-500 italic mt-4">
-            💡 <code>BrowserRouter</code> enveloppe toute l’application et gère
-            l’historique de navigation.
+            💡 <code>BrowserRouter</code> enveloppe l’application et gère
+            l’historique. <code>Routes</code> regroupe les règles ; <code>Route</code>
+            associe un chemin à un élément React.
           </p>
         </div>
 
@@ -1811,7 +2177,167 @@ function ProtectedRoute({ isAuth, children }) {
           </p>
         </div>
 
-        <!-- SLIDE 49: REDUX TOOLKIT (INTRODUCTION) -->
+        <!-- SLIDE 49: SEPARATEUR REDUX -->
+        <div class="slide text-center bg-purple-700 text-white">
+          <h2 class="text-5xl font-extrabold">PARTIE 5 : REDUX PRATIQUE</h2>
+          <p class="text-3xl mt-4">&Eacute;tat global, Redux classique, Toolkit et custom hooks</p>
+        </div>
+
+        <!-- SLIDE 50: PROBLEME DE L'ETAT GLOBAL -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Pourquoi l'&eacute;tat global devient un probl&egrave;me ?</h2>
+          <p class="text-xl text-gray-700">Un &eacute;tat est <b>global</b> lorsqu'il doit &ecirc;tre lu ou modifi&eacute; par plusieurs composants &eacute;loign&eacute;s dans l'application.</p>
+          <div class="grid grid-cols-2 gap-6 mt-5">
+            <div class="bg-sky-50 border-l-4 border-sky-500 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-sky-700">Exemples</h3>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-2">
+                <li>Utilisateur connect&eacute; et permissions.</li>
+                <li>Panier et nombre d'articles.</li>
+                <li>Th&egrave;me clair/sombre.</li>
+                <li>Notifications et messages non lus.</li>
+              </ul>
+            </div>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+              <h3 class="font-bold text-2xl text-red-700">Sans organisation</h3>
+              <p class="text-lg text-gray-700 mt-2">Chaque composant peut garder sa propre copie. Une modification dans un endroit peut alors ne pas &ecirc;tre refl&eacute;t&eacute;e ailleurs.</p>
+              <pre><code>Navbar : user = "Lina"
+Profile : user = "Lina"
+Cart    : user = "Lina"
+// Plusieurs copies &agrave; synchroniser</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-amber-700 font-semibold mt-5">Le probl&egrave;me n'est pas <code>useState</code> : c'est le partage et la synchronisation d'une m&ecirc;me donn&eacute;e.</p>
+        </div>
+
+        <!-- SLIDE 51: PROP DRILLING -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Le prop drilling : faire passer des donn&eacute;es trop loin</h2>
+          <p class="text-xl text-gray-700">Le <b>prop drilling</b> arrive lorsqu'une donn&eacute;e doit traverser plusieurs composants interm&eacute;diaires qui ne l'utilisent pas, uniquement pour atteindre un composant final.</p>
+          <pre><code>function App() {
+  const user = { name: 'Lina' };
+  return &lt;Layout user={user} /&gt;;
+}
+
+function Layout({ user }) {
+  return &lt;Header user={user} /&gt;;
+}
+
+function Header({ user }) {
+  return &lt;UserMenu user={user} /&gt;;
+}
+
+function UserMenu({ user }) {
+  return &lt;span&gt;Bonjour {user.name}&lt;/span&gt;;
+}</code></pre>
+          <div class="grid grid-cols-3 gap-4 mt-4">
+            <div class="bg-red-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-red-700">Couplage</h3><p class="text-base text-gray-700">Les composants interm&eacute;diaires connaissent des donn&eacute;es qui ne les concernent pas.</p></div>
+            <div class="bg-amber-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-amber-700">Maintenance</h3><p class="text-base text-gray-700">Ajouter une nouvelle donn&eacute;e oblige &agrave; modifier toute la cha&icirc;ne.</p></div>
+            <div class="bg-purple-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-purple-700">Lisibilit&eacute;</h3><p class="text-base text-gray-700">Il devient difficile de savoir qui poss&egrave;de et modifie la donn&eacute;e.</p></div>
+          </div>
+        </div>
+
+        <!-- SLIDE 52: CE QUE REDUX CORRIGE -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Ce que Redux corrige</h2>
+          <p class="text-xl text-gray-700">Redux place l'&eacute;tat partag&eacute; dans un store unique. Les composants lisent ce store et demandent un changement en envoyant une action.</p>
+          <div class="grid grid-cols-4 gap-3 mt-5 text-center">
+            <div class="bg-sky-50 border-t-4 border-sky-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-sky-700">Store</h3><p class="text-base text-gray-700">une source unique</p></div>
+            <div class="bg-amber-50 border-t-4 border-amber-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-amber-700">Action</h3><p class="text-base text-gray-700">une intention</p></div>
+            <div class="bg-purple-50 border-t-4 border-purple-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-purple-700">Reducer</h3><p class="text-base text-gray-700">une transition pr&eacute;visible</p></div>
+            <div class="bg-emerald-50 border-t-4 border-emerald-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">UI</h3><p class="text-base text-gray-700">mise &agrave; jour automatique</p></div>
+          </div>
+          <pre><code>const count = useSelector(state =&gt; state.counter.value);
+const dispatch = useDispatch();
+
+// Le composant ne modifie pas le store directement
+dispatch({ type: 'counter/increment' });</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+            <li><b>Centralisation :</b> une seule valeur partag&eacute;e au lieu de copies concurrentes.</li>
+            <li><b>Tra&ccedil;abilit&eacute; :</b> chaque modification correspond &agrave; une action identifiable.</li>
+            <li><b>Pr&eacute;visibilit&eacute; :</b> les reducers d&eacute;crivent comment l'&eacute;tat peut &eacute;voluer.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 53: REDUX CLASSIQUE - CONCEPTS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : comprendre le flux</h2>
+          <p class="text-xl text-gray-700">Redux est une biblioth&egrave;que qui centralise l'&eacute;tat de l'application dans un <b>store</b>. Les composants ne modifient pas directement cet &eacute;tat.</p>
+          <div class="grid grid-cols-4 gap-3 mt-5 text-center">
+            <div class="bg-sky-50 border-t-4 border-sky-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-sky-700">UI</h3><p class="text-base text-gray-700 mt-1">affiche le state</p></div>
+            <div class="bg-amber-50 border-t-4 border-amber-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-amber-700">Action</h3><p class="text-base text-gray-700 mt-1">d&eacute;crit l'intention</p></div>
+            <div class="bg-purple-50 border-t-4 border-purple-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-purple-700">Reducer</h3><p class="text-base text-gray-700 mt-1">calcule le nouvel &eacute;tat</p></div>
+            <div class="bg-emerald-50 border-t-4 border-emerald-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">Store</h3><p class="text-base text-gray-700 mt-1">conserve le state</p></div>
+          </div>
+          <pre><code>// Une action est un objet descriptif
+{ type: '<span class="redux-highlight">counter/increment</span>', <span class="redux-highlight">payload</span>: 1 }
+
+// Un reducer est une fonction pure
+function <span class="redux-highlight">reducer</span>(state, action) {
+  if (action.type === '<span class="redux-highlight">counter/increment</span>') {
+    return { count: state.count + action.<span class="redux-highlight">payload</span> };
+  }
+  return state;
+}</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Flux unidirectionnel : UI &rarr; dispatch(action) &rarr; reducer &rarr; nouveau state &rarr; UI.</p>
+        </div>
+
+        <!-- SLIDE 50: REDUX CLASSIQUE - STORE ET ACTIONS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : cr&eacute;er le store et le reducer</h2>
+          <p class="text-lg text-gray-700">Le <b>store</b> contient l'&eacute;tat global. <code>dispatch()</code> envoie une action ; <code>getState()</code> lit l'&eacute;tat ; <code>subscribe()</code> r&eacute;agit &agrave; ses changements.</p>
+          <pre><code>import { createStore } from 'redux';
+
+const initialState = { count: 0 };
+
+function counterReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { ...state, count: state.count + 1 };
+    case 'ADD':
+      return { ...state, count: state.count + action.payload };
+    case 'RESET':
+      return initialState;
+    default:
+      return state;
+  }
+}
+
+const <span class="redux-highlight">store</span> = <span class="redux-highlight">createStore</span>(counterReducer);
+<span class="redux-highlight">store.dispatch</span>({ type: 'ADD', payload: 5 });
+console.log(<span class="redux-highlight">store.getState()</span>); // { count: 5 }</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
+            <li>Le reducer ne modifie jamais directement <code>state</code> : il retourne un nouvel objet.</li>
+            <li>Le <code>switch</code> associe chaque type d'action &agrave; une transition d'&eacute;tat.</li>
+            <li>Une action ne fait rien seule : elle doit &ecirc;tre envoy&eacute;e avec <code>dispatch()</code>.</li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 51: REDUX CLASSIQUE - REACT-REDUX -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : connecter le store &agrave; React</h2>
+          <p class="text-lg text-gray-700">Le package <code>react-redux</code> fournit <b>Provider</b> pour rendre le store disponible et les fonctions <b>useSelector</b>/<b>useDispatch</b> pour le lire et envoyer des actions.</p>
+          <pre><code>import { Provider, useSelector, useDispatch } from 'react-redux';
+import { store } from './store';
+
+function Counter() {
+  const count = useSelector(state =&gt; state.count);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;button onClick={() =&gt; dispatch({ type: 'INCREMENT' })}&gt;
+      Compteur : {count}
+    &lt;/button&gt;
+  );
+}
+
+// main.jsx
+&lt;Provider store={store}&gt;
+  &lt;Counter /&gt;
+&lt;/Provider&gt;</code></pre>
+          <p class="text-xl text-amber-700 font-semibold mt-4">Cette approche fonctionne, mais elle demande beaucoup de code r&eacute;p&eacute;titif : actions, types, switch, reducers et configuration manuelle.</p>
+        </div>
+
+        <!-- SLIDE 52: REDUX TOOLKIT (INTRODUCTION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             36. Redux Toolkit : Introduction
@@ -1884,7 +2410,83 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );</code></pre>
         </div>
 
-        <!-- SLIDE 51: UTILISATION DANS UN COMPOSANT -->
+        <!-- SLIDE 56: REDUX TOOLKIT - POURQUOI ET COMMENT -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux Toolkit : moins de code, plus de s&eacute;curit&eacute;</h2>
+          <p class="text-xl text-gray-700">Redux Toolkit (RTK) est la fa&ccedil;on moderne d'&eacute;crire Redux. Il garde le m&ecirc;me flux, mais g&eacute;n&egrave;re les actions, simplifie les reducers et configure le store.</p>
+          <div class="grid grid-cols-3 gap-4 mt-5">
+            <div class="bg-purple-50 border-t-4 border-purple-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-purple-700">createSlice</h3><p class="text-base text-gray-700 mt-1">Cr&eacute;e le reducer et les action creators ensemble.</p></div>
+            <div class="bg-sky-50 border-t-4 border-sky-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-sky-700">configureStore</h3><p class="text-base text-gray-700 mt-1">Configure le store avec de bons r&eacute;glages par d&eacute;faut.</p></div>
+            <div class="bg-emerald-50 border-t-4 border-emerald-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">Immer</h3><p class="text-base text-gray-700 mt-1">Autorise une syntaxe de mutation s&ucirc;re dans les reducers.</p></div>
+          </div>
+          <pre><code>const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment(state) {
+      state.value += 1; // Immer produit un nouvel &eacute;tat immuable
+    }
+  }
+});
+
+// RTK g&eacute;n&egrave;re automatiquement cette action
+dispatch(counterSlice.actions.increment());</code></pre>
+          <p class="text-xl text-purple-700 font-semibold mt-4">RTK ne remplace pas les concepts Redux : il les rend plus simples &agrave; appliquer correctement.</p>
+        </div>
+
+        <!-- SLIDE 57: CREATEASYNCTHUNK - ETATS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux Toolkit : appels API avec createAsyncThunk</h2>
+          <p class="text-xl text-gray-700"><code>createAsyncThunk</code> encapsule une op&eacute;ration asynchrone et g&eacute;n&egrave;re automatiquement trois actions : <b>pending</b> (en cours), <b>fulfilled</b> (r&eacute;ussite) et <b>rejected</b> (erreur).</p>
+          <pre><code>import { createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchUsers = createAsyncThunk(
+  'users/fetchUsers',
+  async (_, thunkAPI) =&gt; {
+    try {
+      const response = await fetch('/api/users');
+      if (!response.ok) throw new Error('Erreur serveur');
+      return await response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);</code></pre>
+          <p class="text-lg text-gray-700 mt-3">Le composant fait seulement <code>dispatch(fetchUsers())</code>. Le thunk g&egrave;re l'appel r&eacute;seau et transmet le r&eacute;sultat au slice.</p>
+        </div>
+
+        <!-- SLIDE 58: CREATEASYNCTHUNK - EXTRA REDUCERS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">createAsyncThunk : charger, r&eacute;ussir, &eacute;chouer</h2>
+          <pre><code>const usersSlice = createSlice({
+  name: 'users',
+  initialState: { data: [], status: 'idle', error: null },
+  reducers: {},
+  extraReducers: builder =&gt; {
+    builder
+      .addCase(fetchUsers.pending, state =&gt; {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) =&gt; {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(fetchUsers.rejected, (state, action) =&gt; {
+        state.status = 'failed';
+        state.error = action.payload || action.error.message;
+      });
+  }
+});</code></pre>
+          <div class="grid grid-cols-3 gap-4 mt-4">
+            <div class="bg-amber-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-amber-700">pending</h3><p class="text-base text-gray-700">Afficher un loader.</p></div>
+            <div class="bg-emerald-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">fulfilled</h3><p class="text-base text-gray-700">Afficher les donn&eacute;es.</p></div>
+            <div class="bg-red-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-red-700">rejected</h3><p class="text-base text-gray-700">Afficher un message d'erreur.</p></div>
+          </div>
+          <p class="text-xl text-purple-700 font-semibold mt-4">Ce mod&egrave;le &eacute;vite les &eacute;tats incoh&eacute;rents et centralise toute la logique API dans le slice.</p>
+        </div>
+
+        <!-- SLIDE 59: UTILISATION DANS UN COMPOSANT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             38. Utilisation de Redux Toolkit dans un composant
@@ -1938,51 +2540,122 @@ export default function Counter() {
           </p>
         </div>
 
-        <!-- SLIDE 53: REDUX CLASSIQUE -->
-        <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            40. Redux classique (avant Redux Toolkit)
-          </h2>
-          <p class="text-lg text-gray-700">
-            Avant Redux Toolkit, on utilisait directement la bibliothèque
-            <code>redux</code>. La logique est la même, mais plus
-            <b>verbueuse</b>.
-          </p>
-          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-4">
-            <li><b>Store :</b> contient l’état global.</li>
-            <li><b>Reducer :</b> fonction pure (state, action) → nouveau state.</li>
-            <li><b>Actions :</b> objets avec un type (et éventuellement un payload).</li>
-          </ul>
-          <pre><code>import { createStore } from "redux";
-
-// 1️⃣ Reducer
-function counterReducer(state = { count: 0 }, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return { count: state.count + 1 };
-    case "DECREMENT":
-      return { count: state.count - 1 };
-    default:
-      return state;
+        <!-- SLIDE 61: REDUX PRATIQUE - AUTHENTIFICATION -->
+        <div class="slide border-t-8 border-purple-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : g&eacute;rer un utilisateur connect&eacute;</h2>
+          <p class="text-xl text-gray-700">Un cas concret d'&eacute;tat global : plusieurs composants doivent conna&icirc;tre l'utilisateur sans se transmettre ses donn&eacute;es par props.</p>
+          <pre><code>const authSlice = createSlice({
+  name: 'auth',
+  initialState: { user: null, isAuthenticated: false },
+  reducers: {
+    login(state, action) {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.user = null;
+      state.isAuthenticated = false;
+    }
   }
-}
+});
 
-// 2️⃣ Store
-const store = createStore(counterReducer);
+// Login.jsx
+dispatch(login({ id: 1, name: 'Lina', role: 'admin' }));
 
-// 3️⃣ Dispatch
-store.dispatch({ type: "INCREMENT" });
-console.log(store.getState()); // { count: 1 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            Aujourd’hui, on privilégie Redux Toolkit, mais comprendre Redux
-            classique aide à lire du code legacy.
-          </p>
+// Navbar.jsx
+const user = useSelector(state =&gt; state.auth.user);</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
+            <li><b>Login</b> modifie le store.</li>
+            <li><b>Navbar</b> lit le même utilisateur.</li>
+            <li><b>logout</b> remet l'état à sa valeur initiale.</li>
+          </ul>
         </div>
 
-        <!-- SLIDE 54: PARTIE 4 APIS -->
+        <!-- SLIDE 62: REDUX PRATIQUE - CUSTOM HOOKS -->
+        <div class="slide border-t-8 border-purple-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : cr&eacute;er des custom hooks</h2>
+          <p class="text-xl text-gray-700">Un custom hook masque la r&eacute;p&eacute;tition et donne une API claire aux composants. Le composant n'a plus besoin de conna&icirc;tre les chemins internes du store.</p>
+          <pre><code>// hooks/reduxHooks.js
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../features/auth/authSlice';
+
+export const useAppDispatch = () =&gt; useDispatch();
+export const useCurrentUser = () =&gt;
+  useSelector(state =&gt; state.auth.user);
+export const useIsAuthenticated = () =&gt;
+  useSelector(state =&gt; state.auth.isAuthenticated);
+
+export function useAuthActions() {
+  const dispatch = useAppDispatch();
+  return {
+    login: user =&gt; dispatch(login(user)),
+    logout: () =&gt; dispatch(logout())
+  };
+}</code></pre>
+          <pre><code>// Navbar.jsx
+const user = useCurrentUser();
+const { logout } = useAuthActions();
+
+return user ? &lt;button onClick={logout}&gt;Quitter&lt;/button&gt; : null;</code></pre>
+          <p class="text-xl text-purple-700 font-semibold mt-4">Les composants consomment une intention métier : <code>logout()</code>, pas un détail technique de Redux.</p>
+        </div>
+
+        <!-- SLIDE 63: REDUX PRATIQUE - PANIER -->
+        <div class="slide border-t-8 border-purple-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : panier d'achat</h2>
+          <pre><code>const cartSlice = createSlice({
+  name: 'cart',
+  initialState: { items: [] },
+  reducers: {
+    addItem(state, action) {
+      state.items.push(action.payload);
+    },
+    removeItem(state, action) {
+      state.items = state.items.filter(
+        item =&gt; item.id !== action.payload
+      );
+    },
+    clearCart(state) {
+      state.items = [];
+    }
+  }
+});</code></pre>
+          <pre><code>// selectors/cartSelectors.js
+export const selectCartItems = state =&gt; state.cart.items;
+export const selectCartTotal = state =&gt;
+  state.cart.items.reduce((total, item) =&gt; total + item.price, 0);
+
+// ProductCard.jsx
+dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Les selectors centralisent les calculs et &eacute;vitent de r&eacute;p&eacute;ter la logique dans plusieurs composants.</p>
+        </div>
+
+        <!-- SLIDE 64: REDUX PRATIQUE - BONNES PRATIQUES -->
+        <div class="slide border-t-8 border-purple-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : r&egrave;gles pour un projet solide</h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li><b>Stocker l'&eacute;tat partag&eacute; :</b> auth, panier, filtres globaux, cache API.</li>
+            <li><b>Garder l'&eacute;tat local :</b> ouverture d'un menu ou valeur temporaire d'un formulaire.</li>
+            <li><b>Organiser par feature :</b> chaque domaine poss&egrave;de son slice, ses selectors et ses thunks.</li>
+            <li><b>Utiliser des selectors :</b> un seul endroit pour lire et calculer les donn&eacute;es d&eacute;riv&eacute;es.</li>
+            <li><b>G&eacute;rer les trois &eacute;tats API :</b> <code>loading</code>, <code>succeeded</code> et <code>failed</code>.</li>
+            <li><b>Ne pas mettre :</b> fonctions, instances de classes ou &eacute;l&eacute;ments DOM dans le store.</li>
+          </ul>
+          <pre><code>src/
+|-- app/store.js
+|-- features/auth/authSlice.js
+|-- features/cart/cartSlice.js
+|-- features/users/usersSlice.js
+|-- features/users/usersThunks.js
+|-- features/users/usersSelectors.js
+\-- hooks/reduxHooks.js</code></pre>
+          <p class="text-xl text-purple-700 font-semibold mt-4">Objectif : un flux pr&eacute;visible, une logique testable et des composants faciles &agrave; lire.</p>
+        </div>
+
+        <!-- SLIDE 65: PARTIE 6 APIS -->
         <div class="slide text-center bg-sky-500 text-white">
           <h2 class="text-5xl font-extrabold">
-            PARTIE 4 : APIs &amp; Intégration Back-End
+            PARTIE 6 : APIs &amp; Intégration Back-End
           </h2>
           <p class="text-3xl mt-4">
             REST, HTTP, JSON, Fetch, Axios &amp; bonnes pratiques
