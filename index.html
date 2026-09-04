@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Présentation JavaScript & React</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
@@ -12,11 +14,24 @@
     <style>
       body {
         font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      #slides-container,
+      pre,
+      code {
+        min-width: 0;
+        max-width: 100%;
+      }
+      .border-l-4 {
+        border-left-width: 1px !important;
+      }
+      .border-t-4 {
+        border-top-width: 1px !important;
       }
       .slide {
         display: none;
-        min-height: 550px;
-        padding: 4rem;
+        min-height: clamp(420px, 68vh, 550px);
+        padding: clamp(1.25rem, 4vw, 4rem);
       }
       .slide.active {
         display: flex;
@@ -35,6 +50,71 @@
       }
       code {
         font-family: monospace;
+      }
+      button,
+      select {
+        min-height: 44px;
+      }
+      button:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #38bdf8;
+        outline-offset: 2px;
+      }
+      @media (max-width: 640px) {
+        body {
+          padding: 0.5rem;
+        }
+        #presentation {
+          border-radius: 0.75rem;
+        }
+        .slide {
+          min-height: 480px;
+          padding: 1.25rem;
+        }
+        pre {
+          font-size: 0.72rem;
+          padding: 0.75rem;
+          max-height: 42vh;
+          overflow: auto;
+        }
+        #navigation {
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        #navigation > div {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        #prevBtn,
+        #nextBtn {
+          flex: 1;
+        }
+        #slide-select {
+          max-width: 72vw;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      .code-highlight {
+        font-weight: 800;
+        color: #047857;
+        background-color: #d1fae5;
+        border-radius: 0.25rem;
+        padding: 0 0.2rem;
+      }
+      .redux-highlight {
+        font-weight: 800;
+        color: #6b21a8;
+        background-color: #f3e8ff;
+        border-radius: 0.25rem;
+        padding: 0 0.2rem;
       }
     </style>
   </head>
@@ -2929,7 +3009,15 @@ function useUsers() {
         >
           Précédent
         </button>
-        <div id="slide-counter" class="text-gray-600 text-sm font-medium"></div>
+        <div class="flex items-center gap-3">
+          <div id="slide-counter" class="text-gray-600 text-sm font-medium" aria-live="polite"></div>
+          <label for="slide-select" class="sr-only">Aller directement à une diapositive</label>
+          <select
+            id="slide-select"
+            class="border border-gray-300 bg-white text-gray-700 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            aria-label="Aller directement à une diapositive"
+          ></select>
+        </div>
         <button
           id="nextBtn"
           class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -2951,8 +3039,57 @@ function useUsers() {
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
       const slideCounter = document.getElementById("slide-counter");
+      const slideSelect = document.getElementById("slide-select");
       let currentSlide = 0;
       const totalSlides = slides.length;
+
+      function highlightCodeBlocks() {
+        const importantTerms = /extends React\.Component|createAsyncThunk|configureStore|createSlice|Promise\.all|BrowserRouter|useSelector|useDispatch|useState|useEffect|useNavigate|React\.memo|async|await|fetch|dispatch|render|constructor|this\.state|this\.props|function|return|import|export|class|const|let|new Promise|npm install|npm run|node /g;
+
+        document.querySelectorAll("pre code").forEach((codeBlock) => {
+          const walker = document.createTreeWalker(codeBlock, NodeFilter.SHOW_TEXT);
+          const textNodes = [];
+          let node;
+          while ((node = walker.nextNode())) {
+            if (!node.parentElement.closest(".code-highlight, .redux-highlight")) {
+              textNodes.push(node);
+            }
+          }
+
+          textNodes.forEach((textNode) => {
+            const text = textNode.nodeValue;
+            if (!importantTerms.test(text)) {
+              importantTerms.lastIndex = 0;
+              return;
+            }
+            importantTerms.lastIndex = 0;
+            const fragment = document.createDocumentFragment();
+            let lastIndex = 0;
+            text.replace(importantTerms, (match, offset) => {
+              fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+              const mark = document.createElement("span");
+              mark.className = "code-highlight";
+              mark.textContent = match;
+              fragment.appendChild(mark);
+              lastIndex = offset + match.length;
+              return match;
+            });
+            fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+            textNode.replaceWith(fragment);
+            importantTerms.lastIndex = 0;
+          });
+        });
+      }
+
+      highlightCodeBlocks();
+
+      slides.forEach((slide, index) => {
+        const title = slide.querySelector("h1, h2, h3")?.textContent.trim();
+        const option = document.createElement("option");
+        option.value = index;
+        option.textContent = `${index + 1}. ${title || "Diapositive"}`;
+        slideSelect.appendChild(option);
+      });
 
       function showSlide(index) {
         slides.forEach((slide, i) => {
@@ -2965,6 +3102,7 @@ function useUsers() {
         slideCounter.textContent = `Diapositive ${
           index + 1
         } sur ${totalSlides}`;
+        slideSelect.value = index;
 
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === totalSlides - 1;
@@ -2984,11 +3122,25 @@ function useUsers() {
         }
       });
 
+      slideSelect.addEventListener("change", (event) => {
+        currentSlide = Number(event.target.value);
+        showSlide(currentSlide);
+      });
+
       document.addEventListener("keydown", (e) => {
+        if (["INPUT", "SELECT", "TEXTAREA"].includes(e.target.tagName)) {
+          return;
+        }
         if (e.key === "ArrowLeft") {
           prevBtn.click();
         } else if (e.key === "ArrowRight") {
           nextBtn.click();
+        } else if (e.key === "Home") {
+          currentSlide = 0;
+          showSlide(currentSlide);
+        } else if (e.key === "End") {
+          currentSlide = totalSlides - 1;
+          showSlide(currentSlide);
         }
       });
 
