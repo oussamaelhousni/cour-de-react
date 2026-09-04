@@ -116,6 +116,68 @@
         border-radius: 0.25rem;
         padding: 0 0.2rem;
       }
+      .ecmascript-slide {
+        gap: 1rem;
+        background: linear-gradient(135deg, #f8fbff 0%, #ffffff 58%, #eff6ff 100%);
+      }
+      .ecmascript-intro {
+        max-width: 52rem;
+        color: #475569;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+      }
+      .ecma-flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+      .ecma-step {
+        padding: 1rem;
+        border: 1px solid #dbeafe;
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .ecma-step-number {
+        color: #0284c7;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+      .ecma-step h3 {
+        margin-top: 0.3rem;
+        color: #0f172a;
+        font-size: 1.1rem;
+        font-weight: 800;
+      }
+      .ecma-step p {
+        margin-top: 0.35rem;
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+      .ecma-version-line {
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        background: #e0f2fe;
+        color: #075985;
+        font-size: 0.98rem;
+      }
+      .ecma-takeaway {
+        padding-top: 0.75rem;
+        border-top: 1px solid #bae6fd;
+        color: #0369a1;
+        font-weight: 800;
+      }
+      @media (max-width: 800px) {
+        .ecma-flow {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 520px) {
+        .ecma-flow {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body
@@ -163,17 +225,40 @@
         </div>
 
         <!-- SLIDE 3: ECMASCRIPT (STANDARD) -->
-        <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            ECMAScript : le standard de JavaScript
+        <div class="slide ecmascript-slide">
+          <h2 class="text-4xl font-bold text-gray-800">
+            ECMAScript : les r&egrave;gles, JavaScript : le code
           </h2>
-          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li><b>ECMAScript</b> est la sp&eacute;cification qui d&eacute;finit les r&egrave;gles et les fonctionnalit&eacute;s du langage.</li>
-            <li><b>JavaScript</b> est l'impl&eacute;mentation la plus connue, utilis&eacute;e dans les navigateurs et avec Node.js.</li>
-            <li>Le standard est maintenu par <b>TC39</b>, un comit&eacute; qui fait &eacute;voluer le langage.</li>
-          </ul>
-          <p class="text-xl text-sky-700 font-semibold mt-6">
-            &Agrave; retenir : ECMAScript d&eacute;crit le langage ; JavaScript l'ex&eacute;cute dans un environnement.
+          <p class="ecmascript-intro">
+            Pour comprendre la diff&eacute;rence, suivons le chemin d'un code JavaScript.
+          </p>
+          <div class="ecma-flow">
+            <article class="ecma-step">
+              <span class="ecma-step-number">01 &middot; LES R&Egrave;GLES</span>
+              <h3>ECMAScript</h3>
+              <p>Il d&eacute;crit comment le langage doit fonctionner : <code>let</code>, les fonctions et les classes.</p>
+            </article>
+            <article class="ecma-step">
+              <span class="ecma-step-number">02 &middot; NOTRE CODE</span>
+              <h3>JavaScript</h3>
+              <p>C'est ce que nous &eacute;crivons, par exemple : <code>const message = &quot;Bonjour&quot;</code>.</p>
+            </article>
+            <article class="ecma-step">
+              <span class="ecma-step-number">03 &middot; LECTURE</span>
+              <h3>Le moteur</h3>
+              <p>Il lit et ex&eacute;cute le code. Chrome utilise <b>V8</b> ; Firefox utilise <b>SpiderMonkey</b>.</p>
+            </article>
+            <article class="ecma-step">
+              <span class="ecma-step-number">04 &middot; OUTILS</span>
+              <h3>Le contexte</h3>
+              <p>Le navigateur ajoute le DOM. <b>Node.js</b> ajoute les fichiers et le r&eacute;seau.</p>
+            </article>
+          </div>
+          <p class="ecma-version-line">
+            <b>Les versions :</b> ES5, ES6 (ES2015), ES2016... Un moteur doit comprendre une fonctionnalit&eacute; pour pouvoir l'ex&eacute;cuter. <b>Babel</b> aide les anciens moteurs.
+          </p>
+          <p class="ecma-takeaway">
+            &Agrave; retenir : ECMAScript donne les r&egrave;gles &rarr; nous &eacute;crivons du JavaScript &rarr; le moteur ex&eacute;cute le code.
           </p>
         </div>
 
