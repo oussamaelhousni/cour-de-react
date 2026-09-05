@@ -64,6 +64,9 @@
         body {
           padding: 0.5rem;
         }
+        .slide .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
         #presentation {
           border-radius: 0.75rem;
         }
@@ -189,7 +192,7 @@
     >
       <!-- Slides Container -->
       <div id="slides-container" class="flex-grow">
-        <!-- SLIDE 1: TITRE -->
+        <!-- TITRE -->
         <div class="slide text-center bg-sky-500 text-white">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/05/Logo_ofppt.png"
@@ -218,14 +221,24 @@
           </p>
         </div>
 
-        <!-- SLIDE 2: SÉPARATEUR JS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Ce que vous saurez construire</h2>
+          <p class="text-lg text-gray-700 mt-4">Objectif : créer une application React qui affiche des données d’API, propose plusieurs vues et partage un état quand c’est nécessaire.</p>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li><b>Prérequis :</b> savoir écrire une page HTML, appliquer du CSS et manipuler des fichiers.</li><li><b>Parcours :</b> JavaScript → Node.js et npm → Vite → React → routage → Redux → API.</li><li><b>Pratique :</b> exécuter les exemples dans la console, dans Node.js ou dans le projet Vite selon le chapitre.</li></ul>
+          <p class="text-lg text-gray-700 mt-4">Le code placé dans les diapositives est un exemple à reproduire. Les routes <code>/api/…</code> nécessitent un serveur ; l’API de démonstration est fournie au dernier chapitre.</p>
+        </div>
+
+        <!-- SÉPARATEUR JS -->
         <div class="slide text-center bg-sky-500 text-white">
           <h2 class="text-5xl font-extrabold">PARTIE 1 : JAVASCRIPT</h2>
           <p class="text-3xl mt-4">Les Fondations Essentielles du Web</p>
         </div>
 
-        <!-- SLIDE 3: ECMASCRIPT (STANDARD) -->
+        <!-- ECMASCRIPT (STANDARD) -->
         <div class="slide ecmascript-slide">
+          <!-- [Sources]
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800">
             ECMAScript : les r&egrave;gles, JavaScript : le code
           </h2>
@@ -254,15 +267,13 @@
               <p>Le navigateur ajoute le DOM. <b>Node.js</b> ajoute les fichiers et le r&eacute;seau.</p>
             </article>
           </div>
-          <p class="ecma-version-line">
-            <b>Les versions :</b> ES5, ES6 (ES2015), ES2016... Un moteur doit comprendre une fonctionnalit&eacute; pour pouvoir l'ex&eacute;cuter. <b>Babel</b> aide les anciens moteurs.
-          </p>
+          <p class="ecma-version-line"><b>Versions :</b> ES5, ES6 (ES2015), puis une édition annuelle. Babel peut transformer une syntaxe récente ; les API manquantes peuvent aussi nécessiter un <b>polyfill</b>.</p>
           <p class="ecma-takeaway">
             &Agrave; retenir : ECMAScript donne les r&egrave;gles &rarr; nous &eacute;crivons du JavaScript &rarr; le moteur ex&eacute;cute le code.
           </p>
         </div>
 
-        <!-- SLIDE 4: VERSIONS ECMASCRIPT -->
+        <!-- VERSIONS ECMASCRIPT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             Les versions d'ECMAScript
@@ -281,14 +292,14 @@
               <p class="text-lg text-gray-700 mt-2">Une nouvelle version chaque ann&eacute;e : async/await, optional chaining, etc.</p>
             </div>
           </div>
-          <pre><code>// Exemple de fonctionnalit&eacute; moderne (ES6+)
-const message = `Bonjour ${nom}`;</code></pre>
+          <pre><code>const nom = "Lina";
+const message = `Bonjour ${nom}`; // ES2015</code></pre>
         </div>
 
-        <!-- SLIDE 3: 1. INTRODUCTION À JS -->
+        <!-- 1. INTRODUCTION À JS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            1. Introduction à JavaScript (JS)
+            Introduction à JavaScript (JS)
           </h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
             <li>
@@ -302,10 +313,10 @@ const message = `Bonjour ${nom}`;</code></pre>
             <li>
               <b>Où écrire du code ?</b>
               <ul class="list-circle pl-6 mt-2 space-y-1">
-                <li>Balise `&lt;script&gt;` (dans HTML).</li>
+                <li>Balise <code>&lt;script&gt;</code> (dans HTML).</li>
                 <li>
-                  Fichier externe (`&lt;script
-                  src="app.js"&gt;&lt;/script&gt;`).
+                  Fichier externe (<code>&lt;script
+                  src="app.js"&gt;&lt;/script&gt;</code>).
                 </li>
                 <li>Console du navigateur (pour le débogage).</li>
               </ul>
@@ -318,25 +329,22 @@ const message = `Bonjour ${nom}`;</code></pre>
 alert("Attention !");            // Bloquant, à éviter en production</code></pre>
         </div>
 
-        <!-- SLIDE 4: 2. VARIABLES ET TYPES (LET/CONST/VAR) -->
+        <!-- 2. VARIABLES ET TYPES (LET/CONST/VAR) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            2. Variables : let, const, var
+            Variables : let, const, var
           </h2>
           <div class="grid grid-cols-3 gap-4">
             <div>
               <h3 class="font-bold text-2xl text-red-500">const</h3>
-              <p class="text-lg text-gray-700">
-                Déclare une constante. <b>NE PEUT</b> être réassignée après
-                initialisation.
-              </p>
+              <p class="text-lg text-gray-700">Empêche la réaffectation et possède une portée de bloc. Le contenu d’un objet ou d’un tableau reste modifiable.</p>
               <pre><code>const PI = 3.14; 
 // PI = 3.1415; <-- ERREUR</code></pre>
             </div>
             <div>
               <h3 class="font-bold text-2xl text-blue-500">let</h3>
               <p class="text-lg text-gray-700">
-                Déclare une variable avec une portée de bloc (`{}`).
+                Déclare une variable avec une portée de bloc (<code>{}</code>).
                 <b>PEUT</b> être réassignée.
               </p>
               <pre><code>let compteur = 0;
@@ -344,10 +352,7 @@ compteur = 1;     // OK</code></pre>
             </div>
             <div>
               <h3 class="font-bold text-2xl text-gray-500">var (À ÉVITER)</h3>
-              <p class="text-lg text-gray-700">
-                Déclare une variable avec une portée de fonction.
-                <b>Problèmes de portée</b> (hoisting).
-              </p>
+              <p class="text-lg text-gray-700">Possède une portée de fonction, pas de bloc. Préférez <code>let</code> et <code>const</code> dans le nouveau code.</p>
               <pre><code>if (true) {
   var x = 10;
 }
@@ -355,45 +360,42 @@ compteur = 1;     // OK</code></pre>
             </div>
           </div>
           <p class="text-xl text-emerald-600 font-semibold mt-4">
-            ⭐ <b>Règle d'or :</b> Toujours utiliser `const` par défaut. Si vous
-            devez réassigner, utilisez `let`.
+            ⭐ <b>Règle d'or :</b> Toujours utiliser <code>const</code> par défaut. Si vous
+            devez réassigner, utilisez <code>let</code>.
           </p>
         </div>
 
-        <!-- SLIDE 5: 2. TYPES PRIMITIFS -->
+        <!-- 2. TYPES PRIMITIFS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            2. Types de Données Primitifs
+            Types de Données Primitifs
           </h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li><b>String :</b> Texte (ex: `"React"`).</li>
+            <li><b>String :</b> Texte (ex: <code>"React"</code>).</li>
             <li>
-              <b>Number :</b> Nombres entiers et décimaux (ex: `10`, `3.14`).
+              <b>Number :</b> Nombres entiers et décimaux (ex: <code>10</code>, <code>3.14</code>).
             </li>
-            <li><b>Boolean :</b> Vrai ou Faux (ex: `true`, `false`).</li>
+            <li><b>Boolean :</b> Vrai ou Faux (ex: <code>true</code>, <code>false</code>).</li>
             <li>
-              <b>Null :</b> Absence intentionnelle de valeur (ex: `let data =
-              null;`).
+              <b>Null :</b> Absence intentionnelle de valeur (ex: <code>let data =
+              null;</code>).
             </li>
-            <li>
-              <b>Undefined :</b> Variable déclarée mais non initialisée (valeur
-              par défaut).
-            </li>
+            <li><b>Undefined :</b> valeur d’une variable non initialisée, d’une propriété absente ou d’une fonction sans valeur de retour.</li>
             <li><b>Symbol / BigInt :</b> Utilisés pour des cas avancés.</li>
           </ul>
           <h3 class="font-semibold text-lg text-gray-800 mt-6">
             Vérifier le type :
           </h3>
-          <pre><code>let age = 30;
-let nom = "Alice";
-console.log(typeof age); // "number"
-console.log(typeof nom); // "string"</code></pre>
+          <pre><code>console.log(typeof 30);        // "number"
+console.log(typeof "Alice");   // "string"
+console.log(typeof null);      // "object" : particularité historique
+console.log(Array.isArray([])); // true</code></pre>
         </div>
 
-        <!-- SLIDE 6: 3. OPÉRATEURS DE COMPARAISON -->
+        <!-- 3. OPÉRATEURS DE COMPARAISON -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            3. Opérateurs de Comparaison
+            Opérateurs de Comparaison
           </h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
@@ -412,10 +414,7 @@ console.log(null == undefined); // true</code></pre>
               <h3 class="font-bold text-2xl text-emerald-600">
                 Triple Égal (===) - Comparaison Stricte
               </h3>
-              <p class="text-lg text-gray-700">
-                Compare la valeur ET le type.
-                <b>Toujours utiliser ===</b> pour éviter les surprises.
-              </p>
+              <p class="text-lg text-gray-700">Compare sans conversion de type. Préférez <code>===</code> et <code>!==</code> pour des comparaisons prévisibles.</p>
               <pre><code>console.log(1 === '1');   // false
 console.log(0 === false); // false
 console.log(null === undefined); // false</code></pre>
@@ -423,32 +422,26 @@ console.log(null === undefined); // false</code></pre>
           </div>
           <h3 class="font-semibold text-lg text-gray-800 mt-6">Autres :</h3>
           <ul class="list-disc pl-6 text-xl text-gray-700">
+            <li><b>Arithmétiques :</b> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> (reste), <code>**</code> (puissance).</li>
+            <li>Logiques : <code>&&</code> (ET), <code>||</code> (OU), <code>!</code> (NON).</li>
             <li>
-              Arithmétiques : `+`, `-`, `*`, `/`, `%` (modulo), `**`
-              (puissance).
-            </li>
-            <li>Logiques : `&&` (ET), `||` (OU), `!` (NON).</li>
-            <li>
-              Ternaire : `condition ? vrai : faux;` (pour les conditions
+              Ternaire : <code>condition ? vrai : faux;</code> (pour les conditions
               simples).
             </li>
           </ul>
         </div>
 
-        <!-- SLIDE 7: 4. STRUCTURES CONDITIONNELLES -->
+        <!-- 4. STRUCTURES CONDITIONNELLES -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            4. Structures Conditionnelles
+            Structures Conditionnelles
           </h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
               <h3 class="font-bold text-2xl text-blue-500">
                 if / else if / else
               </h3>
-              <p class="text-lg text-gray-700">
-                Pour vérifier des conditions basées sur des expressions
-                booléennes.
-              </p>
+              <p class="text-lg text-gray-700">La condition est convertie en booléen. <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code> et <code>NaN</code> sont notamment falsy ; <code>[]</code> et <code>{}</code> sont truthy.</p>
               <pre><code>const note = 85;
 if (note > 90) {
   console.log("A");
@@ -476,18 +469,18 @@ switch (jour) {
             </div>
           </div>
           <p class="text-xl text-gray-600 mt-4 italic">
-            Utilisez `switch` quand vous comparez une seule valeur à plusieurs
-            constantes. Sinon, utilisez `if/else`.
+            Utilisez <code>switch</code> quand vous comparez une seule valeur à plusieurs
+            constantes. Sinon, utilisez <code>if/else</code>.
           </p>
         </div>
 
-        <!-- SLIDE 8: 5. BOUCLES (FOR) -->
+        <!-- 5. BOUCLES (FOR) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            5. Boucles : for, while
+            Boucles : for, while
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
-            La boucle `for` (itération par index)
+            La boucle <code>for</code> (itération par index)
           </h3>
           <pre><code>// 1. Initialisation (let i = 0)
 // 2. Condition de continuation (i &lt; 5)
@@ -496,7 +489,7 @@ for (let i = 0; i &lt; 5; i++) {
   console.log("Tour " + i);
 }</code></pre>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
-            Boucles `while` et `do...while`
+            Boucles <code>while</code> et <code>do...while</code>
           </h3>
           <pre><code>// while : la condition est vérifiée avant chaque tour
 let x = 0;
@@ -512,10 +505,13 @@ do {
 } while (y &gt; 0); // La boucle s'arrête après 1 tour</code></pre>
         </div>
 
-        <!-- SLIDE 9: 5. BOUCLES (OF/IN) -->
+        <!-- 5. BOUCLES (OF/IN) -->
         <div class="slide">
+          <!-- [Sources]
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            5. Boucles : for...of et for...in
+            Boucles : for...of et for...in
           </h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
@@ -536,9 +532,7 @@ for (const couleur of couleurs) {
               <h3 class="font-bold text-2xl text-red-600">
                 for...in (Clés/Index)
               </h3>
-              <p class="text-lg text-gray-700">
-                Itère sur les <b>CLÉS (propriétés)</b> d'un objet.
-              </p>
+              <p class="text-lg text-gray-700">Parcourt les propriétés énumérables à clé texte, y compris celles héritées. Pour les propriétés propres, préférez <code>Object.keys()</code> ou <code>Object.entries()</code>.</p>
               <pre><code>const voiture = { marque: 'BMW', annee: 2020 };
 for (const cle in voiture) {
   console.log(cle + ' : ' + voiture[cle]);
@@ -554,13 +548,13 @@ for (const cle in voiture) {
 }</code></pre>
         </div>
 
-        <!-- SLIDE 10: 6. FONCTIONS (DÉCLARATION) -->
+        <!-- 6. FONCTIONS (DÉCLARATION) -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">6. Fonctions</h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Fonctions</h2>
           <h3 class="font-bold text-2xl text-sky-600">Déclaration Classique</h3>
           <p class="text-lg text-gray-700">
             Blocs de code réutilisables qui peuvent prendre des
-            <b>paramètres</b> et retourner une <b>valeur</b> (`return`).
+            <b>paramètres</b> et retourner une <b>valeur</b> (<code>return</code>).
           </p>
           <pre><code>function addition(a, b = 1) { // b est un paramètre par défaut
   const resultat = a + b;
@@ -573,22 +567,26 @@ const unDePlus = addition(10); // 11 (b utilise sa valeur par défaut)</code></p
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Fonctions Anonymes
           </h3>
-          <pre><code>// Utilisée souvent comme argument (callback)
-document.getElementById('btn').addEventListener('click', function() {
-  console.log('Clic !'); 
-});</code></pre>
+          <pre><code>// HTML : &lt;button id="btn"&gt;Tester&lt;/button&gt;
+// Exécuter après le chargement du bouton dans le DOM.
+const bouton = document.getElementById('btn');
+if (bouton) {
+  bouton.addEventListener('click', function () {
+    console.log('Clic !');
+  });
+}</code></pre>
         </div>
 
-        <!-- SLIDE 11: 6. FONCTIONS (FLÉCHÉES / SCOPE) -->
+        <!-- 6. FONCTIONS (FLÉCHÉES / SCOPE) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            6. Fonctions : Fléchées & Portée (Scope)
+            Fonctions : Fléchées & Portée (Scope)
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             Fonctions Fléchées (Arrow Functions) - ES6
           </h3>
           <p class="text-lg text-gray-700">
-            Syntaxe concise. N'a <b>pas son propre `this`</b> (très important en
+            Syntaxe concise. N'a <b>pas son propre <code>this</code></b> (très important en
             React).
           </p>
           <pre><code>// Longue
@@ -601,10 +599,7 @@ const carre = n => n * n; </code></pre>
           <h3 class="font-bold text-2xl text-red-600 mt-4">
             Portée (Scope) des Variables
           </h3>
-          <p class="text-lg text-gray-700">
-            Le scope détermine où une variable est accessible.
-            <b>Scope de Bloc</b> (avec `let`/`const`) est préférable.
-          </p>
+          <p class="text-lg text-gray-700">La portée détermine où une variable est accessible. <code>let</code> et <code>const</code> sont limitées au bloc qui les contient ; une fonction peut lire les variables de sa portée extérieure.</p>
           <pre><code>const globalVar = 'Globale';
 function maFonction() {
   const localVar = 'Locale'; // Inaccessible à l'extérieur
@@ -612,10 +607,10 @@ function maFonction() {
 }</code></pre>
         </div>
 
-        <!-- SLIDE 12: 7. TABLEAUX (BASES) -->
+        <!-- 7. TABLEAUX (BASES) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            7. Tableaux (Arrays)
+            Tableaux (Arrays)
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">Création et Accès</h3>
           <p class="text-lg text-gray-700">
@@ -630,23 +625,20 @@ console.log(legumes.length); // Propriété : 3</code></pre>
             Mutations (Modification du tableau original)
           </h3>
           <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700">
-            <li>`push(e)` : Ajoute un élément à la fin.</li>
-            <li>`pop()` : Retire le dernier élément.</li>
-            <li>`unshift(e)` : Ajoute un élément au début.</li>
-            <li>`shift()` : Retire le premier élément.</li>
+            <li><code>push(e)</code> : Ajoute un élément à la fin.</li>
+            <li><code>pop()</code> : Retire le dernier élément.</li>
+            <li><code>unshift(e)</code> : Ajoute un élément au début.</li>
+            <li><code>shift()</code> : Retire le premier élément.</li>
           </ul>
           <pre><code>legumes.push('pomme de terre'); // ['carotte', ..., 'pomme de terre']</code></pre>
         </div>
 
-        <!-- SLIDE 13: 7. TABLEAUX (MÉTHODES AVANCÉES) -->
+        <!-- 7. TABLEAUX (MÉTHODES AVANCÉES) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            7. Tableaux : Méthodes de Transformation
+            Tableaux : Méthodes de Transformation
           </h2>
-          <p class="text-xl text-gray-700 mb-4">
-            Ces méthodes <b>ne modifient pas</b> le tableau original et sont
-            essentielles en React (Programmation fonctionnelle).
-          </p>
+          <p class="text-xl text-gray-700 mb-4"><code>map</code> et <code>filter</code> créent un tableau ; <code>reduce</code> calcule une valeur. Ces méthodes ne mutent pas directement le tableau : évitez aussi de modifier les éléments dans leurs callbacks.</p>
           <div class="grid grid-cols-3 gap-4">
             <div>
               <h3 class="font-bold text-2xl text-purple-600">.map()</h3>
@@ -661,7 +653,7 @@ console.log(legumes.length); // Propriété : 3</code></pre>
               <h3 class="font-bold text-2xl text-purple-600">.filter()</h3>
               <p>
                 Crée un <b>nouveau tableau</b> avec les éléments qui passent un
-                test (retournent `true`).
+                test (retournent <code>true</code>).
               </p>
               <pre><code>[1, 2, 3].filter(n => n &gt; 1);
 // [2, 3]</code></pre>
@@ -678,14 +670,11 @@ console.log(legumes.length); // Propriété : 3</code></pre>
           </div>
         </div>
 
-        <!-- SLIDE 14: 8. OBJETS (BASES) -->
+        <!-- 8. OBJETS (BASES) -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">8. Objets</h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Objets</h2>
           <h3 class="font-bold text-2xl text-sky-600">Création et Accès</h3>
-          <p class="text-lg text-gray-700">
-            Les objets sont des collections de paires clé/valeur non ordonnées
-            (propriétés).
-          </p>
+          <p class="text-lg text-gray-700">Un objet regroupe des propriétés : chaque clé (texte ou symbole) est associée à une valeur. Pour une liste ordonnée d’éléments, utilisez un tableau.</p>
           <pre><code>const utilisateur = {
   nom: 'Dupont',
   age: 25,
@@ -705,10 +694,10 @@ console.log(utilisateur['age']); // 25</code></pre>
 delete utilisateur.estActif; // Supprimer</code></pre>
         </div>
 
-        <!-- SLIDE 15: 8. OBJETS (MÉTHODES ET DESTRUCTURING) -->
+        <!-- 8. OBJETS (MÉTHODES ET DESTRUCTURING) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            8. Objets : Méthodes Utiles & Destructuring
+            Objets : Méthodes Utiles & Destructuring
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             Méthodes de Parcours
@@ -716,9 +705,7 @@ delete utilisateur.estActif; // Supprimer</code></pre>
           <pre><code>Object.keys(utilisateur);   // ['nom', 'age', 'saluer']
 Object.values(utilisateur); // ['Dupont', 26, function...]
 Object.entries(utilisateur); // [['nom', 'Dupont'], ['age', 26], ...]</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
-            Destructuring (Démantèlement) - ES6
-          </h3>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Déstructuration (destructuring) — ES2015</h3>
           <p class="text-lg text-gray-700">
             Extrait des valeurs d'un objet ou d'un tableau en variables
             distinctes.
@@ -731,7 +718,7 @@ const [premiere, ...reste] = [1, 2, 3];
 console.log(premiere); // 1</code></pre>
         </div>
 
-        <!-- SLIDE 16: CLASSES EN JAVASCRIPT -->
+        <!-- CLASSES EN JAVASCRIPT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             Classes en JavaScript
@@ -758,7 +745,7 @@ console.log(user.saluer()); // Bonjour Alice</code></pre>
           </ul>
         </div>
 
-        <!-- SLIDE 17: HERITAGE AVEC LES CLASSES -->
+        <!-- HERITAGE AVEC LES CLASSES -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
             Classes : h&eacute;ritage et r&eacute;utilisation
@@ -783,10 +770,10 @@ const admin = new Admin('Samir', 'formateur');</code></pre>
           </p>
         </div>
 
-        <!-- SLIDE 18: 9. DOM (QU'EST-CE QUE LE DOM) -->
+        <!-- 9. DOM (QU'EST-CE QUE LE DOM) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            9. DOM (Document Object Model)
+            DOM (Document Object Model)
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
             Qu'est-ce que le DOM ?
@@ -804,11 +791,7 @@ const admin = new Admin('Samir', 'formateur');</code></pre>
               JavaScript utilise le DOM pour accéder, modifier et manipuler la
               page web.
             </li>
-            <li>
-              <b
-                >React ne manipule pas le DOM &agrave; chaque changement manuellement : il compare son arbre virtuel puis applique seulement les mises &agrave; jour n&eacute;cessaires au DOM r&eacute;el (voir plus tard).</b
-              >
-            </li>
+            <li>Avec React, vous décrivez l’interface dans le JSX. React calcule le rendu puis applique les changements nécessaires au DOM ; évitez de modifier vous-même les nœuds qu’il gère.</li>
           </ul>
           <img
             src="https://placehold.co/400x150/f0f9ff/0369a1?text=Arbre+du+DOM"
@@ -821,34 +804,34 @@ const admin = new Admin('Samir', 'formateur');</code></pre>
           />
         </div>
 
-        <!-- SLIDE 17: 9. DOM (SÉLECTION ET MODIFICATION) -->
+        <!-- 9. DOM (SÉLECTION ET MODIFICATION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            9. DOM : Sélection et Contenu
+            DOM : Sélection et Contenu
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             Sélectionner des éléments
           </h3>
-          <pre><code>// Par ID (le plus rapide)
-const titre = document.getElementById('main-title'); 
-
-// Par sélecteur CSS (le plus flexible)
+          <pre><code>// L'élément doit déjà exister dans le DOM.
+const titre = document.getElementById('main-title');
 const premierParagraphe = document.querySelector('.content p');
-const tousLesLiens = document.querySelectorAll('a'); </code></pre>
+const tousLesLiens = document.querySelectorAll('a');
+// getElementById et querySelector renvoient null si rien ne correspond.</code></pre>
           <h3 class="font-bold text-2xl text-emerald-600 mt-4">
             Modifier le contenu
           </h3>
-          <pre><code>titre.textContent = "Nouveau Titre"; 
-// Sécurisé, insère du texte simple
-
-titre.innerHTML = "&lt;em&gt;Titre Italique&lt;/em&gt;"; 
-// Peut insérer du HTML (attention à la sécurité !)</code></pre>
+          <pre><code>if (titre) {
+  titre.textContent = 'Nouveau titre'; // texte simple
+  // HTML constant et maîtrisé uniquement :
+  titre.innerHTML = '&lt;em&gt;Titre en italique&lt;/em&gt;';
+}
+// N'insérez pas une saisie utilisateur dans innerHTML : risque XSS.</code></pre>
         </div>
 
-        <!-- SLIDE 18: 10. ÉVÉNEMENTS (BASES) -->
+        <!-- 10. ÉVÉNEMENTS (BASES) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            10. Événements : addEventListener
+            Événements : addEventListener
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
             Qu'est-ce qu'un événement ?
@@ -860,33 +843,31 @@ titre.innerHTML = "&lt;em&gt;Titre Italique&lt;/em&gt;";
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Attacher un écouteur
           </h3>
-          <pre><code>const bouton = document.querySelector('#mon-bouton');
-
-bouton.addEventListener('click', function(event) {
-  console.log('Bouton cliqué !');
-  // L'objet `event` contient des informations sur l'événement
-  event.preventDefault(); // Empêche l'action par défaut (ex: soumission de formulaire)
-});</code></pre>
+          <pre><code>// HTML : &lt;form id="inscription"&gt;…&lt;/form&gt;
+const formulaire = document.querySelector('#inscription');
+if (formulaire) {
+  formulaire.addEventListener('submit', function (event) {
+    event.preventDefault(); // évite l'envoi HTML et le rechargement
+    console.log('Formulaire soumis');
+  });
+}</code></pre>
           <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700 mt-4">
             <li>
-              Types fréquents : `click`, `submit`, `change`, `input`,
-              `mouseover`, `keydown`.
+              Types fréquents : <code>click</code>, <code>submit</code>, <code>change</code>, <code>input</code>,
+              <code>mouseover</code>, <code>keydown</code>.
             </li>
           </ul>
         </div>
 
-        <!-- SLIDE 19: 10. ÉVÉNEMENTS (PROPAGATION) -->
+        <!-- 10. ÉVÉNEMENTS (PROPAGATION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            10. Événements : Propagation & Délégation
+            Événements : Propagation & Délégation
           </h2>
           <h3 class="font-bold text-2xl text-red-600">
             Propagation (Bubbling)
           </h3>
-          <p class="text-lg text-gray-700">
-            Lorsqu'un événement se produit, il remonte du nœud cible vers la
-            racine du DOM.
-          </p>
+          <p class="text-lg text-gray-700">Un événement qui remonte, comme <code>click</code>, passe de sa cible à ses ancêtres. Tous les événements ne remontent pas : <code>focus</code>, par exemple, ne le fait pas.</p>
           <img
             src="https://placehold.co/400x100/f0f9ff/0369a1?text=Clic+sur+Enfant+%3E+Bulle+vers+Parent"
             alt="Schéma montrant un clic qui remonte de l'enfant vers le parent"
@@ -903,17 +884,23 @@ bouton.addEventListener('click', function(event) {
             Attacher un seul écouteur à un élément parent pour gérer les
             événements de tous ses enfants (même ceux ajoutés dynamiquement).
           </p>
-          <pre><code>parent.addEventListener('click', function(e) {
-  if (e.target.tagName === 'LI') {
-    console.log('Élément de liste cliqué:', e.target.textContent);
-  }
-});</code></pre>
+          <pre><code>const liste = document.querySelector('#ma-liste');
+if (liste) {
+  liste.addEventListener('click', event =&gt; {
+    if (!(event.target instanceof Element)) return;
+    const item = event.target.closest('li');
+    if (item &amp;&amp; liste.contains(item)) {
+      console.log('Élément cliqué :', item.textContent);
+    }
+  });
+}
+// closest() gère aussi un clic sur un élément à l'intérieur du li.</code></pre>
         </div>
 
-        <!-- SLIDE 20: 11. SYNTAXE MODERNE ES6+ -->
+        <!-- 11. SYNTAXE MODERNE ES6+ -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            11. ES6+ : &eacute;crire un JavaScript plus moderne
+            ES6+ : &eacute;crire un JavaScript plus moderne
           </h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
@@ -927,7 +914,7 @@ console.log(message);</code></pre>
             </div>
             <div>
               <h3 class="font-bold text-2xl text-sky-600">Param&egrave;tres par d&eacute;faut</h3>
-              <p class="text-lg text-gray-700 mt-2">Donner une valeur de secours lorsqu'un argument n'est pas fourni.</p>
+              <p class="text-lg text-gray-700 mt-2">Une valeur par défaut s’applique si la valeur manque ou vaut <code>undefined</code>, mais pas si elle vaut <code>null</code>.</p>
               <pre><code>function afficher({ nom, age = 18 }) {
   return `${nom} a ${age} ans`;
 }
@@ -938,11 +925,12 @@ afficher({ nom: 'Lina' });
           <p class="text-xl text-emerald-600 font-semibold mt-4">Ces syntaxes r&eacute;duisent le code r&eacute;p&eacute;titif et rendent l'intention plus claire.</p>
         </div>
 
-        <!-- SLIDE 21: COLLECTIONS ET MODULES ES6+ -->
+        <!-- COLLECTIONS ET MODULES ES6+ -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            11. ES6+ : immutabilit&eacute; et modules
-          </h2>
+          <!-- [Sources]
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">ES6+ : spread, rest et copie superficielle</h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
               <h3 class="font-bold text-2xl text-purple-600">Spread (...) : copier</h3>
@@ -965,12 +953,12 @@ function additionner(...nombres) {
 additionner(2, 3, 5); // 10</code></pre>
             </div>
           </div>
-          <p class="text-xl text-sky-700 font-semibold mt-4">Les modules permettent de d&eacute;couper une grande application en fichiers sp&eacute;cialis&eacute;s et reli&eacute;s explicitement.</p>
+          <p class="text-xl text-sky-700 font-semibold mt-4">Le spread copie <b>un seul niveau</b> : les objets imbriqués restent partagés. Pour modifier une propriété imbriquée sans mutation, copiez chaque niveau concerné.</p>
         </div>
 
-        <!-- SLIDE 22: MODULES - PRINCIPES -->
+        <!-- MODULES - PRINCIPES -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : organiser le projet</h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Modules : organiser le projet</h2>
           <p class="text-xl text-gray-700 mb-4">Un module est un fichier JavaScript avec son propre espace de noms. Seules les valeurs export&eacute;es peuvent &ecirc;tre utilis&eacute;es par les autres fichiers.</p>
           <div class="grid grid-cols-2 gap-6">
             <div>
@@ -997,15 +985,16 @@ console.log(saluer('Lina'));</code></pre>
             </div>
           </div>
           <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
-            <li><b>Export nomm&eacute; :</b> import&eacute; avec le m&ecirc;me nom entre accolades.</li>
+            <li><b>Export nommé :</b> importé entre accolades ; <code>import { PI as pi }</code> permet de le renommer.</li>
             <li><b>Export par d&eacute;faut :</b> un seul par fichier ; le nom d'import peut changer.</li>
             <li><b>Chemin relatif :</b> <code>./</code> d&eacute;signe le dossier actuel et <code>../</code> le dossier parent.</li>
           </ul>
+        <p class="text-lg text-gray-700 mt-4">Dans le navigateur, chargez l’entrée avec <code>&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</code> et servez les fichiers via HTTP. Vite s’en occupera dans le projet React.</p>
         </div>
 
-        <!-- SLIDE 23: MODULES - STRUCTURE DE PROJET -->
+        <!-- MODULES - STRUCTURE DE PROJET -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : une structure de projet claire</h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Modules : une structure de projet claire</h2>
           <p class="text-lg text-gray-700 mb-3">Exemple de structure pour une application React :</p>
           <pre><code>src/
 ├── components/       # composants r&eacute;utilisables
@@ -1028,119 +1017,85 @@ console.log(saluer('Lina'));</code></pre>
           </div>
         </div>
 
-        <!-- SLIDE 24: MODULES - EXEMPLE REACT -->
+        <!-- MODULES - EXEMPLE REACT -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">11. Modules : exemple concret dans React</h2>
-          <pre><code>// services/api.js : une seule responsabilit&eacute;
-export async function getUsers() {
-  const response = await fetch('/api/users');
-  if (!response.ok) throw new Error('Erreur API');
-  return response.json();
-}
-
-// features/users/userUtils.js : logique r&eacute;utilisable
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Modules : utiliser une fonction importée</h2>
+          <p class="text-lg text-gray-700 mt-4">Séparons le calcul et l’affichage dans un exemple JavaScript exécutable. La même organisation sera utilisée dans React.</p>
+          <pre><code>// userUtils.js
 export const getActiveUsers = users =&gt;
   users.filter(user =&gt; user.active);
 
-// features/users/UserList.jsx : interface
-import { getUsers } from '../../services/api.js';
+// app.js
 import { getActiveUsers } from './userUtils.js';
 
-export default function UserList() {
-  return &lt;section&gt;Liste des utilisateurs&lt;/section&gt;;
-}</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Pourquoi c'est essentiel ?</h3>
-          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
-            <li><b>Maintenance :</b> une modification de l'API reste dans <code>api.js</code>.</li>
-            <li><b>R&eacute;utilisation :</b> plusieurs composants peuvent importer la m&ecirc;me fonction.</li>
-            <li><b>Tests :</b> chaque fonction peut &ecirc;tre test&eacute;e ind&eacute;pendamment.</li>
-            <li><b>&Eacute;quipe :</b> chacun travaille sur des fichiers s&eacute;par&eacute;s avec moins de conflits.</li>
-          </ul>
+const users = [
+  { name: 'Lina', active: true },
+  { name: 'Omar', active: false }
+];
+console.log(getActiveUsers(users));
+// [{ name: 'Lina', active: true }]</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Une fonction pure reçoit des données et retourne un résultat. Elle peut être réutilisée et testée sans dépendre de l’interface.</p>
         </div>
 
-        <!-- SLIDE 25: 12. COMPRENDRE L'ASYNCHRONE -->
+        <!-- 12. COMPRENDRE L'ASYNCHRONE -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            12. Asynchrone : ne pas bloquer le programme
-          </h2>
-          <h3 class="font-bold text-2xl text-red-600">Synchrone, asynchrone et Event Loop</h3>
-          <p class="text-lg text-gray-700 mt-2">
-            JavaScript ex&eacute;cute d'abord le code synchrone dans la <b>Call Stack</b>. Les t&acirc;ches lentes, comme un minuteur ou une requ&ecirc;te r&eacute;seau, sont prises en charge par l'environnement puis replac&eacute;es dans la file d'attente. L'Event Loop les r&eacute;cup&egrave;re quand la pile est libre.
-          </p>
-          <pre><code>console.log('1. D&eacute;but');
-setTimeout(() => console.log('3. Callback'), 0);
-console.log('2. Suite du programme');
-// 1. D&eacute;but &rarr; 2. Suite du programme &rarr; 3. Callback</code></pre>
-          <div class="grid grid-cols-2 gap-6 mt-2">
-            <div>
-              <h3 class="font-bold text-2xl text-sky-600">Pourquoi ?</h3>
-              <p class="text-lg text-gray-700 mt-2">Le navigateur ne laisse pas une requ&ecirc;te r&eacute;seau bloquer l'interface. Pendant l'attente, l'utilisateur peut continuer &agrave; interagir avec la page.</p>
-            </div>
-            <div>
-              <h3 class="font-bold text-2xl text-sky-600">Callback</h3>
-              <p class="text-lg text-gray-700 mt-2">Une fonction pass&eacute;e en argument et ex&eacute;cut&eacute;e plus tard lorsque l'op&eacute;ration est termin&eacute;e.</p>
-            </div>
-          </div>
-          <h3 class="font-bold text-2xl text-red-600 mt-4">Le probl&egrave;me des callbacks imbriqu&eacute;s</h3>
-          <pre><code>connexion(user, () => {
-  chargerProfil(user, () => {
-    chargerCommandes(user, () => {
-      afficherResultat(); // difficile &agrave; maintenir
-    });
-  });
-});</code></pre>
-          <p class="text-lg text-gray-700 mt-2">Les Promises puis <b>async/await</b> rendent cette logique plus lisible.</p>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Asynchrone : comprendre l’ordre d’exécution</h2>
+          <p class="text-lg text-gray-700 mt-4">Le code synchrone s’exécute sur la pile d’appels. Le navigateur gère les minuteurs et le réseau ; leurs callbacks attendent que la pile soit libre.</p>
+          <pre><code>console.log('1. Début');
+setTimeout(() =&gt; console.log('4. Minuteur'), 0);
+Promise.resolve().then(() =&gt; console.log('3. Promesse'));
+console.log('2. Fin du code synchrone');</code></pre>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li>Les callbacks de promesses passent dans la file des <b>microtâches</b>, avant la tâche suivante du minuteur.</li><li><code>setTimeout(..., 0)</code> ne signifie pas « immédiatement ». Un long calcul synchrone peut toujours bloquer l’interface.</li><li>Un <b>callback</b> est une fonction passée à une autre fonction : il peut être synchrone (<code>map</code>) ou asynchrone (minuteur).</li></ul>
         </div>
 
-        <!-- SLIDE 23: 12. PROMESSES ET ASYNC/AWAIT -->
+        <!-- 12. PROMESSES ET ASYNC/AWAIT -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            12. Promesses : .then(), async et await
-          </h2>
-          <p class="text-lg text-gray-700">Une <b>Promise</b> repr&eacute;sente une op&eacute;ration en attente, r&eacute;ussie (<b>fulfilled</b>) ou &eacute;chou&eacute;e (<b>rejected</b>). Elle permet de cha&icirc;ner les &eacute;tapes et de centraliser les erreurs.</p>
-          <pre><code>const promesse = new Promise((resolve, reject) => {
-  const ok = true;
-  if (ok) resolve('Donn&eacute;es re&ccedil;ues');
-  else reject(new Error('Erreur r&eacute;seau'));
-});
-
-promesse
-  .then(message => console.log(message))
-  .catch(erreur => console.error(erreur));</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Appeler une API avec .then()</h3>
-          <pre><code>fetch('/api/data')
-  .then(response => {
-    if (!response.ok) throw new Error('Erreur HTTP');
+          <!-- [Sources]
+          https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Promesses : enchaîner un résultat ou une erreur</h2>
+          <p class="text-lg text-gray-700 mt-4">Une promesse est <b>pending</b>, puis <b>fulfilled</b> ou <b>rejected</b>. <code>then</code> transforme le résultat ; <code>catch</code> traite un échec.</p>
+          <pre><code>fetch('/api/users')
+  .then(response =&gt; {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
   })
-  .then(data => console.log(data))
-  .catch(error => console.error(error))
-  .finally(() => console.log('Termin&eacute;'));</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">La syntaxe async/await</h3>
-          <p class="text-lg text-gray-700">Une fonction <b>async</b> retourne toujours une Promise. <b>await</b> attend son r&eacute;sultat sans bloquer le navigateur.</p>
-          <pre><code>async function getData() {
-  try {
-    const response = await fetch('/api/data');
-    if (!response.ok) throw new Error('Erreur HTTP');
-    return await response.json();
-  } catch (error) {
-    console.error('Erreur :', error);
-  }
-}
-
-// Plusieurs requ&ecirc;tes en parall&egrave;le
-const resultats = await Promise.all([getData(), getData()]);
-console.log(resultats);</code></pre>
-          <p class="text-xl text-emerald-600 font-semibold mt-4">Conseil : utilisez <b>Promise.all()</b> pour lancer des t&acirc;ches ind&eacute;pendantes ensemble et g&eacute;rez toujours les erreurs avec <b>try/catch</b>.</p>
+  .then(users =&gt; console.log(users))
+  .catch(error =&gt; console.error('Chargement impossible :', error))
+  .finally(() =&gt; console.log('Requête terminée'));</code></pre>
+          <p class="text-lg text-gray-700 mt-4"><code>fetch</code> ne rejette pas automatiquement une réponse HTTP 404 ou 500 : vérifiez <code>response.ok</code>. Ici, <code>/api/users</code> suppose un serveur qui expose cette route.</p>
         </div>
 
-        <!-- SLIDE 26: SEPARATEUR NODE.JS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">async / await : garder les erreurs visibles</h2>
+          <p class="text-lg text-gray-700 mt-4">Une fonction <code>async</code> retourne une promesse. <code>await</code> suspend cette fonction, sans bloquer tout JavaScript.</p>
+          <pre><code>async function getJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+async function chargerPage() {
+  try {
+    const [users, products] = await Promise.all([
+      getJson('/api/users'), getJson('/api/products')
+    ]);
+    console.log(users, products);
+  } catch (error) {
+    console.error('Chargement impossible :', error.message);
+  }
+}
+chargerPage();</code></pre>
+          <p class="text-lg text-gray-700 mt-4"><code>Promise.all</code> regroupe des opérations indépendantes. Si une promesse rejette, l’ensemble rejette ; les autres opérations ne sont pas automatiquement annulées.</p>
+        </div>
+
+        <!-- SEPARATEUR NODE.JS -->
         <div class="slide text-center bg-emerald-600 text-white">
           <h2 class="text-5xl font-extrabold">PARTIE 2 : NODE.JS</h2>
           <p class="text-3xl mt-4">Ex&eacute;cuter JavaScript, utiliser npm et cr&eacute;er des scripts</p>
         </div>
 
-        <!-- SLIDE 27: NODE.JS - INTRODUCTION -->
+        <!-- NODE.JS - INTRODUCTION -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Node.js : JavaScript en dehors du navigateur</h2>
           <p class="text-xl text-gray-700 mb-4"><b>Node.js</b> permet d'ex&eacute;cuter JavaScript en dehors du navigateur, directement sur votre ordinateur ou sur un serveur.</p>
@@ -1166,56 +1121,41 @@ console.log('Ex&eacute;cut&eacute; dans le terminal');</code></pre>
           </div>
         </div>
 
-        <!-- SLIDE 28: INSTALLER NODE.JS -->
+        <!-- INSTALLER NODE.JS -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Installer Node.js et v&eacute;rifier l'installation</h2>
           <ol class="list-decimal pl-6 space-y-3 text-xl text-gray-700">
-            <li>Ouvrir <b>nodejs.org</b> et choisir la version <b>LTS</b>.</li>
+            <li>Télécharger la version <b>LTS</b> sur <a class="text-sky-700 underline" href="https://nodejs.org/en/download">nodejs.org</a> et vérifier sa compatibilité avec la version de Vite utilisée.</li>
             <li>Ex&eacute;cuter l'installateur et conserver les options par d&eacute;faut.</li>
             <li>Fermer puis rouvrir le terminal pour recharger le chemin syst&egrave;me.</li>
           </ol>
           <h3 class="font-bold text-2xl text-sky-600 mt-6">V&eacute;rifier les versions</h3>
           <pre><code>node --version
 npm --version
-
-// Exemple de r&eacute;sultat :
-// v22.x.x
-// 10.x.x</code></pre>
+# Les numéros dépendent de la version LTS installée.</code></pre>
           <p class="text-lg text-gray-700 mt-4">Node.js installe g&eacute;n&eacute;ralement <b>npm</b> en m&ecirc;me temps. Si une commande n'est pas reconnue, red&eacute;marrez le terminal ou v&eacute;rifiez l'installation.</p>
         </div>
 
-        <!-- SLIDE 29: NODE.JS - PREMIER PROJET -->
-        <div class="slide border-t-8 border-emerald-500">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">Node.js : cr&eacute;er et lancer un premier projet</h2>
-          <pre><code># cr&eacute;er un dossier et initialiser npm
-mkdir demo-node
+        <!-- NODE.JS - PREMIER PROJET -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Node.js : créer et lancer un premier projet</h2>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">1. Dans le terminal</h3>
+          <pre><code>mkdir demo-node
 cd demo-node
-npm init -y
-
-# cr&eacute;er app.js puis l'ex&eacute;cuter
-node app.js</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">app.js</h3>
+npm init -y</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">2. Créer le fichier app.js</h3>
           <pre><code>const nom = 'Lina';
-console.log(`Bonjour ${nom}, Node.js fonctionne !`);
-
-// Sortie dans le terminal :
-// Bonjour Lina, Node.js fonctionne !</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Ajouter une d&eacute;pendance Node.js</h3>
-          <pre><code>npm install lodash
-
-// package.json peut aussi contenir des scripts :
-"scripts": {
-  "start": "node app.js"
-}
-
-npm run start</code></pre>
-          <p class="text-xl text-emerald-600 font-semibold mt-4">Node.js fournit l'environnement d'ex&eacute;cution ; npm installe les paquets et lance les scripts du projet.</p>
+console.log(`Bonjour ${nom}, Node.js fonctionne !`);</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">3. Exécuter le programme</h3>
+          <pre><code>node app.js
+# Affiche : Bonjour Lina, Node.js fonctionne !</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Node.js exécute le fichier ; <code>npm init -y</code> crée un <code>package.json</code> avec les valeurs par défaut.</p>
         </div>
 
-        <!-- SLIDE 30: NPM -->
+        <!-- NPM -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">npm : le gestionnaire de paquets Node.js</h2>
-          <p class="text-xl text-gray-700">npm signifie <b>Node Package Manager</b>. Il permet de t&eacute;l&eacute;charger, mettre &agrave; jour et supprimer des paquets JavaScript, puis de lancer les scripts du projet.</p>
+          <p class="text-xl text-gray-700"><b>npm</b> est un gestionnaire de paquets JavaScript. Sa commande permet d’installer, mettre à jour ou supprimer des dépendances, et de lancer les scripts du projet.</p>
           <div class="grid grid-cols-2 gap-6 mt-5">
             <div>
               <h3 class="font-bold text-2xl text-emerald-600">Commandes essentielles</h3>
@@ -1226,7 +1166,7 @@ npm uninstall lodash # supprimer un paquet
 npm run start        # lancer un script</code></pre>
             </div>
             <div>
-              <h3 class="font-bold text-2xl text-sky-600">npm registre</h3>
+              <h3 class="font-bold text-2xl text-sky-600">Le registre npm</h3>
               <p class="text-lg text-gray-700 mt-2">npm cherche les paquets dans le registre public. Chaque paquet contient du code r&eacute;utilisable : biblioth&egrave;ques, outils, plugins ou frameworks.</p>
               <pre><code>npm view lodash version
 npm search date
@@ -1236,7 +1176,7 @@ npm outdated</code></pre>
           <p class="text-xl text-emerald-600 font-semibold mt-4">npm automatise la gestion des d&eacute;pendances : les versions sont enregistr&eacute;es pour pouvoir reconstruire le projet.</p>
         </div>
 
-        <!-- SLIDE 31: PACKAGE.JSON -->
+        <!-- PACKAGE.JSON -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">package.json : la carte d'identit&eacute; du projet</h2>
           <p class="text-xl text-gray-700 mb-4">Ce fichier d&eacute;crit le projet, ses commandes et les paquets dont il a besoin. Il est versionn&eacute; avec le code et ne doit pas &ecirc;tre supprim&eacute;.</p>
@@ -1257,13 +1197,16 @@ npm outdated</code></pre>
 }</code></pre>
           <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
             <li><b>dependencies :</b> paquets n&eacute;cessaires pour ex&eacute;cuter l'application.</li>
-            <li><b>devDependencies :</b> outils uniquement utiles pendant le d&eacute;veloppement.</li>
+            <li><b>devDependencies :</b> outils de développement, de test et de build ; nécessaires pour construire l’application, même si le site livré ne les exécute pas.</li>
             <li><b>scripts :</b> raccourcis comme <code>npm run start</code> ou <code>npm test</code>.</li>
           </ul>
         </div>
 
-        <!-- SLIDE 32: NODE_MODULES ET PACKAGE-LOCK -->
+        <!-- NODE_MODULES ET PACKAGE-LOCK -->
         <div class="slide border-t-8 border-emerald-500">
+          <!-- [Sources]
+          https://docs.npmjs.com/cli/v11/commands/npm-ci/
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">node_modules et package-lock.json</h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
@@ -1272,23 +1215,22 @@ npm outdated</code></pre>
               <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
                 <li>Il peut devenir tr&egrave;s volumineux.</li>
                 <li>On ne le commit g&eacute;n&eacute;ralement pas dans Git.</li>
-                <li>On le recr&eacute;e avec <code>npm install</code>.</li>
+                <li>On le recrée avec <code>npm ci</code> lorsque le fichier de verrouillage est présent et cohérent.</li>
               </ul>
             </div>
             <div>
               <h3 class="font-bold text-2xl text-sky-600">package-lock.json</h3>
               <p class="text-lg text-gray-700 mt-2">npm y enregistre les versions exactes install&eacute;es et l'arbre complet des d&eacute;pendances.</p>
-              <pre><code># apr&egrave;s avoir clon&eacute; le projet
-npm install
-
-# npm lit package-lock.json
-# puis recr&eacute;e node_modules</code></pre>
+              <pre><code># après avoir cloné un projet avec son lockfile
+npm ci
+# recrée node_modules selon les versions verrouillées
+# échoue si package.json et le lockfile divergent</code></pre>
             </div>
           </div>
           <p class="text-xl text-emerald-600 font-semibold mt-5">R&egrave;gle importante : partager <code>package.json</code> et <code>package-lock.json</code>, mais ignorer <code>node_modules</code>.</p>
         </div>
 
-        <!-- SLIDE 33: INSTALLER ET SUPPRIMER DES PAQUETS -->
+        <!-- INSTALLER ET SUPPRIMER DES PAQUETS -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Installer, mettre &agrave; jour et supprimer un paquet</h2>
           <pre><code># d&eacute;pendance utilis&eacute;e par l'application
@@ -1302,8 +1244,8 @@ npm update lodash
 
 # supprimer un paquet et son entr&eacute;e dans package.json
 npm uninstall lodash</code></pre>
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Apr&egrave;s chaque commande</h3>
-          <p class="text-lg text-gray-700">npm modifie <code>package.json</code>, met &agrave; jour <code>package-lock.json</code> et ajoute ou retire le paquet dans <code>node_modules</code>.</p>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">Quels fichiers changent ?</h3>
+          <p class="text-lg text-gray-700"><code>install</code> et <code>uninstall</code> enregistrent les dépendances dans le manifeste et le lockfile. <code>update</code> actualise les versions autorisées ; <code>npm ci</code> ne réécrit aucun de ces deux fichiers.</p>
           <pre><code># voir les paquets install&eacute;s
 npm list --depth=0
 
@@ -1312,81 +1254,246 @@ npm ci</code></pre>
           <p class="text-lg text-gray-700 mt-3"><code>npm ci</code> est utile dans les pipelines de test et de d&eacute;ploiement, car il installe exactement les versions verrouill&eacute;es.</p>
         </div>
 
-        <!-- SLIDE 34: UTILISER UN PAQUET -->
+        <!-- UTILISER UN PAQUET -->
         <div class="slide border-t-8 border-emerald-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Exemple : utiliser le paquet lodash</h2>
-          <p class="text-lg text-gray-700">Lodash fournit des fonctions pratiques pour manipuler des tableaux et des objets. On l'installe une seule fois, puis on l'importe dans notre fichier.</p>
+          <p class="text-lg text-gray-700">Lodash fournit des fonctions pratiques pour manipuler des tableaux et des objets. Installez-le dans le projet, puis importez-le dans les fichiers qui en ont besoin.</p>
           <pre><code># dans le terminal
 npm install lodash</code></pre>
-          <pre><code>// app.js (CommonJS)
+          <pre><code>// app.cjs : extension explicite pour CommonJS
 const _ = require('lodash');
-
 const utilisateurs = [
   { nom: 'Lina', actif: true },
   { nom: 'Omar', actif: false },
   { nom: 'Sara', actif: true }
 ];
-
-const actifs = _.filter(utilisateurs, { actif: true });
-const noms = _.map(actifs, 'nom');
-console.log(noms); // [ 'Lina', 'Sara' ]</code></pre>
-          <p class="text-xl text-emerald-600 font-semibold mt-4">Le paquet apporte une solution pr&ecirc;te &agrave; l'emploi : on gagne du temps et on r&eacute;duit le code r&eacute;p&eacute;titif.</p>
+const noms = _.map(_.filter(utilisateurs, { actif: true }), 'nom');
+console.log(noms); // ['Lina', 'Sara']
+// Terminal : node app.cjs</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-4"><code>.cjs</code> utilise CommonJS (<code>require</code>) ; <code>.mjs</code> utilise les modules ES (<code>import</code>). Ici, <code>filter</code> et <code>map</code> natifs suffiraient aussi : choisissez une dépendance pour un besoin réel.</p>
         </div>
 
-        <!-- SLIDE 35: SÉPARATEUR REACT -->
+        <!-- SEPARATEUR BUNDLERS -->
+        <div class="slide text-center bg-violet-600 text-white">
+          <h2 class="text-5xl font-extrabold">PARTIE 3 : BUNDLERS</h2>
+          <p class="text-3xl mt-4">Tout ce qu'un d&eacute;veloppeur JavaScript doit comprendre avant React</p>
+        </div>
+
+        <!-- POURQUOI UN BUNDLER ? -->
+        <div class="slide border-t-8 border-violet-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Pourquoi utiliser un bundler ?</h2>
+          <p class="text-xl text-gray-700 mb-5">Un bundler analyse les imports, construit le graphe des d&eacute;pendances et produit des fichiers optimis&eacute;s que le navigateur peut charger.</p>
+          <div class="grid grid-cols-3 gap-5">
+            <div class="bg-violet-50 rounded-xl p-5">
+              <h3 class="font-bold text-2xl text-violet-700">Avant</h3>
+              <p class="text-lg text-gray-700 mt-2">Les navigateurs savent charger les modules ES. Un outil de build devient utile pour intégrer les paquets, le JSX, le CSS et préparer la production.</p>
+              <pre><code>index.html
+  &rarr; app.js
+  &rarr; button.js
+  &rarr; api.js</code></pre>
+            </div>
+            <div class="bg-sky-50 rounded-xl p-5">
+              <h3 class="font-bold text-2xl text-sky-700">Pendant</h3>
+              <p class="text-lg text-gray-700 mt-2">Il suit les imports et, avec ses transformations ou plugins, prépare le code. Un build réussi ne remplace ni les tests ni le lint.</p>
+              <pre><code>import { Button } from './ui/Button.js';
+import './styles.css';</code></pre>
+            </div>
+            <div class="bg-emerald-50 rounded-xl p-5">
+              <h3 class="font-bold text-2xl text-emerald-700">Apr&egrave;s</h3>
+              <p class="text-lg text-gray-700 mt-2">Le navigateur re&ccedil;oit des assets pr&ecirc;ts &agrave; servir et souvent minifi&eacute;s.</p>
+              <pre><code>dist/assets/
+  index-abc123.js
+  index-def456.css</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-violet-700 font-semibold mt-5">Le bundler automatise la pr&eacute;paration de l'application pour le d&eacute;veloppement et la production.</p>
+        </div>
+
+        <!-- OUTILS PRINCIPAUX -->
+        <div class="slide border-t-8 border-violet-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Les outils principaux &agrave; conna&icirc;tre</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-violet-700">Vite</h3>
+              <p class="text-lg text-gray-700 mt-2">Serveur de d&eacute;veloppement rapide et build de production moderne. C'est un excellent choix pour d&eacute;marrer avec React.</p>
+              <h3 class="font-bold text-2xl text-sky-700 mt-5">Webpack</h3>
+              <p class="text-lg text-gray-700 mt-2">Bundler tr&egrave;s configurable, encore pr&eacute;sent dans beaucoup de projets existants.</p>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-700">Rollup</h3>
+              <p class="text-lg text-gray-700 mt-2">Particuli&egrave;rement adapt&eacute; &agrave; la cr&eacute;ation de biblioth&egrave;ques JavaScript.</p>
+              <h3 class="font-bold text-2xl text-orange-600 mt-5">esbuild, SWC et Turbopack</h3>
+              <p class="text-lg text-gray-700 mt-2">esbuild transforme et regroupe du code ; SWC est un compilateur ; Turbopack est un bundler utilisé par Next.js. Leurs rôles diffèrent.</p>
+            </div>
+          </div>
+          <p class="text-xl text-violet-700 font-semibold mt-6">Retenez surtout le cycle : source &rarr; transformation &rarr; bundle &rarr; navigateur.</p>
+        </div>
+
+        <!-- DEVELOPPEMENT ET PRODUCTION -->
+        <div class="slide border-t-8 border-violet-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">D&eacute;veloppement, build et pr&eacute;visualisation</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">D&eacute;veloppement</h3>
+              <pre><code>npm run dev</code></pre>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+                <li>Lance un serveur local.</li>
+                <li>Reconstruit seulement ce qui change.</li>
+                <li>Fournit souvent le HMR : l'interface se met &agrave; jour rapidement.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-sky-600">Production</h3>
+              <pre><code>npm run build
+npm run preview</code></pre>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+                <li>Transforme et minifie le code.</li>
+                <li>G&eacute;n&egrave;re le dossier <code>dist/</code>.</li>
+                <li>Permet de tester le r&eacute;sultat final localement.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-xl text-violet-700 font-semibold mt-5">Pour ce projet Vite côté client, déployez le contenu de <code>dist/</code>. <code>npm run preview</code> sert à vérifier le build localement ; ce n’est pas un serveur de production.</p>
+        <p class="text-lg text-gray-700 mt-4">Repères Vite : <code>src/</code> contient le code source ; <code>public/</code> contient les fichiers copiés tels quels ; <code>dist/</code> contient le résultat du build.</p>
+        </div>
+
+        <!-- TRANSFORMATIONS ET OPTIMISATIONS -->
+        <div class="slide border-t-8 border-violet-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Transformations et optimisations</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-violet-700">Ce qui est transform&eacute;</h3>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+                <li>Le JSX devient du JavaScript.</li>
+                <li>Le CSS est regroup&eacute; et peut &ecirc;tre pr&eacute;trait&eacute;.</li>
+                <li>Les images import&eacute;es re&ccedil;oivent une URL finale.</li>
+                <li>Les source maps rendent le d&eacute;bogage lisible.</li>
+              </ul>
+              <pre class="mt-4"><code>src/App.jsx &rarr; dist/assets/index-x7y8z9.js</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-700">Ce qui est optimis&eacute;</h3>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-3">
+                <li><b>Tree shaking :</b> élimine le code inutilisé lorsque l’analyse et les effets de bord le permettent.</li>
+                <li><b>Code splitting :</b> sépare le code en morceaux ; les imports dynamiques permettent de les charger à la demande.</li>
+                <li><b>Minification :</b> r&eacute;duit le poids du JS et du CSS.</li>
+              </ul>
+              <pre class="mt-4"><code>// JavaScript : charger un module à la demande
+const { additionner } = await import('./math.js');
+console.log(additionner(2, 3)); // 5</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-violet-700 font-semibold mt-5">Un bundle plus petit se t&eacute;l&eacute;charge, s'analyse et s'ex&eacute;cute plus vite.</p>
+        </div>
+
+        <!-- VARIABLES ET DEBUG -->
+        <div class="slide border-t-8 border-violet-500">
+          <!-- [Sources]
+          https://vite.dev/guide/env-and-mode
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Variables d'environnement et d&eacute;bogage</h2>
+          <p class="text-xl text-gray-700 mb-4">Par défaut, Vite expose vos variables préfixées par <code>VITE_</code> au code client, en plus de ses variables intégrées. Leurs valeurs sont des chaînes et sont remplacées lors du build.</p>
+          <pre><code># .env.local
+VITE_API_URL=https://api.exemple.com
+
+// code client
+const apiUrl = import.meta.env.VITE_API_URL;</code></pre>
+          <div class="grid grid-cols-2 gap-6 mt-5">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">Bonnes pratiques</h3>
+              <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-2">
+                <li>Versionner un fichier <code>.env.example</code>.</li>
+                <li>Configurer les vraies valeurs sur la plateforme.</li>
+                <li>Tester le build de production avant de d&eacute;ployer.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-red-600">Attention</h3>
+              <p class="text-lg text-gray-700 mt-2">Une variable inject&eacute;e dans le front finit dans les fichiers envoy&eacute;s au navigateur : elle n'est pas secr&egrave;te.</p>
+              <p class="text-lg text-gray-700 mt-3">Pour une erreur, v&eacute;rifiez d'abord le chemin et la casse de l'import, puis lancez <code>npm run build</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKLIST AVANT REACT -->
+        <div class="slide border-t-8 border-violet-500">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Checklist avant de commencer React</h2>
+          <div class="flex items-center justify-between bg-violet-50 rounded-xl px-5 py-3 mb-5">
+            <p class="text-lg text-violet-800 font-semibold">Validez chaque pr&eacute;requis avant de passer &agrave; React.</p>
+            <span id="prerequisite-progress" class="text-lg text-violet-700 font-bold" aria-live="polite">0 / 6</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-lg text-gray-700">
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je sais lire <code>package.json</code> et lancer un script npm.</span>
+            </label>
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je distingue <code>npm run dev</code> et <code>npm run build</code>.</span>
+            </label>
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je comprends <code>src/</code>, <code>public/</code> et <code>dist/</code>.</span>
+            </label>
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je sais qu'un import peut viser un fichier, un asset ou un paquet.</span>
+            </label>
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je connais le tree shaking et le code splitting.</span>
+            </label>
+            <label class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-violet-400 transition-colors">
+              <input type="checkbox" class="prerequisite-check mt-1 h-5 w-5 accent-violet-600" />
+              <span>Je sais qu'une variable publique n'est pas un secret.</span>
+            </label>
+          </div>
+          <p id="prerequisite-message" class="text-xl text-violet-700 font-bold mt-6">Source &rarr; bundler &rarr; assets livr&eacute;s : cochez les six cases pour confirmer vos bases.</p>
+        </div>
+
+        <!-- SEPARATEUR REACT -->
         <div class="slide text-center bg-sky-500 text-white">
-          <h2 class="text-5xl font-extrabold">PARTIE 3 : REACT</h2>
+          <h2 class="text-5xl font-extrabold">PARTIE 4 : REACT</h2>
           <p class="text-3xl mt-4">
             Développement d'Interface Utilisateur Moderne
           </p>
         </div>
 
-        <!-- SLIDE 24: 13. INTRODUCTION À REACT -->
+        <!-- 13. INTRODUCTION À REACT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            13. Introduction à React
+            Introduction à React
           </h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
             <li>
               <b>Qu'est-ce que React ?</b> Une bibliothèque JS pour construire
               des interfaces utilisateur (UI) déclaratives.
             </li>
-            <li>
-              <b>Philosophie :</b> "UI = f(état)". L'UI n'est qu'une fonction de
-              l'état actuel de l'application.
-            </li>
+            <li><b>Approche déclarative :</b> l’interface dépend des props, de l’état et du contexte. Vous décrivez le résultat attendu pour ces données.</li>
             <li>
               <b>Différences avec vanilla JS :</b> React gère les mises à jour
               du DOM pour vous, vous vous concentrez sur la gestion de l'état.
             </li>
-            <li>
-              <b>Installation :</b> Typiquement via des outils comme Vite ou
-              Next.js (remplace Create React App).
-            </li>
+            <li><b>Démarrage :</b> un framework convient souvent à une application complète ; dans ce cours, Vite permet d’apprendre les bases côté client.</li>
           </ul>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">Le Virtual DOM</h3>
-          <p class="text-lg text-gray-700">
-            Une représentation légère du DOM réel, gardée en mémoire par React.
-            Les changements sont d'abord appliqués au V-DOM, puis React calcule
-            les différences (diffing) et met à jour uniquement les parties
-            nécessaires du DOM réel (minimisation des opérations coûteuses).
-          </p>
+          <p class="text-lg text-gray-700">Lors d’un rendu, React appelle vos composants pour calculer l’interface. Il compare ce résultat au précédent, puis applique les changements nécessaires au DOM pendant le <b>commit</b>. Un rendu ne signifie donc pas forcément une modification du DOM.</p>
         </div>
 
-        <!-- SLIDE 36: INSTALLER REACT AVEC VITE -->
+        <!-- INSTALLER REACT AVEC VITE -->
         <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/build-a-react-app-from-scratch
+          https://vite.dev/guide/
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Approche moderne : cr&eacute;er React avec Vite</h2>
-          <p class="text-xl text-gray-700 mb-4">Vite est l'approche recommand&eacute;e pour un nouveau projet : il d&eacute;marre rapidement et fournit un serveur de d&eacute;veloppement moderne.</p>
-          <pre><code># cr&eacute;er le projet
+          <p class="text-xl text-gray-700 mb-4">Nous utilisons Vite pour apprendre React dans une application côté client. Pour une application complète avec routage et chargement de données intégrés, évaluez aussi un framework React.</p>
+          <pre><code># Le template react sélectionne déjà React + JavaScript.
 npm create vite@latest mon-app -- --template react
-
-# choisir dans l'assistant :
-# Framework : React
-# Variant   : JavaScript ou TypeScript
-
 cd mon-app
 npm install
-npm run dev</code></pre>
+npm run dev
+# Pour TypeScript : utiliser le template react-ts.</code></pre>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">Scripts principaux</h3>
           <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
             <li><code>npm run dev</code> : lancer le serveur local pendant le d&eacute;veloppement.</li>
@@ -1395,14 +1502,17 @@ npm run dev</code></pre>
           </ul>
         </div>
 
-        <!-- SLIDE 37: ANCIENNE INSTALLATION REACT -->
+        <!-- ANCIENNE INSTALLATION REACT -->
         <div class="slide">
+          <!-- [Sources]
+          https://react.dev/blog/2025/02/14/sunsetting-create-react-app
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Ancienne approche : Create React App (CRA)</h2>
-          <p class="text-xl text-gray-700 mb-4">Create React App (CRA) a longtemps &eacute;t&eacute; la m&eacute;thode officielle pour d&eacute;marrer React. Elle reste utile pour comprendre d'anciens projets, mais les nouveaux projets utilisent g&eacute;n&eacute;ralement Vite.</p>
-          <pre><code># cr&eacute;er un ancien projet React
-npx create-react-app mon-ancien-app
-cd mon-ancien-app
-npm start</code></pre>
+          <p class="text-xl text-gray-700 mb-4"><b>Create React App est déprécié depuis février 2025.</b> Ce repère sert à maintenir un projet existant ; utilisez un outil ou framework maintenu pour démarrer un projet.</p>
+          <pre><code># Dans un projet CRA existant, avec un lockfile cohérent :
+npm ci
+npm start
+# Consulter son README pour la version de Node requise.</code></pre>
           <div class="grid grid-cols-2 gap-6 mt-4">
             <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-lg">
               <h3 class="font-bold text-2xl text-sky-700">Vite</h3>
@@ -1416,41 +1526,216 @@ npm start</code></pre>
           <p class="text-xl text-emerald-600 font-semibold mt-5">Dans les deux cas, Node.js et npm sont n&eacute;cessaires pour installer les paquets et lancer les scripts.</p>
         </div>
 
-        <!-- SLIDE 38: 14. JSX -->
+        <!-- JSX : INTRODUCTION -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            14. JSX : Syntaxe
-          </h2>
-          <h3 class="font-bold text-2xl text-sky-600">Qu'est-ce que JSX ?</h3>
-          <p class="text-lg text-gray-700">
-            JavaScript XML. C'est une extension de syntaxe qui permet d'écrire
-            du balisage HTML directement dans les fichiers JavaScript.
-          </p>
-          <h3 class="font-bold text-2xl text-sky-600 mt-4">
-            Règles et Expressions
-          </h3>
-          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li>
-              <b>Unique Parent :</b> Tout le JSX retourné doit être enveloppé
-              dans un seul élément parent (ou un `&lt;&gt;&lt;/&gt;`).
-            </li>
-            <li>
-              <b>camelCase pour Attributs :</b> Utiliser `className` au lieu de
-              `class`, `htmlFor` au lieu de `for`.
-            </li>
-            <li>
-              <b>Expressions JS :</b> Utiliser des accolades `{}` pour insérer
-              du JavaScript (variables, fonctions, calculs).
-            </li>
+          <!-- [Sources]
+          https://react.dev/learn/writing-markup-with-jsx
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : Syntaxe</h2>
+          <p class="text-xl text-gray-700">JSX décrit l’interface avec une syntaxe proche de HTML, directement dans JavaScript. Vite transforme le JSX avant son exécution dans le navigateur.</p>
+          <pre><code>// App.jsx : exemple à essayer dans le projet Vite
+export default function App() {
+  const nom = 'Lina';
+  return (
+    &lt;section className="bienvenue"&gt;
+      &lt;h1&gt;Bonjour, {nom} !&lt;/h1&gt;
+      &lt;p&gt;Vous commencez le chapitre JSX.&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li><code>&lt;section&gt;</code> décrit un élément HTML ; <code>{nom}</code> insère une valeur JavaScript.</li>
+            <li>Le JSX est une expression : on peut le retourner, le stocker dans une variable ou le choisir avec une condition.</li>
+            <li>JSX décrit le résultat attendu ; React prend en charge les mises à jour de l’interface.</li>
           </ul>
-          <pre><code>const nom = "Jean";
-const element = &lt;h1 className="titre"&gt;Bonjour, {nom.toUpperCase()}&lt;/h1&gt;;</code></pre>
         </div>
 
-        <!-- SLIDE 39: COMPOSANTS REACT À CLASSES -->
+        <!-- JSX : STRUCTURE -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">Composants React &agrave; classes : la structure</h2>
-          <p class="text-xl text-gray-700 mb-4">Avant les Hooks, on construisait les composants avec des classes JavaScript qui h&eacute;ritent de <code>React.Component</code>. Commen&ccedil;ons par un composant simple, sans state.</p>
+          <!-- [Sources]
+          https://react.dev/learn/writing-markup-with-jsx
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : balises, fragments et commentaires</h2>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li>Regroupez les balises voisines dans un parent ou un <b>fragment</b> <code>&lt;&gt;…&lt;/&gt;</code>, qui n’ajoute aucun élément au DOM.</li>
+            <li>Fermez chaque balise et respectez l’imbrication : <code>&lt;input /&gt;</code>, <code>&lt;br /&gt;</code>, <code>&lt;strong&gt;…&lt;/strong&gt;</code>.</li>
+            <li>Pour un retour sur plusieurs lignes, placez <code>(</code> sur la même ligne que <code>return</code>.</li>
+          </ul>
+          <pre><code>function Introduction() {
+  return (
+    &lt;&gt;
+      {/* Commentaire dans le balisage JSX */}
+      &lt;h2&gt;Apprendre &lt;strong&gt;React&lt;/strong&gt;&lt;/h2&gt;
+      &lt;p&gt;Une étape à la fois.&lt;br /&gt;À vous de jouer !&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Dans le balisage, utilisez <code>{/* commentaire */}</code>. En dehors, les commentaires JavaScript habituels restent valides.</p>
+        </div>
+
+        <!-- JSX : ATTRIBUTS -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/reference/react-dom/components/common
+          https://react.dev/learn/javascript-in-jsx-with-curly-braces
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : attributs, chaînes et booléens</h2>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li>Écrivez <code>className</code>, <code>htmlFor</code>, <code>tabIndex</code> et <code>maxLength</code>. Les attributs <code>aria-*</code> et <code>data-*</code> gardent leurs tirets.</li>
+            <li>Les guillemets donnent une chaîne fixe ; les accolades évaluent une expression.</li>
+          </ul>
+          <pre><code>function ChampNom() {
+  const limite = 30;
+  const bloque = false;
+  return (
+    &lt;div className="champ" data-section="profil"&gt;
+      &lt;label htmlFor="nom-profil"&gt;Votre nom&lt;/label&gt;
+      &lt;input id="nom-profil" maxLength={limite}
+        required disabled={bloque} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4"><code>required</code> équivaut à <code>required={true}</code>. Pour un attribut booléen comme <code>disabled</code>, utilisez <code>{false}</code>, pas la chaîne <code>"false"</code>.</p>
+        </div>
+
+        <!-- JSX : EXPRESSIONS -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/javascript-in-jsx-with-curly-braces
+          https://react.dev/reference/react-dom/components/common
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : que mettre entre les accolades ?</h2>
+          <p class="text-lg text-gray-700">Utilisez une variable, un calcul, un accès à une propriété ou un appel de fonction qui retourne une valeur affichable. Une instruction comme <code>if</code> ou <code>for</code> se place avant le JSX.</p>
+          <pre><code>function Resume() {
+  const user = { nom: 'Lina', age: 24 };
+  const prix = 50;
+  return (
+    &lt;div title={user.nom}&gt;
+      &lt;p&gt;{user.nom.toUpperCase()} a {user.age} ans.&lt;/p&gt;
+      &lt;p&gt;Deux articles : {prix * 2} DH&lt;/p&gt;
+      &lt;p&gt;Statut : {String(false)}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li>Comme enfants JSX, <code>null</code>, <code>undefined</code> et les booléens n’affichent rien ; <code>0</code> s’affiche.</li>
+            <li>Un objet ordinaire ne s’affiche pas directement : utilisez <code>{user.nom}</code>, pas <code>{user}</code>.</li>
+            <li><code>title="{user.nom}"</code> est du texte littéral ; <code>title={user.nom}</code> lit la propriété.</li>
+          </ul>
+        </div>
+
+        <!-- JSX : CONDITIONS ET LISTES -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/conditional-rendering
+          https://react.dev/learn/rendering-lists
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : conditions et listes</h2>
+          <p class="text-lg text-gray-700">Le ternaire choisit entre deux contenus ; <code>&amp;&amp;</code> affiche un contenu si la condition est vraie ; <code>map()</code> transforme des données en éléments JSX.</p>
+          <pre><code>function Catalogue() {
+  const produits = [{ id: 1, nom: 'Clavier' }];
+  const disponible = true;
+  return (
+    &lt;section&gt;
+      &lt;p&gt;{disponible ? 'En stock' : 'Épuisé'}&lt;/p&gt;
+      {produits.length &gt; 0 &amp;&amp; (
+        &lt;ul&gt;
+          {produits.map(produit =&gt; (
+            &lt;li key={produit.id}&gt;{produit.nom}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      )}
+    &lt;/section&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">La <code>key</code> doit être stable et unique parmi les éléments frères. Avec <code>map(x =&gt; { … })</code>, écrivez un <code>return</code> ; avec <code>map(x =&gt; (…))</code>, le retour est implicite.</p>
+          <p class="text-lg text-gray-700 mt-2">Écrivez <code>produits.length &gt; 0 &amp;&amp; …</code> : sans <code>&gt; 0</code>, une liste vide peut afficher le nombre zéro.</p>
+        </div>
+
+        <!-- JSX : COMPOSITION -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/passing-props-to-a-component
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : composants, props et children</h2>
+          <p class="text-lg text-gray-700"><code>&lt;article&gt;</code> désigne une balise HTML ; <code>&lt;Carte&gt;</code> désigne votre composant, défini ou importé. Commencez le nom d’un composant par une majuscule.</p>
+          <pre><code>function Carte({ titre, children }) {
+  return (
+    &lt;article&gt;
+      &lt;h2&gt;{titre}&lt;/h2&gt;
+      {children}
+    &lt;/article&gt;
+  );
+}
+
+function Exemple() {
+  const infos = { titre: 'JavaScript' };
+  return (
+    &lt;Carte {...infos} titre="React"&gt;
+      &lt;p&gt;Ce paragraphe devient la prop children.&lt;/p&gt;
+    &lt;/Carte&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4"><code>{...infos}</code> transmet les propriétés de l’objet. En cas de doublon, la valeur écrite en dernier gagne : le titre est ici <b>React</b>. Préférez des props explicites quand elles rendent l’appel plus clair.</p>
+        </div>
+
+        <!-- JSX : STYLES ET EVENEMENTS -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/reference/react-dom/components/common
+          https://react.dev/learn/responding-to-events
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : styles et fonctions d’événement</h2>
+          <pre><code>function BoutonAide() {
+  const afficherAide = () =&gt; console.log('Aide demandée');
+  return (
+    &lt;button type="button"
+      style={{ backgroundColor: '#0369a1', color: 'white', padding: 12 }}
+      onClick={afficherAide}&gt;
+      Afficher l’aide
+    &lt;/button&gt;
+  );
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
+            <li><code>style</code> reçoit un objet : les premières accolades ouvrent une expression JSX, les secondes délimitent l’objet JavaScript.</li>
+            <li>Les propriétés CSS utilisent le camelCase : <code>backgroundColor</code>. Ici, <code>padding: 12</code> signifie 12 px ; certaines propriétés, comme <code>opacity</code>, sont sans unité.</li>
+            <li><code>onClick={afficherAide}</code> transmet une fonction. <code>onClick={afficherAide()}</code> l’appellerait pendant le rendu.</li>
+            <li>Pour transmettre un argument : <code>onClick={() =&gt; afficherAide('profil')}</code>, avec une fonction adaptée à cet argument.</li>
+          </ul>
+        </div>
+
+        <!-- JSX : APPLICATION -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/passing-props-to-a-component
+          https://react.dev/learn/conditional-rendering
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">JSX : exemple récapitulatif</h2>
+          <p class="text-lg text-gray-700">Une fiche produit combine des props, des expressions et une condition. Le bouton demande une action au composant parent.</p>
+          <pre><code>function FicheProduit({ nom, prix, disponible, onAjouter }) {
+  return (
+    &lt;article className="produit"&gt;
+      &lt;h2&gt;{nom}&lt;/h2&gt;
+      &lt;p&gt;{prix.toFixed(2)} DH&lt;/p&gt;
+      &lt;p&gt;{disponible ? 'En stock' : 'Épuisé'}&lt;/p&gt;
+      &lt;button disabled={!disponible} onClick={onAjouter}&gt;
+        Ajouter au panier
+      &lt;/button&gt;
+    &lt;/article&gt;
+  );
+}
+
+export default function App() {
+  return &lt;FicheProduit nom="Clavier" prix={149.9} disponible
+    onAjouter={() =&gt; console.log('Clavier ajouté')} /&gt;;
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4"><b>À vous :</b> passez <code>disponible={false}</code>, observez le bouton, puis ajoutez une prop <code>promo</code> pour afficher « Promotion » uniquement lorsqu’elle vaut <code>true</code>.</p>
+        </div>
+
+        <!-- COMPOSANTS REACT À CLASSES -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Repère : Composants React à classes : la structure</h2>
+          <p class="text-xl text-gray-700 mb-4"><b>Repère pour le code existant.</b> Les classes restent prises en charge ; les nouveaux composants sont généralement des fonctions avec des Hooks.</p>
           <pre><code>import React from 'react';
 
 class Bonjour <span class="code-highlight">extends React.Component</span> {
@@ -1468,9 +1753,9 @@ class Bonjour <span class="code-highlight">extends React.Component</span> {
           </ul>
         </div>
 
-        <!-- SLIDE 40: CLASSES - PROPS ET STATE -->
+        <!-- CLASSES - PROPS ET STATE -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">Classes : introduire le state</h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Repère : Classes : introduire le state</h2>
           <div class="grid grid-cols-2 gap-6">
             <div>
               <h3 class="font-bold text-2xl text-sky-600">Lire les props</h3>
@@ -1485,17 +1770,20 @@ class Bonjour <span class="code-highlight">extends React.Component</span> {
             </div>
             <div>
               <h3 class="font-bold text-2xl text-emerald-600">D&eacute;clarer le state</h3>
-              <pre><code>class Compteur <span class="code-highlight">extends React.Component</span> {
-  constructor(props) {
-    <span class="code-highlight">super(props)</span>;
-    <span class="code-highlight">this.state</span> = { compte: 0 };
-  }
+              <pre><code>import { Component } from 'react';
 
+class Compteur extends Component {
+  state = { compte: 0 };
   incrementer = () =&gt; {
-    <span class="code-highlight">this.setState</span>(prevState =&gt; ({
-      compte: prevState.compte + 1
-    }));
+    this.setState(prev =&gt; ({ compte: prev.compte + 1 }));
   };
+  render() {
+    return (
+      &lt;button onClick={this.incrementer}&gt;
+        {this.state.compte}
+      &lt;/button&gt;
+    );
+  }
 }</code></pre>
               <p class="text-lg text-gray-700">Le state contient les donn&eacute;es internes et <code>setState()</code> demande un nouveau rendu.</p>
             </div>
@@ -1503,46 +1791,74 @@ class Bonjour <span class="code-highlight">extends React.Component</span> {
           <p class="text-xl text-amber-700 font-semibold mt-5">Ne faites jamais <code>this.state.compte++</code> directement : React ne sera pas inform&eacute; correctement du changement.</p>
         </div>
 
-        <!-- SLIDE 41: CLASSES - CYCLE DE VIE ET EVENEMENTS -->
+        <!-- CLASSES - CYCLE DE VIE ET EVENEMENTS -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">Classes : cycle de vie et &eacute;v&eacute;nements</h2>
+          <!-- [Sources]
+          https://legacy.reactjs.org/docs/react-component.html
+          https://react.dev/reference/react/Component
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Repère : classes — cycle de vie et événements</h2>
+          <p class="text-lg text-gray-700 mb-4">Un composant de classe passe par trois moments : <b>montage</b> (création), <b>mise à jour</b> (props ou state changent), puis <b>démontage</b> (retrait de l’interface).</p>
           <div class="grid grid-cols-2 gap-6">
             <div>
-              <h3 class="font-bold text-2xl text-purple-600">Cycle de vie</h3>
-              <pre><code><span class="code-highlight">componentDidMount()</span> {
-  this.timer = setInterval(() =&gt; {
-    console.log('actif');
-  }, 1000);
-}
+              <h3 class="font-bold text-2xl text-purple-600">Un exemple complet</h3>
+              <pre><code>class Horloge extends React.Component {
+  state = { secondes: 0 };
 
-<span class="code-highlight">componentWillUnmount()</span> {
-  clearInterval(this.timer);
+  componentDidMount() {
+    // Après l’affichage initial
+    this.timer = setInterval(() =&gt; {
+      this.setState(prev =&gt; ({
+        secondes: prev.secondes + 1
+      }));
+    }, 1000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.secondes !== this.state.secondes) {
+      document.title = `${this.state.secondes}s`;
+    }
+  }
+
+  componentWillUnmount() {
+    // Avant le retrait : arrêter le timer
+    clearInterval(this.timer);
+  }
+
+  render() {
+    return &lt;p&gt;{this.state.secondes} s&lt;/p&gt;;
+  }
 }</code></pre>
-              <p class="text-lg text-gray-700">La premi&egrave;re m&eacute;thode se lance apr&egrave;s le montage ; la seconde nettoie avant le d&eacute;montage.</p>
             </div>
             <div>
-              <h3 class="font-bold text-2xl text-red-600">Attention &agrave; <code>this</code></h3>
-              <p class="text-lg text-gray-700 mt-2">Une m&eacute;thode classique peut perdre le contexte du composant. Une fonction fl&eacute;ch&eacute;e ou <code>bind(this)</code> conserve le bon contexte.</p>
-              <pre><code><span class="code-highlight">handleClick</span> = () =&gt; {
-  <span class="code-highlight">this.setState</span>({ ouvert: true });
-};</code></pre>
+              <h3 class="font-bold text-2xl text-sky-600">Que fait chaque méthode ?</h3>
+              <ul class="list-disc pl-6 space-y-3 text-lg text-gray-700 mt-3">
+                <li><code>componentDidMount</code> s’exécute une fois après le premier rendu. On y démarre un abonnement, un timer ou une requête.</li>
+                <li><code>componentDidUpdate</code> s’exécute après une mise à jour. Comparez les anciennes valeurs avant de modifier le state ou le document.</li>
+                <li><code>componentWillUnmount</code> nettoie ce qui a été démarré : timer, abonnement ou écouteur d’événement.</li>
+              </ul>
+              <h3 class="font-bold text-2xl text-red-600 mt-5">Attention à <code>this</code></h3>
+              <p class="text-lg text-gray-700 mt-2">Quand React appelle une méthode comme gestionnaire, <code>this</code> peut être perdu. Une propriété fléchée lie automatiquement le contexte ; sinon utilisez <code>bind</code> dans le constructeur.</p>
+              <pre><code>handleClick = () =&gt; {
+  this.setState({ ouvert: true });
+};
+
+// Alternative dans constructor :
+this.handleClick = this.handleClick.bind(this);</code></pre>
             </div>
           </div>
-          <p class="text-xl text-gray-700 font-semibold mt-5">Ces composants sont importants pour maintenir du code ancien, m&ecirc;me si les nouveaux composants utilisent surtout les fonctions et les Hooks.</p>
+          <p class="text-lg text-amber-700 font-semibold mt-5"><b>À retenir :</b> chaque ressource ouverte dans <code>componentDidMount</code> doit être fermée dans <code>componentWillUnmount</code>. Les composants fonctionnels utilisent plutôt <code>useEffect</code> avec une fonction de nettoyage.</p>
         </div>
 
-        <!-- SLIDE 42: COMPOSANTS FONCTIONNELS -->
+        <!-- COMPOSANTS FONCTIONNELS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            15. Composants Fonctionnels
+            Composants Fonctionnels
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             Le Bloc de Construction de React
           </h3>
-          <p class="text-lg text-gray-700">
-            Un composant est une fonction JavaScript qui retourne du JSX. Il
-            doit commencer par une <b>majuscule</b>.
-          </p>
+          <p class="text-lg text-gray-700">Un composant fonctionnel est une fonction JavaScript dont le nom commence par une majuscule. Il retourne des éléments React, généralement décrits en JSX, ou <code>null</code> pour ne rien afficher.</p>
           <pre><code>// 1. Définition du Composant (Nom: 'Bouton')
 function Bouton(props) {
   return (
@@ -1566,10 +1882,10 @@ function App() {
           </p>
         </div>
 
-        <!-- SLIDE 27: 16. PROPS -->
+        <!-- 16. PROPS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            16. Props (Propriétés)
+            Props (Propriétés)
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
             Passage de Données (Flux Unidirectionnel)
@@ -1587,38 +1903,57 @@ function App() {
               <b>Destructuring des props :</b> Pratique courante pour la clarté.
             </li>
           </ul>
-          <pre><code>// Avant destructuring
-function Card(props) {
+          <pre><code>// Les deux signatures reçoivent le même objet de props.
+function CardAvecProps(props) {
   return &lt;h3&gt;{props.titre}&lt;/h3&gt;;
 }
 
-// Après destructuring
 function Card({ titre, contenu }) {
-  return &lt;div&gt;
-    &lt;h3&gt;{titre}&lt;/h3&gt;
-    &lt;p&gt;{contenu}&lt;/p&gt;
-  &lt;/div&gt;
-}</code></pre>
+  return (
+    &lt;article&gt;
+      &lt;h3&gt;{titre}&lt;/h3&gt;
+      &lt;p&gt;{contenu}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}
+// Dans un parent : &lt;Card titre="React" contenu="Les bases" /&gt;</code></pre>
         </div>
 
-        <!-- SLIDE 28: 17. STATE (useState) -->
         <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Hooks : deux règles à respecter</h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li>Appelez <code>useState</code>, <code>useEffect</code> et les autres Hooks classiques au <b>premier niveau</b>, avant tout retour conditionnel.</li><li>Appelez-les uniquement dans un composant fonctionnel ou dans un <b>custom Hook</b>. Jamais dans une boucle, une condition ou un gestionnaire de clic.</li></ul>
+          <pre><code>import { useState } from 'react';
+
+function Compteur({ visible }) {
+  const [count, setCount] = useState(0);
+  if (!visible) return null;
+  return (
+    &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;
+      {count}
+    &lt;/button&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Gardez les règles ESLint de React activées : elles détectent les appels de Hooks invalides et les dépendances oubliées.</p>
+        </div>
+
+        <!-- 17. STATE (useState) -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/learn/queueing-a-series-of-state-updates
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            17. State (État) : Le Hook useState
+            State (État) : Le Hook useState
           </h2>
           <h3 class="font-bold text-2xl text-red-600">
             Qu'est-ce que l'État ?
           </h3>
-          <p class="text-lg text-gray-700">
-            Des données qui, lorsqu'elles changent, provoquent le
-            <b>re-rendu</b> du composant (son actualisation dans le DOM).
-          </p>
+          <p class="text-lg text-gray-700">L’état est la mémoire du composant entre les rendus. Une mise à jour demande à React un nouveau rendu ; le DOM ne change que si le résultat affiché change.</p>
           <h3 class="font-bold text-2xl text-red-600 mt-4">useState Hook :</h3>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
             <li>
-              Retourne une paire : `[valeurActuelle, fonctionDeMiseÀJour]`.
+              Retourne une paire : <code>[valeurActuelle, fonctionDeMiseÀJour]</code>.
             </li>
-            <li>La mise à jour du state est <b>asynchrone</b>.</li>
+            <li><code>useState</code> retourne <code>[valeur, setter]</code>. Le setter prépare la valeur du prochain rendu : la variable du rendu en cours ne change pas immédiatement.</li>
           </ul>
           <pre><code>import { useState } from 'react';
 
@@ -1638,41 +1973,66 @@ function Toggle() {
 }</code></pre>
         </div>
 
-        <!-- SLIDE 29: 18. useEffect I -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            18. useEffect Hook : Effets de bord
-          </h2>
-          <h3 class="font-bold text-2xl text-purple-600">
-            Qu'est-ce qu'un Effet de Bord ?
-          </h3>
-          <p class="text-lg text-gray-700">
-            Toute action qui interagit avec le monde extérieur à React (appels
-            API, timers, manipulation directe du DOM, gestion des abonnements).
-          </p>
-          <h3 class="font-bold text-2xl text-purple-600 mt-4">
-            Tableau de Dépendances `[]`
-          </h3>
-          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li>`useEffect(() => { ... })` : S'exécute après chaque rendu.</li>
-            <li>
-              `useEffect(() => { ... }, [])` : S'exécute seulement au
-              <b>montage</b> (comme `componentDidMount`).
-            </li>
-            <li>
-              `useEffect(() => { ... }, [data])` : S'exécute au montage et quand
-              `data` change.
-            </li>
-          </ul>
-          <pre><code>useEffect(() => {
-  fetchData(); // Appel API
-}, []); // Se lance une seule fois (après le 1er rendu)</code></pre>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">State : calculer depuis la valeur précédente</h2>
+          <p class="text-lg text-gray-700 mt-4">Chaque rendu voit un instantané de l’état. React peut regrouper plusieurs mises à jour : utilisez une fonction lorsque la prochaine valeur dépend de la précédente.</p>
+          <pre><code>// Dans un composant :
+const [count, setCount] = useState(0);
+
+function ajouterTrois() {
+  setCount(c =&gt; c + 1);
+  setCount(c =&gt; c + 1);
+  setCount(c =&gt; c + 1); // +3 au prochain rendu
+}
+// Trois appels à setCount(count + 1) demanderaient
+// trois fois la même valeur : seulement +1.</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Le setter ne renvoie pas une promesse : <code>await setCount(...)</code> n’attend pas le rendu. Les fonctions de mise à jour doivent rester pures.</p>
         </div>
 
-        <!-- SLIDE 30: 18. useEffect II -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">State : modifier sans mutation</h2>
+          <p class="text-lg text-gray-700 mt-4">Avec <code>useState</code>, remplacez les objets et tableaux au lieu de les modifier. Le spread est une copie superficielle : copiez chaque niveau modifié.</p>
+          <pre><code>const [profil, setProfil] = useState({
+  nom: 'Lina', adresse: { ville: 'Rabat' }
+});
+
+function changerVille(ville) {
+  setProfil(p =&gt; ({
+    ...p, adresse: { ...p.adresse, ville }
+  }));
+}
+
+const [items, setItems] = useState([]);
+const ajouter = item =&gt; setItems(liste =&gt; [...liste, item]);
+const supprimer = id =&gt; setItems(liste =&gt;
+  liste.filter(item =&gt; item.id !== id)
+);</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Évitez <code>profil.adresse.ville = …</code> et <code>items.push(…)</code> sur le state. La syntaxe de mutation d’Immer sera un cas particulier présenté avec Redux Toolkit.</p>
+        </div>
+
+        <!-- 18. useEffect I -->
+        <div class="slide">
+          <!-- [Sources]
+          https://react.dev/reference/react/useEffect
+          https://react.dev/learn/you-might-not-need-an-effect
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">useEffect : synchroniser avec un système externe</h2>
+          <p class="text-lg text-gray-700 mt-4">Un effet synchronise React avec un minuteur, un abonnement ou une API du navigateur. Les calculs dérivés restent dans le rendu ; les actions utilisateur restent dans les gestionnaires d’événements.</p>
+          <pre><code>import { useEffect } from 'react';
+
+function TitrePage({ titre }) {
+  useEffect(() =&gt; {
+    document.title = titre;
+  }, [titre]);
+  return &lt;h1&gt;{titre}&lt;/h1&gt;;
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li>Sans tableau : après chaque commit. Avec <code>[]</code> : à chaque montage. Avec <code>[titre]</code> : au montage et lorsque <code>titre</code> change.</li><li>Incluez toutes les valeurs réactives lues dans l’effet. Ne supprimez pas une dépendance pour forcer son exécution.</li><li>En développement, <b>StrictMode</b> ajoute un cycle installation → nettoyage → installation pour détecter les défauts.</li></ul>
+        </div>
+
+        <!-- 18. useEffect II -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            18. useEffect : La Fonction de Nettoyage (Cleanup)
+            useEffect : La Fonction de Nettoyage (Cleanup)
           </h2>
           <h3 class="font-bold text-2xl text-red-600">Pourquoi ?</h3>
           <p class="text-lg text-gray-700">
@@ -1692,55 +2052,67 @@ function Toggle() {
     console.log("Cleanup effectuée");
   };
 }, []);</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            Le `return` est essentiel pour éviter les fuites de mémoire (memory
-            leaks).
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4">Retournez un nettoyage quand l’effet ouvre une ressource ou un abonnement. Il s’exécute avant une nouvelle installation avec des dépendances modifiées et au démontage ; tous les effets n’en ont pas besoin.</p>
         </div>
 
-        <!-- SLIDE 31: 19. ÉVÉNEMENTS DANS REACT -->
+        <!-- 19. ÉVÉNEMENTS DANS REACT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            19. Gestion des Événements dans React
+            Gestion des Événements dans React
           </h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
             <li>
               <b>Nommage :</b> Les gestionnaires d'événements sont en camelCase
-              (ex: `onClick`, `onChange`).
+              (ex: <code>onClick</code>, <code>onChange</code>).
             </li>
             <li>
               <b>Fonction Passée :</b> On passe une fonction, pas une chaîne de
-              caractères (`onClick={handleClick}`).
+              caractères (<code>onClick={handleClick}</code>).
             </li>
             <li>
               <b>Synthetic Events :</b> React enveloppe les événements natifs
-              dans un objet appelé `SyntheticEvent` qui assure une compatibilité
+              dans un objet appelé <code>SyntheticEvent</code> qui assure une compatibilité
               multi-navigateurs.
             </li>
           </ul>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Passer des Arguments
           </h3>
-          <pre><code>function List() {
-  const itemId = 5;
-  // Utiliser une fonction fléchée inline pour passer un argument
+          <pre><code>function BoutonSupprimer({ itemId, onSupprimer }) {
   return (
-    &lt;button onClick={() =&gt; handleClick(itemId)}&gt;
-      Supprimer l'item 5
+    &lt;button onClick={() =&gt; onSupprimer(itemId)}&gt;
+      Supprimer l’article {itemId}
     &lt;/button&gt;
   );
-}</code></pre>
+}
+// Passez la fonction : onClick={handleClick}
+// Ne l'appelez pas pendant le rendu : onClick={handleClick()}</code></pre>
         </div>
-        <!-- SLIDE 32: 20. LISTES ET KEYS -->
+
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Rendu conditionnel : choisir quoi afficher</h2>
+          <pre><code>function EtatListe({ loading, error, users }) {
+  if (loading) return &lt;p&gt;Chargement…&lt;/p&gt;;
+  if (error) return &lt;p role="alert"&gt;{error}&lt;/p&gt;;
+  if (users.length === 0) return &lt;p&gt;Aucun résultat.&lt;/p&gt;;
+  return &lt;p&gt;{users.length} utilisateurs trouvés&lt;/p&gt;;
+}
+
+function Connexion({ user }) {
+  return &lt;p&gt;{user ? `Bonjour ${user.name}` : 'Non connecté'}&lt;/p&gt;;
+}</code></pre>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li><code>if</code> choisit un retour ; le ternaire choisit entre deux expressions JSX.</li><li>Pour un affichage optionnel : <code>{items.length &gt; 0 &amp;&amp; &lt;Liste /&gt;}</code>. Avec <code>items.length &amp;&amp; …</code>, zéro peut apparaître à l’écran.</li></ul>
+        </div>
+        <!-- 20. LISTES ET KEYS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            20. Rendu de Listes et Keys
+            Rendu de Listes et Keys
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
-            Rendre des listes avec `.map()`
+            Rendre des listes avec <code>.map()</code>
           </h3>
           <p class="text-lg text-gray-700">
-            En React, on utilise la méthode `.map()` pour transformer un tableau
+            En React, on utilise la méthode <code>.map()</code> pour transformer un tableau
             de données en un tableau d'éléments JSX.
           </p>
           <pre><code>const utilisateurs = [
@@ -1754,25 +2126,21 @@ function Toggle() {
   ))}
 &lt;/ul&gt;</code></pre>
           <h3 class="font-bold text-2xl text-red-600 mt-4">
-            L'Importance des `key`
+            L'Importance des <code>key</code>
           </h3>
           <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700">
             <li>
-              La `key` aide React à identifier quels éléments ont été modifiés,
+              La <code>key</code> aide React à identifier quels éléments ont été modifiés,
               ajoutés ou supprimés.
             </li>
-            <li>
-              Elle doit être <b>unique</b> et <b>stable</b> (ID de la base de
-              données). N'utilisez <b>JAMAIS</b> l'index du tableau si la liste
-              peut changer de manière dynamique.
-            </li>
+            <li>La clé doit être <b>stable et unique parmi les éléments frères</b>. Préférez un identifiant issu des données ; évitez l’index si la liste est réordonnée, ajoutée ou supprimée. <code>key</code> n’est pas transmise comme prop.</li>
           </ul>
         </div>
 
-        <!-- SLIDE 33: 21. FORMULAIRES CONTRÔLÉS -->
+        <!-- 21. FORMULAIRES CONTRÔLÉS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            21. Formulaires Contrôlés
+            Formulaires Contrôlés
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">Le Contrôle par React</h3>
           <p class="text-lg text-gray-700">
@@ -1782,31 +2150,26 @@ function Toggle() {
           <pre><code>import { useState } from 'react';
 
 function Formulaire() {
-  const [valeur, setValeur] = useState('');
-
-  const handleChange = (event) => {
-    // La valeur de l'input est toujours lue depuis l'objet event
-    setValeur(event.target.value); 
-  };
-
+  const [nom, setNom] = useState('');
   return (
-    &lt;input 
-      type="text" 
-      value={valeur} // La valeur affichée est lue depuis le state
-      onChange={handleChange} // Chaque frappe met à jour le state
-      placeholder="Votre nom"
-    /&gt;
+    &lt;form onSubmit={event =&gt; {
+      event.preventDefault();
+      console.log(nom);
+    }}&gt;
+      &lt;label htmlFor="nom"&gt;Votre nom&lt;/label&gt;
+      &lt;input id="nom" value={nom}
+        onChange={event =&gt; setNom(event.target.value)} /&gt;
+      &lt;button type="submit"&gt;Valider&lt;/button&gt;
+    &lt;/form&gt;
   );
 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            C'est le pattern standard pour la gestion des inputs en React.
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4">Pour une case à cocher, utilisez <code>checked</code> et <code>event.target.checked</code>. Un champ contrôlé garde une valeur définie, par exemple <code>""</code> pour du texte.</p>
         </div>
 
-        <!-- SLIDE 34: STYLING EN REACT (INTRODUCTION) -->
+        <!-- STYLING EN REACT (INTRODUCTION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            22. Styling en React
+            Styling en React
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
             Pourquoi le styling est important ?
@@ -1834,29 +2197,30 @@ function Formulaire() {
               accélérer le design.
             </li>
           </ul>
-          <p class="text-xl text-emerald-600 font-semibold mt-6">
-            ⭐ Le choix dépend du projet : Tailwind pour la rapidité, CSS
-            Modules pour la modularité.
-          </p>
+          <p class="text-xl text-emerald-600 font-semibold mt-6">Choisissez selon les besoins : CSS classique pour les bases, CSS Modules pour isoler les classes, bibliothèque de composants pour des éléments prêts à intégrer.</p>
         </div>
 
-        <!-- SLIDE 35: INLINE ET CSS EXTERNE -->
+        <!-- INLINE ET CSS EXTERNE -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            23. Styling : Inline & CSS Externe
+            Styling : Inline & CSS Externe
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">1️⃣ Inline Styles</h3>
           <p class="text-lg text-gray-700">
             On utilise un objet JavaScript. Les noms de propriétés utilisent le
             format camelCase.
           </p>
-          <pre><code>const style = { color: "blue", fontSize: "22px" };
-&lt;p style={style}&gt;Bonjour React !&lt;/p&gt;
-
-// Exemple dynamique :
-&lt;div style={{ backgroundColor: isActive ? "green" : "red" }}&gt;
-  {isActive ? "Actif" : "Inactif"}
-&lt;/div&gt;</code></pre>
+          <pre><code>function Statut({ isActive }) {
+  const style = { color: "blue", fontSize: "22px" };
+  return (
+    &lt;div&gt;
+      &lt;p style={style}&gt;Bonjour React !&lt;/p&gt;
+      &lt;p style={{ color: isActive ? "green" : "red" }}&gt;
+        {isActive ? "Actif" : "Inactif"}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
 
           <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ CSS Externe</h3>
           <p class="text-lg text-gray-700">
@@ -1877,16 +2241,12 @@ function App() {
 }</code></pre>
         </div>
 
-        <!-- SLIDE 36: CSS MODULES -->
+        <!-- CSS MODULES -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            24. Styling : CSS Modules
+            Styling : CSS Modules
           </h2>
-          <p class="text-lg text-gray-700">
-            Les <b>CSS Modules</b> permettent de créer des styles isolés pour
-            chaque composant. Le nom des classes est automatiquement rendu
-            unique.
-          </p>
+          <p class="text-lg text-gray-700">Les <b>CSS Modules</b> génèrent des noms locaux pour les classes. Cela évite les collisions de noms ; les styles globaux et la cascade CSS peuvent encore agir sur les éléments.</p>
           <pre><code>import styles from "./App.module.css";
 
 function App() {
@@ -1912,16 +2272,38 @@ function App() {
           </p>
         </div>
 
-        <!-- SLIDE 37: CONTEXT API (INTRODUCTION) -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Partager l’état : le parent commun</h2>
+          <p class="text-lg text-gray-700 mt-4">Quand deux composants doivent rester synchronisés, placez la valeur dans leur parent commun et transmettez une fonction pour demander sa modification.</p>
+          <pre><code>import { useState } from 'react';
+
+function Recherche({ valeur, onChange }) {
+  return (
+    &lt;label&gt;Recherche
+      &lt;input value={valeur}
+        onChange={e =&gt; onChange(e.target.value)} /&gt;
+    &lt;/label&gt;
+  );
+}
+
+function App() {
+  const [recherche, setRecherche] = useState('');
+  return (
+    &lt;&gt;
+      &lt;Recherche valeur={recherche} onChange={setRecherche} /&gt;
+      &lt;p&gt;Recherche actuelle : {recherche || 'Aucune'}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Une seule source de vérité suffit ici. Context devient utile si cette donnée doit traverser plusieurs niveaux.</p>
+        </div>
+
+        <!-- CONTEXT API (INTRODUCTION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            25. Context API : Introduction
+            Context API : Introduction
           </h2>
-          <p class="text-lg text-gray-700">
-            Le <b>Context API</b> permet de partager des données à travers
-            plusieurs composants sans passer de props à chaque niveau. On
-            l’utilise souvent pour gérer :
-          </p>
+          <p class="text-lg text-gray-700">L’<b>API Context</b> distribue une valeur aux descendants sans la transmettre par props à chaque niveau. Elle ne stocke pas l’état à elle seule : combinez-la avec <code>useState</code> ou <code>useReducer</code> si la valeur doit évoluer.</p>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-2">
             <li>Le thème (clair/sombre)</li>
             <li>L’utilisateur connecté</li>
@@ -1939,10 +2321,10 @@ export const ThemeContext = createContext("light");</code></pre>
           </p>
         </div>
 
-        <!-- SLIDE 38: CONTEXT API (UTILISATION) -->
+        <!-- CONTEXT API (UTILISATION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            26. Context API : Fournir et Consommer
+            Context API : Fournir et Consommer
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             1️⃣ Fournir le contexte
@@ -1962,62 +2344,49 @@ function Navbar() {
   return &lt;h3&gt;Thème actuel : {theme}&lt;/h3&gt;;
 }</code></pre>
 
-          <p class="text-lg text-gray-700 mt-4">
-            ✅ <b>Avantage :</b> évite de répéter les props inutiles.  
-            ⚠️ <b>Attention :</b> un Provider fournit une valeur aux composants
-            descendants ; plusieurs Providers du m&ecirc;me contexte peuvent fournir
-            des valeurs diff&eacute;rentes selon leur emplacement dans l'arbre.
-          </p>
+          <p class="text-lg text-gray-700 mt-4"><code>useContext</code> lit le Provider correspondant le plus proche. Si sa valeur change, les composants qui lisent ce contexte sont rendus à nouveau. Sans Provider, ils lisent la valeur par défaut.</p>
         </div>
 
-        <!-- SLIDE 39: USEREF -->
+        <!-- USEREF -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            27. Hook useRef()
+            Hook useRef()
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">
             Qu’est-ce que useRef ?
           </h3>
           <p class="text-lg text-gray-700">
             <b>useRef()</b> permet de stocker une valeur persistante entre les
-            rendus sans provoquer de re-render.
+            rendus sans provoquer de nouveau rendu.
           </p>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Exemple : accéder à un élément DOM
           </h3>
-          <pre><code>import { useRef } from "react";
+          <pre><code>import { useRef } from 'react';
 
 function FocusInput() {
   const inputRef = useRef(null);
-
-  const focusInput = () => {
-    inputRef.current.focus();
-  };
-
   return (
     &lt;div&gt;
-      &lt;input ref={inputRef} placeholder="Cliquez sur le bouton" /&gt;
-      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;
+      &lt;label htmlFor="recherche"&gt;Recherche&lt;/label&gt;
+      &lt;input id="recherche" ref={inputRef} /&gt;
+      &lt;button onClick={() =&gt; inputRef.current?.focus()}&gt;
+        Placer le curseur
+      &lt;/button&gt;
     &lt;/div&gt;
   );
 }</code></pre>
-          <p class="text-lg text-gray-700 mt-3">
-            💡 Aussi utile pour sauvegarder des valeurs précédentes ou un
-            intervalle de temps.
-          </p>
+          <p class="text-lg text-gray-700 mt-3">Une ref peut aussi conserver l’identifiant d’un minuteur. Modifier <code>ref.current</code> ne déclenche pas de rendu : utilisez le state pour une valeur qui doit actualiser l’interface.</p>
         </div>
 
-        <!-- SLIDE 40: USEMEMO, USECALLBACK & MEMO -->
+        <!-- USEMEMO, USECALLBACK & MEMO -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            28. useMemo, useCallback et React.memo
+            useMemo, useCallback et React.memo
           </h2>
 
           <h3 class="font-bold text-2xl text-emerald-600">1️⃣ useMemo()</h3>
-          <p class="text-lg text-gray-700">
-            Mémorise le résultat d’un calcul pour éviter de le refaire à chaque
-            rendu.
-          </p>
+          <p class="text-lg text-gray-700">Réutilise le résultat d’un calcul tant que les dépendances ne changent pas. C’est une optimisation, pas une garantie nécessaire au fonctionnement.</p>
           <pre><code>const total = useMemo(() => {
   console.log("Calcul du total...");
   return items.reduce((sum, i) => sum + i.price, 0);
@@ -2026,9 +2395,7 @@ function FocusInput() {
           <h3 class="font-bold text-2xl text-emerald-600 mt-4">
             2️⃣ useCallback()
           </h3>
-          <p class="text-lg text-gray-700">
-            Mémorise une fonction pour éviter de la recréer à chaque rendu.
-          </p>
+          <p class="text-lg text-gray-700">Renvoie une référence de fonction stable tant que les dépendances ne changent pas ; une nouvelle fonction peut tout de même être créée pendant le rendu.</p>
           <pre><code>const handleClick = useCallback(() => {
   console.log("Clic !");
 }, []);</code></pre>
@@ -2049,12 +2416,13 @@ function FocusInput() {
             ✅ Utile pour des calculs ou composants réellement coûteux ; ne
             mémorisez pas tout par défaut, mesurez d'abord avec le Profiler.
           </p>
+        <p class="text-lg text-gray-700 mt-4"><code>memo</code> ne bloque pas les rendus dus à l’état ou au contexte. Si React Compiler est activé, il peut automatiser une partie de ces optimisations.</p>
         </div>
 
-        <!-- SLIDE 41: USEREDUCER -->
+        <!-- USEREDUCER -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            29. Hook useReducer : gérer des états complexes
+            Hook useReducer : gérer des états complexes
           </h2>
           <p class="text-lg text-gray-700">
             <b>useReducer</b> est une alternative à <code>useState</code> pour
@@ -2096,12 +2464,13 @@ function Counter() {
             Très utile pour des formulaires complexes, des wizards, ou des
             composants avec beaucoup de règles métier.
           </p>
+        <p class="text-lg text-gray-700 mt-4">Un reducer reste pur : pas de requête réseau, de mutation du state reçu, ni d’effet de bord. <code>dispatch</code> décrit une transition avec une action.</p>
         </div>
 
-        <!-- SLIDE 42: CUSTOM HOOKS -->
+        <!-- CUSTOM HOOKS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            30. Custom Hooks : réutiliser la logique
+            Custom Hooks : réutiliser la logique
           </h2>
           <p class="text-lg text-gray-700">
             Un <b>custom hook</b> est une fonction qui commence par
@@ -2134,27 +2503,20 @@ function Switch() {
     &lt;/button&gt;
   );
 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            Plus tard, on peut créer des custom hooks pour les appels API
-            (<code>useFetch</code>, <code>useAuth</code>, etc.).
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4">Un custom Hook partage la <b>logique</b>, pas automatiquement l’état : deux appels à <code>useToggle()</code> créent deux états indépendants.</p>
         </div>
 
-        <!-- SLIDE 43: SÉPARATEUR PARTIE 4 -->
+        <!-- SÉPARATEUR PARTIE 5 -->
         <div class="slide text-center bg-sky-500 text-white">
-          <h2 class="text-5xl font-extrabold">
-            PARTIE 4 : Navigation avec React Router DOM
-          </h2>
-          <p class="text-3xl mt-4">React Router DOM & Redux Toolkit</p>
+          <h2 class="text-5xl font-extrabold">PARTIE 5 : REACT ROUTER</h2>
+          <p class="text-3xl mt-4">URLs, navigation et routes imbriquées</p>
         </div>
 
-        <!-- SLIDE 44: REACT ROUTER DOM (INTRODUCTION) -->
+        <!-- REACT ROUTER DOM (INTRODUCTION) -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            31. React Router DOM : Introduction
-          </h2>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">React Router : navigation côté client</h2>
           <p class="text-lg text-gray-700">
-            <b>React Router DOM</b> permet de gérer la navigation entre
+            <b>React Router</b> permet de gérer la navigation entre
             plusieurs pages dans une application
             <b>Single Page Application (SPA)</b> sans rechargement complet du
             navigateur.
@@ -2176,17 +2538,20 @@ function Switch() {
           </p>
         </div>
 
-        <!-- SLIDE 45: INSTALLATION & CONFIGURATION -->
+        <!-- INSTALLATION & CONFIGURATION -->
         <div class="slide">
+          <!-- [Sources]
+          https://reactrouter.com/start/declarative/installation
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            32. Installation & Configuration
+            Installation & Configuration
           </h2>
-          <h3 class="font-bold text-2xl text-sky-600">Installation :</h3>
-          <pre><code>npm install react-router-dom</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600">Installation — mode déclaratif de React Router 7</h3>
+          <pre><code>npm install react-router</code></pre>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Structure de base :
           </h3>
-          <pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";
+          <pre><code>import { BrowserRouter, Routes, Route } from "react-router";
 import Home from "./Home";
 import About from "./About";
 
@@ -2200,22 +2565,19 @@ function App() {
     &lt;/BrowserRouter&gt;
   );
 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            💡 <code>BrowserRouter</code> enveloppe l’application et gère
-            l’historique. <code>Routes</code> regroupe les règles ; <code>Route</code>
-            associe un chemin à un élément React.
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4"><code>BrowserRouter</code> doit entourer tous les composants qui utilisent le routeur. Sur un hébergement SPA, configurez le renvoi des URLs comme <code>/about</code> vers <code>index.html</code>.</p>
+        <p class="text-lg text-gray-700 mt-4">Ces exemples utilisent <code>react-router</code> v7. Vous rencontrerez aussi les imports <code>react-router-dom</code> dans les projets existants.</p>
         </div>
 
-        <!-- SLIDE 46: NAVIGATION & LINK -->
+        <!-- NAVIGATION & LINK -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            33. Navigation avec &lt;Link&gt; et useNavigate
+            Navigation avec &lt;Link&gt; et useNavigate
           </h2>
           <h3 class="font-bold text-2xl text-emerald-600">
             &lt;Link&gt; : Navigation sans rechargement
           </h3>
-          <pre><code>import { Link } from "react-router-dom";
+          <pre><code>import { Link } from "react-router";
 
 function Navbar() {
   return (
@@ -2229,21 +2591,23 @@ function Navbar() {
           <h3 class="font-bold text-2xl text-emerald-600 mt-4">
             useNavigate() : Navigation programmée
           </h3>
-          <pre><code>import { useNavigate } from "react-router-dom";
+          <pre><code>import { useNavigate } from 'react-router';
 
-function Login() {
+function OuvrirTableauDeBord() {
   const navigate = useNavigate();
-  const handleLogin = () =&gt; {
-    navigate("/dashboard");
-  };
-  return &lt;button onClick={handleLogin}&gt;Se connecter&lt;/button&gt;;
-}</code></pre>
+  return (
+    &lt;button onClick={() =&gt; navigate('/dashboard')}&gt;
+      Ouvrir le tableau de bord
+    &lt;/button&gt;
+  );
+}
+// Une navigation seule ne connecte pas un utilisateur.</code></pre>
         </div>
 
-        <!-- SLIDE 47: ROUTES IMBRIQUÉES & OUTLET -->
+        <!-- ROUTES IMBRIQUÉES & OUTLET -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            34. Routes Imbriquées &lt;Outlet /&gt;
+            Routes Imbriquées &lt;Outlet /&gt;
           </h2>
           <p class="text-lg text-gray-700">
             Les <b>routes imbriquées</b> permettent de partager un layout
@@ -2255,7 +2619,7 @@ function Login() {
             1️⃣ Déclaration des routes imbriquées
           </h3>
           <pre><code>// App.jsx
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import DashboardLayout from "./DashboardLayout";
 import Overview from "./Overview";
 import Settings from "./Settings";
@@ -2274,7 +2638,7 @@ function App() {
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             2️⃣ Utilisation de &lt;Outlet /&gt; dans le layout
           </h3>
-          <pre><code>import { Outlet, Link } from "react-router-dom";
+          <pre><code>import { Outlet, Link } from "react-router";
 
 function DashboardLayout() {
   return (
@@ -2290,15 +2654,16 @@ function DashboardLayout() {
     &lt;/div&gt;
   );
 }</code></pre>
+        <p class="text-lg text-gray-700 mt-4">Ces routes supposent un <code>BrowserRouter</code> placé au-dessus de <code>App</code>. La route <code>index</code> affiche la vue par défaut ; <code>settings</code> est relative à <code>/dashboard</code>.</p>
         </div>
 
-        <!-- SLIDE 48: ROUTES DYNAMIQUES, PROTÉGÉES & useSearchParams -->
+        <!-- ROUTES DYNAMIQUES, PROTÉGÉES & useSearchParams -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            35. Routes Dynamiques, Protégées & useSearchParams
+            Routes Dynamiques, Protégées & useSearchParams
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">Paramètres dynamiques</h3>
-          <pre><code>import { useParams } from "react-router-dom";
+          <pre><code>import { useParams } from "react-router";
 
 function Profil() {
   const { id } = useParams();
@@ -2311,7 +2676,7 @@ function Profil() {
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Lire les query params avec useSearchParams
           </h3>
-          <pre><code>import { useSearchParams } from "react-router-dom";
+          <pre><code>import { useSearchParams } from "react-router";
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -2331,24 +2696,21 @@ function Products() {
 }</code></pre>
 
           <h3 class="font-bold text-2xl text-sky-600 mt-4">Routes protégées</h3>
-          <pre><code>import { Navigate } from "react-router-dom";
+          <pre><code>import { Navigate } from 'react-router';
 
 function ProtectedRoute({ isAuth, children }) {
-  return isAuth ? children : &lt;Navigate to="/login" /&gt;;
+  return isAuth ? children : &lt;Navigate to="/login" replace /&gt;;
 }</code></pre>
-          <p class="text-lg text-gray-700 mt-3">
-            🔒 On protège une route en enveloppant le composant cible dans
-            <code>ProtectedRoute</code>.
-          </p>
+          <p class="text-lg text-gray-700 mt-3">Ce garde contrôle l’affichage et la navigation. Le serveur doit vérifier l’authentification et les autorisations à chaque requête : une route masquée ne sécurise pas une API.</p>
         </div>
 
-        <!-- SLIDE 49: SEPARATEUR REDUX -->
+        <!-- SEPARATEUR REDUX -->
         <div class="slide text-center bg-purple-700 text-white">
-          <h2 class="text-5xl font-extrabold">PARTIE 5 : REDUX PRATIQUE</h2>
+          <h2 class="text-5xl font-extrabold">PARTIE 6 : REDUX PRATIQUE</h2>
           <p class="text-3xl mt-4">&Eacute;tat global, Redux classique, Toolkit et custom hooks</p>
         </div>
 
-        <!-- SLIDE 50: PROBLEME DE L'ETAT GLOBAL -->
+        <!-- PROBLEME DE L'ETAT GLOBAL -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Pourquoi l'&eacute;tat global devient un probl&egrave;me ?</h2>
           <p class="text-xl text-gray-700">Un &eacute;tat est <b>global</b> lorsqu'il doit &ecirc;tre lu ou modifi&eacute; par plusieurs composants &eacute;loign&eacute;s dans l'application.</p>
@@ -2374,7 +2736,7 @@ Cart    : user = "Lina"
           <p class="text-xl text-amber-700 font-semibold mt-5">Le probl&egrave;me n'est pas <code>useState</code> : c'est le partage et la synchronisation d'une m&ecirc;me donn&eacute;e.</p>
         </div>
 
-        <!-- SLIDE 51: PROP DRILLING -->
+        <!-- PROP DRILLING -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Le prop drilling : faire passer des donn&eacute;es trop loin</h2>
           <p class="text-xl text-gray-700">Le <b>prop drilling</b> arrive lorsqu'une donn&eacute;e doit traverser plusieurs composants interm&eacute;diaires qui ne l'utilisent pas, uniquement pour atteindre un composant final.</p>
@@ -2401,7 +2763,7 @@ function UserMenu({ user }) {
           </div>
         </div>
 
-        <!-- SLIDE 52: CE QUE REDUX CORRIGE -->
+        <!-- CE QUE REDUX CORRIGE -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Ce que Redux corrige</h2>
           <p class="text-xl text-gray-700">Redux place l'&eacute;tat partag&eacute; dans un store unique. Les composants lisent ce store et demandent un changement en envoyant une action.</p>
@@ -2421,9 +2783,10 @@ dispatch({ type: 'counter/increment' });</code></pre>
             <li><b>Tra&ccedil;abilit&eacute; :</b> chaque modification correspond &agrave; une action identifiable.</li>
             <li><b>Pr&eacute;visibilit&eacute; :</b> les reducers d&eacute;crivent comment l'&eacute;tat peut &eacute;voluer.</li>
           </ul>
+        <p class="text-lg text-gray-700 mt-4">Redux est utile pour un état partagé avec de nombreuses transitions et un besoin de traçabilité. Un menu ouvert peut rester local ; un thème peut souvent utiliser Context.</p>
         </div>
 
-        <!-- SLIDE 53: REDUX CLASSIQUE - CONCEPTS -->
+        <!-- REDUX CLASSIQUE - CONCEPTS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : comprendre le flux</h2>
           <p class="text-xl text-gray-700">Redux est une biblioth&egrave;que qui centralise l'&eacute;tat de l'application dans un <b>store</b>. Les composants ne modifient pas directement cet &eacute;tat.</p>
@@ -2433,21 +2796,22 @@ dispatch({ type: 'counter/increment' });</code></pre>
             <div class="bg-purple-50 border-t-4 border-purple-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-purple-700">Reducer</h3><p class="text-base text-gray-700 mt-1">calcule le nouvel &eacute;tat</p></div>
             <div class="bg-emerald-50 border-t-4 border-emerald-500 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">Store</h3><p class="text-base text-gray-700 mt-1">conserve le state</p></div>
           </div>
-          <pre><code>// Une action est un objet descriptif
-{ type: '<span class="redux-highlight">counter/increment</span>', <span class="redux-highlight">payload</span>: 1 }
+          <pre><code>const action = { type: 'counter/increment', payload: 1 };
 
-// Un reducer est une fonction pure
-function <span class="redux-highlight">reducer</span>(state, action) {
-  if (action.type === '<span class="redux-highlight">counter/increment</span>') {
-    return { count: state.count + action.<span class="redux-highlight">payload</span> };
+function reducer(state = { count: 0 }, action) {
+  if (action.type === 'counter/increment') {
+    return { ...state, count: state.count + action.payload };
   }
   return state;
 }</code></pre>
           <p class="text-xl text-emerald-600 font-semibold mt-4">Flux unidirectionnel : UI &rarr; dispatch(action) &rarr; reducer &rarr; nouveau state &rarr; UI.</p>
         </div>
 
-        <!-- SLIDE 50: REDUX CLASSIQUE - STORE ET ACTIONS -->
+        <!-- REDUX CLASSIQUE - STORE ET ACTIONS -->
         <div class="slide">
+          <!-- [Sources]
+          https://redux.js.org/introduction/why-rtk-is-redux-today
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : cr&eacute;er le store et le reducer</h2>
           <p class="text-lg text-gray-700">Le <b>store</b> contient l'&eacute;tat global. <code>dispatch()</code> envoie une action ; <code>getState()</code> lit l'&eacute;tat ; <code>subscribe()</code> r&eacute;agit &agrave; ses changements.</p>
           <pre><code>import { createStore } from 'redux';
@@ -2475,9 +2839,10 @@ console.log(<span class="redux-highlight">store.getState()</span>); // { count: 
             <li>Le <code>switch</code> associe chaque type d'action &agrave; une transition d'&eacute;tat.</li>
             <li>Une action ne fait rien seule : elle doit &ecirc;tre envoy&eacute;e avec <code>dispatch()</code>.</li>
           </ul>
+        <p class="text-lg text-gray-700 mt-4">Exemple historique : il nécessite <code>npm install redux react-redux</code>. <code>createStore</code> est déprécié pour le nouveau code ; préférez <code>configureStore</code> de Redux Toolkit.</p>
         </div>
 
-        <!-- SLIDE 51: REDUX CLASSIQUE - REACT-REDUX -->
+        <!-- REDUX CLASSIQUE - REACT-REDUX -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux classique : connecter le store &agrave; React</h2>
           <p class="text-lg text-gray-700">Le package <code>react-redux</code> fournit <b>Provider</b> pour rendre le store disponible et les fonctions <b>useSelector</b>/<b>useDispatch</b> pour le lire et envoyer des actions.</p>
@@ -2502,10 +2867,10 @@ function Counter() {
           <p class="text-xl text-amber-700 font-semibold mt-4">Cette approche fonctionne, mais elle demande beaucoup de code r&eacute;p&eacute;titif : actions, types, switch, reducers et configuration manuelle.</p>
         </div>
 
-        <!-- SLIDE 52: REDUX TOOLKIT (INTRODUCTION) -->
+        <!-- REDUX TOOLKIT (INTRODUCTION) -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            36. Redux Toolkit : Introduction
+            Redux Toolkit : Introduction
           </h2>
           <p class="text-lg text-gray-700">
             <b>Redux Toolkit (RTK)</b> simplifie la gestion de l’état global en
@@ -2525,10 +2890,10 @@ function Counter() {
           </p>
         </div>
 
-        <!-- SLIDE 50: CONFIGURATION COMPLÈTE DE REDUX TOOLKIT -->
+        <!-- CONFIGURATION COMPLÈTE DE REDUX TOOLKIT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            37. Configuration complète de Redux Toolkit
+            Configuration complète de Redux Toolkit
           </h2>
 
           <h3 class="font-bold text-2xl text-sky-600">1️⃣ Créer un Slice</h3>
@@ -2575,14 +2940,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );</code></pre>
         </div>
 
-        <!-- SLIDE 56: REDUX TOOLKIT - POURQUOI ET COMMENT -->
+        <!-- REDUX TOOLKIT - POURQUOI ET COMMENT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux Toolkit : moins de code, plus de s&eacute;curit&eacute;</h2>
           <p class="text-xl text-gray-700">Redux Toolkit (RTK) est la fa&ccedil;on moderne d'&eacute;crire Redux. Il garde le m&ecirc;me flux, mais g&eacute;n&egrave;re les actions, simplifie les reducers et configure le store.</p>
           <div class="grid grid-cols-3 gap-4 mt-5">
             <div class="bg-purple-50 border-t-4 border-purple-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-purple-700">createSlice</h3><p class="text-base text-gray-700 mt-1">Cr&eacute;e le reducer et les action creators ensemble.</p></div>
             <div class="bg-sky-50 border-t-4 border-sky-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-sky-700">configureStore</h3><p class="text-base text-gray-700 mt-1">Configure le store avec de bons r&eacute;glages par d&eacute;faut.</p></div>
-            <div class="bg-emerald-50 border-t-4 border-emerald-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">Immer</h3><p class="text-base text-gray-700 mt-1">Autorise une syntaxe de mutation s&ucirc;re dans les reducers.</p></div>
+            <div class="bg-emerald-50 border-t-4 border-emerald-500 p-4 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">Immer</h3><p class="text-base text-gray-700 mt-1">Transforme les écritures sur un brouillon en mises à jour immuables, dans les reducers créés par RTK.</p></div>
           </div>
           <pre><code>const counterSlice = createSlice({
   name: 'counter',
@@ -2599,8 +2964,11 @@ dispatch(counterSlice.actions.increment());</code></pre>
           <p class="text-xl text-purple-700 font-semibold mt-4">RTK ne remplace pas les concepts Redux : il les rend plus simples &agrave; appliquer correctement.</p>
         </div>
 
-        <!-- SLIDE 57: CREATEASYNCTHUNK - ETATS -->
+        <!-- CREATEASYNCTHUNK - ETATS -->
         <div class="slide">
+          <!-- [Sources]
+          https://redux.js.org/usage/side-effects-approaches
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux Toolkit : appels API avec createAsyncThunk</h2>
           <p class="text-xl text-gray-700"><code>createAsyncThunk</code> encapsule une op&eacute;ration asynchrone et g&eacute;n&egrave;re automatiquement trois actions : <b>pending</b> (en cours), <b>fulfilled</b> (r&eacute;ussite) et <b>rejected</b> (erreur).</p>
           <pre><code>import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -2618,12 +2986,17 @@ export const fetchUsers = createAsyncThunk(
   }
 );</code></pre>
           <p class="text-lg text-gray-700 mt-3">Le composant fait seulement <code>dispatch(fetchUsers())</code>. Le thunk g&egrave;re l'appel r&eacute;seau et transmet le r&eacute;sultat au slice.</p>
+        <p class="text-lg text-gray-700 mt-4">Un thunk ne fournit pas un cache API à lui seul. Pour charger et mettre en cache des données serveur avec Redux, <b>RTK Query</b> est le choix recommandé ; les thunks conviennent à une logique asynchrone personnalisée.</p>
         </div>
 
-        <!-- SLIDE 58: CREATEASYNCTHUNK - EXTRA REDUCERS -->
+        <!-- CREATEASYNCTHUNK - EXTRA REDUCERS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">createAsyncThunk : charger, r&eacute;ussir, &eacute;chouer</h2>
-          <pre><code>const usersSlice = createSlice({
+          <pre><code>// features/users/usersSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUsers } from './usersThunks';
+
+const usersSlice = createSlice({
   name: 'users',
   initialState: { data: [], status: 'idle', error: null },
   reducers: {},
@@ -2642,19 +3015,20 @@ export const fetchUsers = createAsyncThunk(
         state.error = action.payload || action.error.message;
       });
   }
-});</code></pre>
+});
+export default usersSlice.reducer;</code></pre>
           <div class="grid grid-cols-3 gap-4 mt-4">
             <div class="bg-amber-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-amber-700">pending</h3><p class="text-base text-gray-700">Afficher un loader.</p></div>
             <div class="bg-emerald-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-emerald-700">fulfilled</h3><p class="text-base text-gray-700">Afficher les donn&eacute;es.</p></div>
             <div class="bg-red-50 p-3 rounded-lg"><h3 class="font-bold text-xl text-red-700">rejected</h3><p class="text-base text-gray-700">Afficher un message d'erreur.</p></div>
           </div>
-          <p class="text-xl text-purple-700 font-semibold mt-4">Ce mod&egrave;le &eacute;vite les &eacute;tats incoh&eacute;rents et centralise toute la logique API dans le slice.</p>
+          <p class="text-xl text-purple-700 font-semibold mt-4">Ajoutez le reducer sous la clé <code>users</code> dans <code>configureStore</code>. L’appel réseau appartient au thunk ; le slice réagit à ses actions. Affichez aussi un état vide si <code>data.length === 0</code>.</p>
         </div>
 
-        <!-- SLIDE 59: UTILISATION DANS UN COMPOSANT -->
+        <!-- UTILISATION DANS UN COMPOSANT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            38. Utilisation de Redux Toolkit dans un composant
+            Utilisation de Redux Toolkit dans un composant
           </h2>
           <pre><code>import { useDispatch, useSelector } from "react-redux";
 import { increment, decrement, reset } from "./features/counterSlice";
@@ -2672,23 +3046,17 @@ export default function Counter() {
     &lt;/div&gt;
   );
 }</code></pre>
-          <p class="text-xl text-emerald-600 font-semibold mt-4">
-            ⚡ Redux Toolkit simplifie tout le flux :
-            <b>State → Action → Reducer → UI</b>
-          </p>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Flux complet : UI → <code>dispatch(action)</code> → reducer → nouvel état du store → UI.</p>
         </div>
 
-        <!-- SLIDE 52: BONNES PRATIQUES REDUX TOOLKIT -->
+        <!-- BONNES PRATIQUES REDUX TOOLKIT -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            39. Bonnes Pratiques Redux Toolkit
+            Bonnes Pratiques Redux Toolkit
           </h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
             <li>📁 Organiser vos fichiers par <b>feature</b> (slice, store, composant).</li>
-            <li>
-              🔄 Utiliser <code>createAsyncThunk()</code> pour les appels API
-              asynchrones.
-            </li>
+            <li>Utiliser <b>RTK Query</b> pour le chargement et le cache API ; <code>createAsyncThunk</code> pour les traitements asynchrones personnalisés.</li>
             <li>
               🧩 Éviter de stocker des objets DOM ou fonctions dans le store
               (données sérialisables uniquement).
@@ -2705,38 +3073,35 @@ export default function Counter() {
           </p>
         </div>
 
-        <!-- SLIDE 61: REDUX PRATIQUE - AUTHENTIFICATION -->
+        <!-- REDUX PRATIQUE - AUTHENTIFICATION -->
         <div class="slide border-t-8 border-purple-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : g&eacute;rer un utilisateur connect&eacute;</h2>
           <p class="text-xl text-gray-700">Un cas concret d'&eacute;tat global : plusieurs composants doivent conna&icirc;tre l'utilisateur sans se transmettre ses donn&eacute;es par props.</p>
-          <pre><code>const authSlice = createSlice({
+          <pre><code>// features/auth/authSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, isAuthenticated: false },
+  initialState: { user: null },
   reducers: {
-    login(state, action) {
-      state.user = action.payload;
-      state.isAuthenticated = true;
-    },
-    logout(state) {
-      state.user = null;
-      state.isAuthenticated = false;
-    }
+    login(state, action) { state.user = action.payload; },
+    logout(state) { state.user = null; }
   }
 });
-
-// Login.jsx
-dispatch(login({ id: 1, name: 'Lina', role: 'admin' }));
-
-// Navbar.jsx
-const user = useSelector(state =&gt; state.auth.user);</code></pre>
+export const { login, logout } = authSlice.actions;
+export default authSlice.reducer;
+// Ajouter ce reducer sous la clé auth dans configureStore.
+// Après validation de la session par le serveur :
+// dispatch(login(userRetourneParLeServeur));</code></pre>
           <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mt-4">
             <li><b>Login</b> modifie le store.</li>
             <li><b>Navbar</b> lit le même utilisateur.</li>
             <li><b>logout</b> remet l'état à sa valeur initiale.</li>
           </ul>
+        <p class="text-lg text-gray-700 mt-4">La présence d’un utilisateur dans Redux décrit l’état de l’interface ; elle ne prouve pas son identité au serveur. Dérivez <code>isAuthenticated</code> de <code>user !== null</code> pour éviter deux valeurs à synchroniser.</p>
         </div>
 
-        <!-- SLIDE 62: REDUX PRATIQUE - CUSTOM HOOKS -->
+        <!-- REDUX PRATIQUE - CUSTOM HOOKS -->
         <div class="slide border-t-8 border-purple-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : cr&eacute;er des custom hooks</h2>
           <p class="text-xl text-gray-700">Un custom hook masque la r&eacute;p&eacute;tition et donne une API claire aux composants. Le composant n'a plus besoin de conna&icirc;tre les chemins internes du store.</p>
@@ -2744,47 +3109,55 @@ const user = useSelector(state =&gt; state.auth.user);</code></pre>
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../features/auth/authSlice';
 
-export const useAppDispatch = () =&gt; useDispatch();
 export const useCurrentUser = () =&gt;
   useSelector(state =&gt; state.auth.user);
 export const useIsAuthenticated = () =&gt;
-  useSelector(state =&gt; state.auth.isAuthenticated);
+  useSelector(state =&gt; state.auth.user !== null);
 
 export function useAuthActions() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   return {
     login: user =&gt; dispatch(login(user)),
     logout: () =&gt; dispatch(logout())
   };
 }</code></pre>
           <pre><code>// Navbar.jsx
-const user = useCurrentUser();
-const { logout } = useAuthActions();
-
-return user ? &lt;button onClick={logout}&gt;Quitter&lt;/button&gt; : null;</code></pre>
+import { useCurrentUser, useAuthActions } from './hooks/reduxHooks';
+function Navbar() {
+  const user = useCurrentUser();
+  const { logout } = useAuthActions();
+  return user ? &lt;button onClick={logout}&gt;Se déconnecter&lt;/button&gt; : null;
+}</code></pre>
           <p class="text-xl text-purple-700 font-semibold mt-4">Les composants consomment une intention métier : <code>logout()</code>, pas un détail technique de Redux.</p>
         </div>
 
-        <!-- SLIDE 63: REDUX PRATIQUE - PANIER -->
+        <!-- REDUX PRATIQUE - PANIER -->
         <div class="slide border-t-8 border-purple-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : panier d'achat</h2>
-          <pre><code>const cartSlice = createSlice({
+          <pre><code>// features/cart/cartSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const cartSlice = createSlice({
   name: 'cart',
   initialState: { items: [] },
   reducers: {
     addItem(state, action) {
-      state.items.push(action.payload);
+      const item = state.items.find(i =&gt; i.id === action.payload.id);
+      if (item) item.quantity += 1;
+      else state.items.push({ ...action.payload, quantity: 1 });
     },
     removeItem(state, action) {
-      state.items = state.items.filter(
-        item =&gt; item.id !== action.payload
-      );
+      state.items = state.items.filter(i =&gt; i.id !== action.payload);
     },
-    clearCart(state) {
-      state.items = [];
-    }
+    clearCart(state) { state.items = []; }
   }
-});</code></pre>
+});
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
+
+export const selectCartTotal = state =&gt; state.cart.items.reduce(
+  (total, item) =&gt; total + item.price * item.quantity, 0
+);</code></pre>
           <pre><code>// selectors/cartSelectors.js
 export const selectCartItems = state =&gt; state.cart.items;
 export const selectCartTotal = state =&gt;
@@ -2792,10 +3165,10 @@ export const selectCartTotal = state =&gt;
 
 // ProductCard.jsx
 dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
-          <p class="text-xl text-emerald-600 font-semibold mt-4">Les selectors centralisent les calculs et &eacute;vitent de r&eacute;p&eacute;ter la logique dans plusieurs composants.</p>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">Ajoutez ce reducer sous <code>cart</code> dans le store. Deux ajouts du même produit augmentent sa quantité ; le total est calculé par le selector, sans le stocker séparément.</p>
         </div>
 
-        <!-- SLIDE 64: REDUX PRATIQUE - BONNES PRATIQUES -->
+        <!-- REDUX PRATIQUE - BONNES PRATIQUES -->
         <div class="slide border-t-8 border-purple-500">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">Redux pratique : r&egrave;gles pour un projet solide</h2>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
@@ -2817,36 +3190,28 @@ dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
           <p class="text-xl text-purple-700 font-semibold mt-4">Objectif : un flux pr&eacute;visible, une logique testable et des composants faciles &agrave; lire.</p>
         </div>
 
-        <!-- SLIDE 65: PARTIE 6 APIS -->
+        <!-- PARTIE 7 APIS -->
         <div class="slide text-center bg-sky-500 text-white">
           <h2 class="text-5xl font-extrabold">
-            PARTIE 6 : APIs &amp; Intégration Back-End
+            PARTIE 7 : APIs &amp; Intégration Back-End
           </h2>
           <p class="text-3xl mt-4">
             REST, HTTP, JSON, Fetch, Axios &amp; bonnes pratiques
           </p>
         </div>
 
-        <!-- SLIDE 55: QU'EST-CE QU'UNE API / REST -->
+        <!-- QU'EST-CE QU'UNE API / REST -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            41. Qu’est-ce qu’une API ? Qu’est-ce qu’une REST API ?
+            Qu’est-ce qu’une API ? Qu’est-ce qu’une REST API ?
           </h2>
-          <p class="text-lg text-gray-700">
-            Une <b>API (Application Programming Interface)</b> est une porte
-            d’entrée permettant à un programme d’en appeler un autre pour
-            récupérer ou envoyer des données.
-          </p>
+          <p class="text-lg text-gray-700">Une <b>API</b> est une interface qu’un programme expose à d’autres programmes. Dans ce chapitre, nous utilisons des API Web pour échanger des données via HTTP.</p>
           <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
             <li>
               <b>API Web :</b> accessible via HTTP(s), généralement au format
               JSON.
             </li>
-            <li>
-              <b>REST (REpresentational State Transfer) :</b> style d’API qui
-              utilise les verbes HTTP et des URLs pour manipuler des
-              ressources.
-            </li>
+            <li><b>REST :</b> style architectural centré sur des ressources et une interface uniforme ; les requêtes sont sans état côté serveur au sens où chacune contient les informations nécessaires à son traitement. HTTP et JSON ne suffisent pas à eux seuls à définir REST.</li>
             <li>
               Une ressource peut être : <code>/users</code>,
               <code>/orders</code>, <code>/products</code>, etc.
@@ -2858,15 +3223,15 @@ dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
           </p>
         </div>
 
-        <!-- SLIDE 56: VERBES HTTP & STATUTS -->
+        <!-- VERBES HTTP & STATUTS -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            42. Verbes HTTP &amp; Codes de Statut
+            Verbes HTTP &amp; Codes de Statut
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">Verbes principaux</h3>
           <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-2">
             <li><b>GET :</b> Lire / récupérer des données.</li>
-            <li><b>POST :</b> Créer une nouvelle ressource.</li>
+            <li><b>POST :</b> soumettre des données à traiter ; souvent utilisé pour créer une ressource.</li>
             <li><b>PUT :</b> Remplacer complètement une ressource.</li>
             <li><b>PATCH :</b> Modifier partiellement une ressource.</li>
             <li><b>DELETE :</b> Supprimer une ressource.</li>
@@ -2875,19 +3240,17 @@ dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
             Codes de statut HTTP (réponse serveur)
           </h3>
           <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-2">
-            <li><b>2xx :</b> Succès (200 OK, 201 Created).</li>
-            <li><b>4xx :</b> Erreur côté client (400 Bad Request, 401 Unauthorized, 404 Not Found).</li>
+            <li><b>2xx :</b> succès — 200 OK, 201 Created, 204 No Content (sans corps).</li>
+            <li><b>4xx :</b> problème de requête — 400 invalide, 401 authentification requise ou invalide, 403 accès refusé, 404 introuvable.</li>
             <li><b>5xx :</b> Erreur côté serveur (500 Internal Server Error).</li>
           </ul>
-          <p class="text-lg text-gray-500 italic mt-4">
-            Toujours vérifier le code de statut avant de traiter la réponse JSON.
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4">Vérifiez le statut et le format attendu. Une réponse <code>204</code> n’a pas de corps : n’appelez pas <code>response.json()</code> dessus.</p>
         </div>
 
-        <!-- SLIDE 57: ENDPOINT, HEADERS, JSON -->
+        <!-- ENDPOINT, HEADERS, JSON -->
         <div class="slide">
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            43. Endpoints, Headers, Body &amp; JSON
+            Endpoints, Headers, Body &amp; JSON
           </h2>
           <h3 class="font-bold text-2xl text-sky-600">1️⃣ Endpoint</h3>
           <p class="text-lg text-gray-700">
@@ -2909,21 +3272,42 @@ dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
             Données envoyées dans une requête (POST/PUT/PATCH), souvent en
             <b>JSON</b>.
           </p>
-          <pre><code>// Exemple de payload JSON
-{
+          <pre><code>{
   "name": "Alice",
   "email": "alice@example.com"
 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            JSON = JavaScript Object Notation : format léger, lisible, idéal
-            pour le Web.
-          </p>
+          <p class="text-lg text-gray-500 italic mt-4">JSON utilise des clés entre guillemets doubles. <code>JSON.stringify(objet)</code> sérialise un objet ; <code>JSON.parse(texte)</code> lit du JSON. Il n’accepte ni fonctions, ni commentaires, ni virgule finale.</p>
         </div>
 
-        <!-- SLIDE 58: INTEGRATION AVEC FETCH -->
         <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Envoyer du JSON avec fetch</h2>
+          <pre><code>async function creerArticle() {
+  try {
+    const response = await fetch(
+      'https://jsonplaceholder.typicode.com/posts',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: 'Bonjour', body: 'React', userId: 1 })
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const article = await response.json();
+    console.log(article);
+  } catch (error) {
+    console.error('Enregistrement impossible :', error.message);
+  }
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Appelez cette fonction depuis un événement de soumission. JSONPlaceholder simule l’écriture : les données ne sont pas enregistrées durablement.</p>
+        </div>
+
+        <!-- INTEGRATION AVEC FETCH -->
+        <div class="slide">
+          <!-- [Sources]
+          https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+          [/Sources] -->
           <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            44. Intégrer une API avec fetch()
+            Intégrer une API avec fetch()
           </h2>
           <p class="text-lg text-gray-700">
             <code>fetch</code> est l’API native du navigateur pour faire des
@@ -2932,7 +3316,7 @@ dispatch(addItem({ id: 3, name: 'Clavier', price: 49 }));</code></pre>
           <h3 class="font-bold text-2xl text-sky-600 mt-4">
             Exemple : GET + gestion du chargement / erreur
           </h3>
-          <pre><code>import { useEffect, useState } from "react";
+          <pre><code>import { useEffect, useState } from 'react';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -2940,146 +3324,106 @@ function Users() {
   const [error, setError] = useState(null);
 
   useEffect(() =&gt; {
+    const controller = new AbortController();
     async function loadUsers() {
       try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/users");
-
-        if (!res.ok) {
-          throw new Error("Erreur HTTP : " + res.status);
-        }
-
+        const res = await fetch(
+          'https://jsonplaceholder.typicode.com/users',
+          { signal: controller.signal }
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        setUsers(data);
+        if (!controller.signal.aborted) setUsers(data);
       } catch (err) {
-        setError(err.message);
+        if (!controller.signal.aborted) setError(err.message);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     }
-
     loadUsers();
+    return () =&gt; controller.abort();
   }, []);
 
-  if (loading) return &lt;p&gt;Chargement...&lt;/p&gt;;
-  if (error) return &lt;p&gt;Erreur : {error}&lt;/p&gt;;
-
-  return (
-    &lt;ul&gt;
-      {users.map((u) =&gt; (
-        &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
-  );
+  if (loading) return &lt;p&gt;Chargement…&lt;/p&gt;;
+  if (error) return &lt;p role="alert"&gt;Chargement impossible : {error}&lt;/p&gt;;
+  if (users.length === 0) return &lt;p&gt;Aucun utilisateur.&lt;/p&gt;;
+  return &lt;ul&gt;{users.map(u =&gt; &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;)}&lt;/ul&gt;;
 }</code></pre>
         </div>
 
-        <!-- SLIDE 59: AXIOS -->
+        <!-- AXIOS -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            45. Axios : bibliothèque HTTP
-          </h2>
-          <p class="text-lg text-gray-700">
-            <b>Axios</b> est une bibliothèque populaire pour simplifier les
-            appels HTTP. Elle fonctionne dans le navigateur et dans Node.js.
-          </p>
-          <h3 class="font-bold text-2xl text-sky-600 mt-4">Installation</h3>
+          <!-- [Sources]
+          https://axios-http.com/docs/cancellation
+          [/Sources] -->
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Axios : un client HTTP réutilisable</h2>
+          <p class="text-lg text-gray-700 mt-4">Axios transforme les réponses JSON et rejette par défaut les statuts hors de la plage 2xx. Contrairement à <code>fetch</code>, il nécessite une dépendance.</p>
           <pre><code>npm install axios</code></pre>
-
-          <h3 class="font-bold text-2xl text-sky-600 mt-4">Exemple simple</h3>
-          <pre><code>import axios from "axios";
-import { useEffect, useState } from "react";
-
-function Posts() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() =&gt; {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) =&gt; setPosts(res.data))
-      .catch((err) =&gt; console.error(err));
-  }, []);
-
-  return (
-    &lt;ul&gt;
-      {posts.slice(0, 5).map((p) =&gt; (
-        &lt;li key={p.id}&gt;{p.title}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
-  );
-}</code></pre>
-
-          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
-            Client Axios réutilisable
-          </h3>
           <pre><code>// apiClient.js
-import axios from "axios";
+import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: "https://api.monsite.com",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            On peut ajouter des <b>interceptors</b> pour injecter les tokens
-            d’authentification ou logger les erreurs.
-          </p>
+  baseURL: 'https://jsonplaceholder.typicode.com',
+  timeout: 10000
+});
+
+// userService.js
+import { api } from './apiClient';
+
+export async function getUsers(signal) {
+  const response = await api.get('/users', { signal });
+  return response.data;
+}</code></pre>
+          <p class="text-lg text-gray-700 mt-4">Le service transmet les erreurs à son appelant. Celui-ci décide du message à afficher ; le signal permet d’annuler une requête devenue inutile.</p>
         </div>
 
-        <!-- SLIDE 60: CUSTOM HOOK API + BONNES PRATIQUES -->
+        <!-- CUSTOM HOOK API + BONNES PRATIQUES -->
         <div class="slide">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">
-            46. Bonnes pratiques pour l’intégration API
-          </h2>
-          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-            <li>
-              📦 <b>Isoler la logique API</b> dans des services ou custom hooks
-              (<code>useApi</code>, <code>useUsers</code>…).
-            </li>
-            <li>
-              🧠 Toujours gérer les états : <code>loading</code>,
-              <code>error</code>, <code>data</code>.
-            </li>
-            <li>
-              🔐 Ne jamais mettre de secrets (token privé, clé API sensible) dans
-              le front. Utiliser un back-end ou des variables d’environnement
-              côté serveur.
-            </li>
-            <li>
-              🧪 Logguer les erreurs (console, Sentry, etc.) et afficher un
-              message clair à l’utilisateur.
-            </li>
-            <li>
-              ♻️ Utiliser des custom hooks + Redux/RTK Query ou TanStack Query
-              pour la mise en cache et la synchronisation serveur.
-            </li>
-          </ul>
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Un custom Hook pour charger les utilisateurs</h2>
+          <pre><code>import { useEffect, useState } from 'react';
+import { getUsers } from './userService';
 
-          <h3 class="font-bold text-2xl text-sky-600 mt-6">
-            Exemple de custom hook simple avec Axios
-          </h3>
-          <pre><code>import { useEffect, useState } from "react";
-import { api } from "./apiClient";
-
-function useUsers() {
+export function useUsers() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() =&gt; {
-    api
-      .get("/users")
-      .then((res) =&gt; setData(res.data))
-      .catch((err) =&gt; setError(err.message))
-      .finally(() =&gt; setLoading(false));
+    const controller = new AbortController();
+    getUsers(controller.signal)
+      .then(users =&gt; {
+        if (!controller.signal.aborted) setData(users);
+      })
+      .catch(err =&gt; {
+        if (!controller.signal.aborted) setError(err.message);
+      })
+      .finally(() =&gt; {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () =&gt; controller.abort();
   }, []);
 
   return { data, loading, error };
 }</code></pre>
-          <p class="text-lg text-gray-500 italic mt-4">
-            Ensuite, vos composants deviennent très simples : ils consomment
-            juste le hook et affichent l’UI.
-          </p>
+          <p class="text-lg text-gray-700 mt-4">Le composant lit <code>const { data, loading, error } = useUsers()</code> et affiche le chargement, l’erreur, le résultat vide ou la liste. Ce Hook ne fournit ni cache partagé ni déduplication.</p>
+        </div>
+
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">API : les réflexes à garder</h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li><b>Affichage :</b> prévoir chargement, erreur et nouvel essai, résultat vide et succès.</li><li><b>Cycle de vie :</b> annuler ou ignorer une réponse devenue inutile ; éviter les requêtes inutiles.</li><li><b>Cache :</b> RTK Query ou TanStack Query gèrent le partage des données serveur ; un custom Hook seul ne crée pas de cache.</li><li><b>Secrets :</b> garder les clés privées sur le serveur. Les variables injectées dans le frontend sont publiques.</li><li><b>CORS :</b> l’autorisation d’une origine se configure sur le serveur ; <code>no-cors</code> ne rend pas une réponse lisible.</li><li><b>Diagnostic :</b> consulter l’onglet Réseau, le statut HTTP et la réponse ; afficher un message utile sans exposer de données sensibles.</li></ul>
+        </div>
+
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">À vous de jouer : annuaire React</h2>
+          <p class="text-lg text-gray-700 mt-4">Construisez un annuaire à partir de <code>https://jsonplaceholder.typicode.com/users</code>.</p>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li><b>Afficher :</b> charger les utilisateurs, gérer les quatre états et filtrer la liste par nom.</li><li><b>Naviguer :</b> créer <code>/users</code> et <code>/users/:id</code>, avec un lien de retour.</li><li><b>Partager :</b> gérer une liste de favoris ; commencer avec un parent commun, puis comparer avec Redux Toolkit.</li><li><b>Vérifier :</b> tester une erreur réseau, une recherche vide, un ajout répété aux favoris et l’actualisation d’une URL de profil.</li></ul>
+          <p class="text-lg text-gray-700 mt-4">Vous devez pouvoir expliquer où vit chaque état, pourquoi un effet est nécessaire et comment une action utilisateur met l’interface à jour.</p>
+        </div>
+
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">Documentation pour continuer</h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4"><li><a class="text-sky-700 underline" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">MDN — JavaScript</a> : langage, objets et asynchrone.</li><li><a class="text-sky-700 underline" href="https://nodejs.org/en/learn">Node.js</a> et <a class="text-sky-700 underline" href="https://docs.npmjs.com/cli/v11/commands/npm-ci/">npm ci</a> : exécution et dépendances.</li><li><a class="text-sky-700 underline" href="https://vite.dev/guide/">Vite</a> : démarrage, build et configuration.</li><li><a class="text-sky-700 underline" href="https://react.dev/learn">React</a> et <a class="text-sky-700 underline" href="https://react.dev/reference/react/useEffect">useEffect</a> : état, Hooks et effets.</li><li><a class="text-sky-700 underline" href="https://reactrouter.com/start/declarative/installation">React Router</a> et <a class="text-sky-700 underline" href="https://redux.js.org/usage/side-effects-approaches">Redux</a> : navigation et données partagées.</li><li><a class="text-sky-700 underline" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN — Fetch</a> et <a class="text-sky-700 underline" href="https://axios-http.com/docs/cancellation">Axios</a> : HTTP et annulation.</li></ul>
+          <p class="text-lg text-gray-700 mt-4">Les liens officiels permettent de vérifier les comportements et les prérequis quand les outils évoluent.</p>
         </div>
       </div>
 
@@ -3167,6 +3511,27 @@ function useUsers() {
       }
 
       highlightCodeBlocks();
+
+      const prerequisiteChecks = document.querySelectorAll(".prerequisite-check");
+      const prerequisiteProgress = document.getElementById("prerequisite-progress");
+      const prerequisiteMessage = document.getElementById("prerequisite-message");
+
+      function updatePrerequisiteProgress() {
+        const checkedCount = [...prerequisiteChecks].filter((check) => check.checked).length;
+        prerequisiteProgress.textContent = `${checkedCount} / ${prerequisiteChecks.length}`;
+        prerequisiteMessage.textContent = checkedCount === prerequisiteChecks.length
+          ? "Prérequis validés ! Vous êtes prêt à commencer React."
+          : `Source → bundler → assets livrés : encore ${prerequisiteChecks.length - checkedCount} prérequis à vérifier.`;
+        prerequisiteChecks.forEach((check) => {
+          check.closest("label").classList.toggle("bg-violet-50", check.checked);
+          check.closest("label").classList.toggle("border-violet-400", check.checked);
+        });
+      }
+
+      prerequisiteChecks.forEach((check) => {
+        check.addEventListener("change", updatePrerequisiteProgress);
+      });
+      updatePrerequisiteProgress();
 
       slides.forEach((slide, index) => {
         const title = slide.querySelector("h1, h2, h3")?.textContent.trim();
